@@ -184,7 +184,23 @@ Learning WPF
     </Grid>
 </Window>
 
+## Элементы управления 
+https://metanit.com/sharp/wpf/5.1.php
 
+## DependencyObject и свойства зависимостей
+https://metanit.com/sharp/wpf/13.php
+
+## Модель событий
+https://metanit.com/sharp/wpf/6.php
+
+## Команды
+https://metanit.com/sharp/wpf/7.1.php
+
+## Кисти
+https://metanit.com/sharp/wpf/8.php
+
+## Ресурсы
+https://metanit.com/sharp/wpf/9.php
 
 
 
