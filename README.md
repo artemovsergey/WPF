@@ -568,4 +568,30 @@ namespace WpfApp
 	
 ```
 	
-	
+## Документы
+https://metanit.com/sharp/wpf/15.php
+								  
+## Работа с графикой
+https://metanit.com/sharp/wpf/17.php
+								  
+## Трехмерная графика						  
+https://metanit.com/sharp/wpf/18.1.php								  
+
+## Анимация
+https://metanit.com/sharp/wpf/16.php
+								  
+## Окна
+https://metanit.com/sharp/wpf/20.1.php
+
+## Паттерн MVVM
+https://metanit.com/sharp/wpf/22.1.php
+								  
+## SQLite в WPF
+https://metanit.com/sharp/wpf/21.1.php
+								  
+								  
+								  
+								  
+								  
+								  
+								  
