@@ -415,13 +415,157 @@ private void deleteButton_Click(object sender, RoutedEventArgs e)
 
 ```
 
+## WPF Entity Framework CRUD
+
+1
+App.config
+
+Создание строки подключения и провайдеров для Entity Framework
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+	<configSections>
+		<!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+		<section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+	</configSections>
+
+	<startup>
+		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
+	</startup>
+	
+	<connectionStrings>
+		<add name="DefaultConnection"
+			 connectionString="Data Source=localhost;Initial Catalog=MobileStore;Integrated Security=True"
+			providerName="System.Data.SqlClient"/>
+	</connectionStrings>
+	
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework" />
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+	
+	
+</configuration>
+
+```
+
+2 Далее надо создать класс модели
+
+3 Для взаимодействия с базой данных через Entity Framework нам нужен контекст данных, поэтому добавим в папку Models еще один класс, который назовем AppContext:
+
+```csharp
+
+
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
+
+
+public class AppContext : DbContext
+    {
+  
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+        
+    }
+
+    public DbSet<User> Users { get; set; }
+
+    }
 
 
 
+```
+
+Класс контекста наследуется от класса DbContext. В своем конструкторе он передает в конструктор базового класса название строки подключения из файла App.config. Также в контексте данных определяется свойство по типу DbSet<Phone> - через него мы будем взаимодействовать с таблицей, которая хранит объекты Phone.
+
+	
+4 В разметки Xaml
+	
+
+```xaml
+
+	<DataGrid AutoGenerateColumns="False" x:Name="phonesGrid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Title}" Header="Модель" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Company}" Header="Производитель" Width="110"/>
+                <DataGridTextColumn Binding="{Binding Price}" Header="Цена" Width="70"/>
+            </DataGrid.Columns>
+        </DataGrid>
+	
+```
+	
+5 Теперь определим в файле кода c# привязку данных и обработчики кнопок:
+
+	
+```csharp
 
 
+using Microsoft.EntityFrameworkCore;
+using System.Windows;
+
+namespace WpfApp
+{
+	
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    /// 
+	
+    public partial class MainWindow2 : Window
+    {
 
 
+        AppContext db;
+
+        public MainWindow2()
+        {
+            InitializeComponent();
+            db = new AppContext();
+            db.Users.Load();
+            usersGrid.ItemsSource = db.Users.Local.ToBindingList();
+            this.Closing += MainWindow2_Closing;
+        }
 
 
+        private void MainWindow2_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            db.Dispose();
+        }
+	
+        private void updateButton_Click(object sender, RoutedEventArgs e)
+        {
+            db.SaveChanges();
+        }
 
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+	
+            if (usersGrid.SelectedItems.Count > 0)
+            {
+                for (int i = 0; i < usersGrid.SelectedItems.Count; i++)
+                {
+                    User user = usersGrid.SelectedItems[i] as User;
+                    if (user != null)
+                    {
+                        db.Users.Remove(user);
+                    }
+                }
+            }
+            db.SaveChanges();
+        }
+
+
+    }
+}
+
+	
+	
+```
+	
+	
