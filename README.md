@@ -585,7 +585,9 @@ https://metanit.com/sharp/wpf/20.1.php
 
 ## Паттерн MVVM
 https://metanit.com/sharp/wpf/22.1.php
-								  
+
+
+![](Patterns.png)
 ## SQLite в WPF
 https://metanit.com/sharp/wpf/21.1.php
 								  
