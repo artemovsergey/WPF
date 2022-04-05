@@ -631,8 +631,8 @@ https://nationalteam.worldskills.ru/skills/realizatsiya-grafikov-s-pomoshchyu-ko
 ## ПРОГРАММНАЯ РАБОТА С ТАБЛИЦАМИ EXCEL С ПОМОЩЬЮ БИБЛИОТЕКИ MICROSOFT.OFFICE.INTEROP.EXCEL
 https://nationalteam.worldskills.ru/skills/programmnaya-rabota-s-tablitsami-excel-s-pomoshchyu-biblioteki-microsoft-office-interop-excel/
 
-
-
+## Программная работа с документами Word с помощью библиотеки Microsoft.Office.Interop.Word
+https://nationalteam.worldskills.ru/skills/programmnaya-rabota-s-dokumentami-word-s-pomoshchyu-biblioteki-microsoft-office-interop-word/
 
 
 
