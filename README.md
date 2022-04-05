@@ -623,5 +623,20 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         FontFamily="{DynamicResource MaterialDesignFont}"
 
 ```
-								  
+
+## РЕАЛИЗАЦИЯ ГРАФИКОВ С ПОМОЩЬЮ КОМПОНЕНТА CHART (SYSTEM.WINDOWS.FORMS.DATAVISUALIZATION)
+
+https://nationalteam.worldskills.ru/skills/realizatsiya-grafikov-s-pomoshchyu-komponenta-chart-system-windows-forms-datavisualization/
+
+
+
+
+
+
+
+
+
+
+
+
 								  
