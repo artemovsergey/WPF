@@ -634,8 +634,8 @@ https://nationalteam.worldskills.ru/skills/programmnaya-rabota-s-tablitsami-exce
 ## Программная работа с документами Word с помощью библиотеки Microsoft.Office.Interop.Word
 https://nationalteam.worldskills.ru/skills/programmnaya-rabota-s-dokumentami-word-s-pomoshchyu-biblioteki-microsoft-office-interop-word/
 
-
-
+## РЕАЛИЗАЦИЯ ПОЛЬЗОВАТЕЛЬСКИХ ЭЛЕМЕНТОВ УПРАВЛЕНИЯ (USERCONTROL)
+https://nationalteam.worldskills.ru/skills/realizatsiya-polzovatelskikh-elementov-upravleniya-usercontrol/
 
 
 
