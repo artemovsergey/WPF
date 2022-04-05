@@ -638,5 +638,38 @@ https://nationalteam.worldskills.ru/skills/programmnaya-rabota-s-dokumentami-wor
 https://nationalteam.worldskills.ru/skills/realizatsiya-polzovatelskikh-elementov-upravleniya-usercontrol/
 
 
+## Page навигация в WPF
+
+
+Переход с помощью Navigate можно только по Page, а не по Window
+
+Чтобы получить доступ к фрейму из другой страницы можно создать класс посредник Manager, который будет хранить в статическом поле объект фрейма
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Controls; // for Frame
+
+namespace WpfApp1
+{
+    public class ManagerPages
+    {
+
+        public static Frame Mainframe { get; set; }
+
+    }
+}
+
+```
+
+
+При этом либо мы работаем через page, либо через окна
+
+
+
+
 
 								  
