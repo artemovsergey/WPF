@@ -625,11 +625,11 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 ```
 
 ## РЕАЛИЗАЦИЯ ГРАФИКОВ С ПОМОЩЬЮ КОМПОНЕНТА CHART (SYSTEM.WINDOWS.FORMS.DATAVISUALIZATION)
-
 https://nationalteam.worldskills.ru/skills/realizatsiya-grafikov-s-pomoshchyu-komponenta-chart-system-windows-forms-datavisualization/
 
 
-
+## ПРОГРАММНАЯ РАБОТА С ТАБЛИЦАМИ EXCEL С ПОМОЩЬЮ БИБЛИОТЕКИ MICROSOFT.OFFICE.INTEROP.EXCEL
+https://nationalteam.worldskills.ru/skills/programmnaya-rabota-s-tablitsami-excel-s-pomoshchyu-biblioteki-microsoft-office-interop-excel/
 
 
 
