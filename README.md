@@ -672,4 +672,33 @@ namespace WpfApp1
 
 **Замечание**: чтобы отправить файлы в ресурсы надо выбрать проект и нажать кнопку с "ключиком" и открыть свойства проекта. Далее перейти в Ресурсы и создаться папка Resources и файл ```Properties/Resources.resx```, в котором можно добавлсять ресурсы. При этом в свойствах отдельного ресурса Действия при сборке должны быть выбраны Ресурс
 
+## Стилизация приложения
+
+Все стили можно прописать в отдельном файле App.xaml
+
+```xaml
+<Application x:Class="WpfApp1.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfApp1"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="15"></Setter>
+            <Setter Property="Width" Value="100"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+         
+    </Application.Resources>
+    
+</Application>
+
+```
+
+
+
+
+
 								  
