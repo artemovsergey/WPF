@@ -455,6 +455,30 @@ App.config
 
 2 Далее надо создать класс модели
 
+Класс модели ```Product```. можно все модели поместить в папку Models
+
+```csharp
+
+{
+    public class Product
+    {
+
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public int ProductTypeID { get; set; }
+        public string ArticleNumber { get; set; }
+        public string Description { get; set; }
+        public string Image { get; set; }
+        public int ProductionPersonCount { get; set; }
+        public int ProductionWorkshopNumber { get; set; }
+        public decimal MinCostForAgent { get; set; }
+
+    }
+}
+
+```
+
+
 3 Для взаимодействия с базой данных через Entity Framework нам нужен контекст данных, поэтому добавим в папку Models еще один класс, который назовем AppContext:
 
 ```csharp
@@ -474,13 +498,12 @@ public class AppContext : DbContext
         
     }
 
-    public DbSet<User> Users { get; set; }
+    public DbSet<Product> Products { get; set; }
 
     }
-
-
-
 ```
+**Замечание**: Product - это класс модели, Products - это название таблицы в базе данных
+
 
 Класс контекста наследуется от класса DbContext. В своем конструкторе он передает в конструктор базового класса название строки подключения из файла App.config. Также в контексте данных определяется свойство по типу DbSet<Phone> - через него мы будем взаимодействовать с таблицей, которая хранит объекты Phone.
 
@@ -523,15 +546,24 @@ namespace WpfApp
 
         AppContext db;
 
-        public MainWindow2()
+        public MainWindow()
         {
             InitializeComponent();
-            db = new AppContext();
-            db.Users.Load();
-            usersGrid.ItemsSource = db.Users.Local.ToBindingList();
-            this.Closing += MainWindow2_Closing;
-        }
 
+            try
+            {
+                db = new AppContext();
+                db.Product.Load();
+                ProductGrid.ItemsSource = db.Product.Local.ToBindingList();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+            
+
+
+        }
 
         private void MainWindow2_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
