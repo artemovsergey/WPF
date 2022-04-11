@@ -731,6 +731,20 @@ namespace WpfApp1
 
 **Замечание**: можно создавать базу данных и таблицы в Visual Studio. Также при импорте данных в знаениях float SQL Server принимает значения с ,
 
+Проблема для создания модели данных в проекте .NET 6
+Добавление ADO.Net Entity Framework дает «Целевая платформа проекта не содержит сборки среды выполнения Entity Framework»
 
+
+Проблема в том, что EF для .Net 6.0 работает только с командами. Коллега прислал мне эту ссылку:
+Инструмент EF 6 работает только с проектом .NET Framework, вы должны добавить его в свое решение, а затем скопировать или связать с созданным кодом. Кроме того, файлы EDMX в проектах .NET Core не поддерживаются, но есть обходные пути.
+
+Решение
+В консоли диспетчера пакетов Nuget прописать команду
+Scaffold-DbContext "Server=localhost;Database=Users;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models2
+
+
+Надо собрать лучшее по крупицам из всего материала по С# технологиям, что я читаю и пробую
+
+<TextBox Name="textBox" Height="40" Width="100" Text="{Binding ElementName=textBlock,Path=Text,Mode=TwoWay}"   />
 
 								  
