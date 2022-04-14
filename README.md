@@ -422,7 +422,7 @@ private void deleteButton_Click(object sender, RoutedEventArgs e)
 ## Технология доступа к базе данных через фреймворк Entity Framework 6
 
 
-**App.config**
+Создадим файл **App.config**
 
 Создание строки подключения и провайдеров для Entity Framework
 
@@ -553,6 +553,11 @@ namespace WpfApp
                 db = new AppContext();
                 db.Product.Load();
                 ProductGrid.ItemsSource = db.Product.Local.ToBindingList();
+		// using Linq
+		// ProductGrid.ItemsSource = db.Product.ToList(); 
+	
+				
+
             }
             catch(Exception ex)
             {
@@ -745,5 +750,20 @@ Scaffold-DbContext "Server=localhost;Database=Users;Trusted_Connection=True;" Mi
 ## Привязка данных
 
 <TextBox Name="textBox" Height="40" Width="100" Text="{Binding ElementName=textBlock,Path=Text,Mode=TwoWay}"   />
+
+
+## Алгоритм действий при создании нового проекта WPF .NET 6
+1. Определиться как будет осуществляться навигация по проету. Через окна или через страницы
+2. Установить EF6, Material Design (Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes)
+3. Подключить базу данных для EF6, подключить Material Design
+4. Создать модели, сделать структуру проекта
+
+
+
+
+
+
+
+
 
 								  
