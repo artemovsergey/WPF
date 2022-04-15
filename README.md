@@ -752,6 +752,240 @@ Scaffold-DbContext "Server=localhost;Database=Users;Trusted_Connection=True;" Mi
 <TextBox Name="textBox" Height="40" Width="100" Text="{Binding ElementName=textBlock,Path=Text,Mode=TwoWay}"   />
 
 
+## Обновление
+
+Событие IsVisibleChanged="Page1_InVisibleChanged"
+
+```Csharp
+private void Page1_InVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                AppContext db = new AppContext();
+                db.ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                ProductGrid.ItemsSource = db.Users.ToList();
+            }
+        }
+```
+## Вызов контекста на кнопке Редактировать
+
+```Csharp
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            ManagerPages.Mainframe.Navigate(new Page2((sender as Button).DataContext as User));
+        }
+```
+## Кнопка удаления с диалогом
+
+```Csharp
+
+private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedUsers = ProductGrid.SelectedItems.Cast<User>().ToList();
+
+            if (MessageBox.Show($"Вы точно хотите удалить {selectedUsers.Count()} пользователей", "Внимание!",
+                 MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    AppContext db = new AppContext();
+                    db.Users.RemoveRange(selectedUsers);
+                    db.SaveChanges();
+                    ProductGrid.ItemsSource = db.Users.ToList();
+                    MessageBox.Show("Пользователи удалены!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{ex.Message}");
+                }
+            }
+        }
+```
+
+## Общий метод для поиска, фильтрации, сортировки
+
+```Csharp
+
+private void UpdateUser()
+        {
+            var currentUsers = db.Users.ToList();
+
+            if (ComboBox.SelectedIndex > 0)
+            {
+                currentUsers = currentUsers.Where(p => p.Login == ComboBox.SelectedItem.ToString()).ToList();
+            }
+
+            currentUsers = currentUsers.Where(p => p.Login.ToLower().Contains(SearchBox.Text.ToLower())).ToList();
+
+
+            //if (CheckBox.IsChecked.Value)
+            //  currentUsers = currentUsers.Where(p => p.Password == "1").ToList();
+
+
+            ProductGrid.ItemsSource = currentUsers.OrderBy(p => p.Login).ToList();
+        }
+
+```
+
+## Задание начальных значений для списка
+
+```Csharp
+            var allTypes = db.Users.ToList();
+
+            allTypes.Insert(0, new User { Login = "Все типы" });
+            ComboBox.ItemsSource = allTypes;//.Select(p => p.Login);
+
+            CheckBox.IsChecked = true;
+            ComboBox.SelectedIndex = 0;
+```
+## Список
+
+```xaml
+ <ComboBox Width="100" Name="ComboBox" DisplayMemberPath="Login" SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
+```
+
+## ListView
+
+```xaml
+
+<ListView Grid.Row ="0" x:Name="ListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center" >
+
+
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        
+                        <Image Grid.Row="2"  HorizontalAlignment="Center" Height="100" Width="100">
+
+                            
+
+                                <Image.Source>
+
+                                <Binding Path="Password" >
+
+                                    
+                                    
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>products/tire_0.jpg</ImageSource>
+                                    </Binding.TargetNullValue>
+                                    
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+                        
+
+                        <TextBlock Text="{Binding Login}"  VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="5 5"
+                                   FontSize="10" Grid.Row="0"/>
+                        <TextBlock Text="{Binding Password, StringFormat={}{0}}"  VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="5 5"
+                                   FontSize="10" Grid.Row="1"/>
+                        
+
+                                               
+
+
+
+
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+```
+
+## Работа с изображениями через путь
+
+```Csharp
+AppContext db = new AppContext();
+// чтобы картинка подгружалась из папки products
+// сформировать в коде список с измененным полем Password, где путь до изображения
+// в базе данных в поле дописать папку в путь
+db.Users.ToList().ForEach(p => p.Password = "products/" + p.Password);
+ListView.ItemsSource = db.Users.ToList();
+```
+
+## Передача параметров в конструктор для текущего пользователя
+
+```Csharp
+private User _currentUser = new User();
+
+        public Page2(User selectedUser)
+        {
+            InitializeComponent();
+
+            if(selectedUser != null)
+            {
+                _currentUser = selectedUser;
+            }
+
+            DataContext = _currentUser;
+        }
+```
+
+## Валидация 
+```Csharp
+private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            StringBuilder errors = new StringBuilder();
+            AppContext db = new AppContext();
+
+            if (string.IsNullOrWhiteSpace(_currentUser.Login))
+                errors.AppendLine("Укажите логин");
+
+            //
+            if (errors.Length > 0)
+            {
+                MessageBox.Show(errors.ToString());
+                return;
+            }
+
+            MessageBox.Show(_currentUser.Id.ToString());
+            if (_currentUser.Id == 0)
+            {
+                db.Users.Add(_currentUser);   
+            }
+            else
+            {
+              db.Users.Update(_currentUser);
+            }
+
+
+            try
+            {
+                db.SaveChanges();
+                MessageBox.Show("Пользователь добавлен!");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+
+
+        }
+```
+
+
+
+
+
+
+
 ## Алгоритм действий при создании нового проекта WPF .NET 6
 1. Определиться как будет осуществляться навигация по проету. Через окна или через страницы
 2. Установить EF6, Material Design (Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes)
