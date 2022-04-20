@@ -62,8 +62,8 @@ Learning WPF
 Здесь столбец или строка занимает то место, которое им нужно
 
 ```xaml
-<ColumnDefinition Width="**Auto**" />
-<RowDefinition Height="**Auto**" />
+<ColumnDefinition Width="Auto" />
+<RowDefinition Height="Auto" />
 ```
 Также абсолютные размеры можно задать в пикселях, дюймах, сантиметрах или точках:
 
@@ -78,7 +78,7 @@ Learning WPF
     <Button Content="Right Bottom" />
 </UniformGrid>
 ```
-**Примечание**: по умолчанию контейнер только один в элементе Window 
+
 
 
 ## GridSplitter
