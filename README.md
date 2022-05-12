@@ -507,8 +507,6 @@ public class AppContext : DbContext
     }
 ```
 **Замечание**: Product - это класс модели, Products - это название таблицы в базе данных
-
-
 Класс контекста наследуется от класса DbContext. В своем конструкторе он передает в конструктор базового класса название строки подключения из файла App.config. Также в контексте данных определяется свойство по типу DbSet<Phone> - через него мы будем взаимодействовать с таблицей, которая хранит объекты Phone.
 
 
@@ -517,7 +515,7 @@ public class AppContext : DbContext
 
 ```xaml
 
-	<DataGrid AutoGenerateColumns="False" x:Name="phonesGrid">
+	<DataGrid AutoGenerateColumns="False" x:Name="usersGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Title}" Header="Модель" Width="100"/>
                 <DataGridTextColumn Binding="{Binding Company}" Header="Производитель" Width="110"/>
@@ -527,7 +525,7 @@ public class AppContext : DbContext
 	
 ```
 	
-Определим в файле кода c# привязку данных и обработчики кнопок:
+Определим в файле кода c# привязку данных и возможные обработчики кнопок:
 
 	
 ```csharp
@@ -599,7 +597,9 @@ namespace WpfApp
     }
 }
 
-	
+**Замечание**: при таком подходе надо изначально создавать базу данных на сервере или в классе AppContext прописать создание базы данных автоматически
+								  
+								  
 	
 ```
 	
