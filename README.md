@@ -81,9 +81,6 @@ connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].C
 
 Чтобы задействовать эту функциональность, нам надо добавить в проект библиотеку **System.Configuration.dll**.
 
-
-
-## Технология доступа к базе данных ADO.NET
 Далее в обработчике загрузки окна Window_Loaded создаем объект SqlDataAdapter:
 
 
