@@ -739,7 +739,7 @@ private void SaveButton_Click(object sender, RoutedEventArgs e)
 
 
 ## Алгоритм действий при создании нового проекта WPF .NET 6
-1. Определиться как будет осуществляться навигация по проету. Через окна или через страницы
+1. Определиться как будет осуществляться навигация по проекту. Через окна или через страницы
 2. Установить EF6, Material Design (Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes)
 3. Подключить базу данных для EF6, подключить Material Design
 4. Создать модели, сделать структуру проекта
