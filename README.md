@@ -500,8 +500,14 @@ namespace WpfApp1
 Проблема в том, что EF для .Net 6.0 работает только с командами. Коллега прислал мне эту ссылку:
 Инструмент EF 6 работает только с проектом .NET Framework, вы должны добавить его в свое решение, а затем скопировать или связать с созданным кодом. Кроме того, файлы EDMX в проектах .NET Core не поддерживаются, но есть обходные пути.
 
-Решение: В консоли диспетчера пакетов Nuget прописать команду
+
+
+**Решение**: В консоли диспетчера пакетов Nuget прописать команду
 Scaffold-DbContext "Server=localhost;Database=Users;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models2
+**Замечание**: надо установить Microsoft.EntityFrameworkCore.Tools.
+
+Команда создает модели из каждой сущности в базе данных, учитывая связи, а также создает класс контекста для работы с данными как с классами.
+
 
 
 ## Привязка данных
@@ -739,10 +745,12 @@ private void SaveButton_Click(object sender, RoutedEventArgs e)
 
 
 ## Алгоритм действий при создании нового проекта WPF .NET 6
-1. Определиться как будет осуществляться навигация по проекту. Через окна или через страницы
+1. Определиться как будет осуществляться навигация по проекту. Через окна или через страницы. Сделать интерфейс приложения с навигацией
 2. Установить EF6, Material Design (Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes)
 3. Подключить базу данных для EF6, подключить Material Design
 4. Создать модели, сделать структуру проекта
+5. Создать базу данных в CУБД.
+6. Восстановить модели по готовой базе данных при помощи команды Scaffold-DbContext "Server=localhost;Database=Name;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 
 
 
