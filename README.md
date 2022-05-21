@@ -744,6 +744,18 @@ private void SaveButton_Click(object sender, RoutedEventArgs e)
 ```
 
 
+В Visual Studio работа с базой данных. Связь двух таблиц внешним ключом
+
+```SQL
+CONSTRAINT [FK_Abiturients_Specialty] FOREIGN KEY ([specialty_id]) REFERENCES [dbo].[Specialty] ([Id])
+```
+Автоинкремент в SQL Server 
+
+```SQL
+[Id] int Identity(1,1)
+```
+
+
 ## Алгоритм действий при создании нового проекта WPF .NET 6
 1. Определиться как будет осуществляться навигация по проекту. Через окна или через страницы. Сделать интерфейс приложения с навигацией
 2. Установить EF6, Material Design (Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes)
