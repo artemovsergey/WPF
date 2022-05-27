@@ -765,7 +765,166 @@ CONSTRAINT [FK_Abiturients_Specialty] FOREIGN KEY ([specialty_id]) REFERENCES [d
 6. Восстановить модели по готовой базе данных при помощи команды Scaffold-DbContext "Server=localhost;Database=Name;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 
 
+## SQLite
 
+Замечание: В отличие от работы с MS SQL Server по отношению к SQLite EF 6 не поддерживает автоматическое создание базы данных и ее таблиц через Code First в соответствии со структурой моделей приложения. И в этом случае нам самим надо создавать баз данных и ее таблицы.
+
+После добавления для файла базы данных установим опцию "Copy if newer", чтобы файл копировался при компиляции в каталог приложения:
+
+
+## MaterialDesign
+
+App.xaml
+
+```xaml
+<Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+```
+
+Пример
+
+```xaml
+<Window x:Class="Vosmerka.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:local="clr-namespace:Vosmerka"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Восьмерка" Height="500" Width="800">
+    <Grid>
+        <Border MinWidth="100" Margin="15" Background="AliceBlue" VerticalAlignment="Center" Padding="40" MaxHeight="400" CornerRadius="30">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
+            </Border.Effect>
+
+            <StackPanel>
+                <TextBlock Text="Пользователи" FontSize="30" FontWeight="Bold" Margin="0 0 0 20"/>
+
+                <Grid Margin="0 0 0 30">
+                    <Button HorizontalAlignment="Left" Content="Список"/>
+                    <Button HorizontalAlignment="Right" Content="Войти" Style="{StaticResource MaterialDesignFlatButton}"/>
+
+                </Grid>
+
+                <TextBox Name="loginField" materialDesign:HintAssist.Hint="Введите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <PasswordBox Name="passwordField" materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                
+                <TextBox Name="emailField" materialDesign:HintAssist.Hint="Введите email" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <Button Name="createButton" Content="Создать" Margin="0 20" Click="createButton_Click"/>
+            </StackPanel>
+        </Border>
+
+
+    </Grid>
+</Window>
+
+```
+
+
+## Работа с Word
+
+```Csharp
+          //  using(AppContext db = new AppContext())
+            {
+                //var products = db.Products.ToList();
+
+                //var application = new Word.Application();
+
+                //Word.Document document = application.Documents.Add();
+
+
+                // Создаем параграф для хранения страниц
+
+
+                // Основной структурной единицей текста является параграф, представленный объектом
+                // Paragraph. Все абзацы объединяются в коллекцию Paragraphs, причем новые параграфы
+                // добавляются с помощью метода Add. Доступ к тексту предоставляет объект Range,
+                // являющийся свойством Paragraph, а текстовое содержание абзаца доступно через
+                // Range.Text. В данном случае для хранения ФИО каждого пользователя создается новый параграф
+
+                /*foreach (var p in products)
+                {
+                    Word.Paragraph productParagraph = document.Paragraphs.Add();
+                    Word.Range productRange = productParagraph.Range;
+
+
+                  
+
+                    // Добавляем названия страниц
+                    productRange.Text = p.Title;
+                    //productParagraph.set_Style("Title");
+                    productRange.InsertParagraphAfter();
+
+                    //Добавляем и форматируем таблицу для хранения информации о продуктах
+                    Word.Paragraph tableParagraph = document.Paragraphs.Add();
+                    Word.Range tableRange = tableParagraph.Range;
+                    Word.Table paymentsTable = document.Tables.Add(tableRange, products.Count() + 1, 3);
+
+
+                    //После создания параграфа для таблицы и получения его Range, добавляется таблица
+                    //с указанием числа строк (по количеству категорий + 1) и столбцов. Последние две строчки
+                    //касаются указания границ (внутренних и внешних) и выравнивания ячеек (по центру и по вертикали)
+
+                    paymentsTable.Borders.InsideLineStyle = paymentsTable.Borders.OutsideLineStyle
+                        = Word.WdLineStyle.wdLineStyleSingle;
+                    paymentsTable.Range.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+
+
+                    Word.Range cellRange;
+
+                    cellRange = paymentsTable.Cell(1, 1).Range;
+                    cellRange.Text = "Текст 1";
+                    cellRange = paymentsTable.Cell(1, 2).Range;
+                    cellRange.Text = "Текст 2";
+                    cellRange = paymentsTable.Cell(1, 3).Range;
+                    cellRange.Text = "Текст 3";
+
+                    paymentsTable.Rows[1].Range.Bold = 1;
+                    paymentsTable.Rows[1].Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;*/
+
+
+
+                    // Положение ячейки заносится в переменную cellRange. Метод AddPicture() класса
+                    // InlineShape позволяет добавить изображение в ячейку. Иконки категорий размещаются
+                    // в новой папке Assets, основные шаги создания которой изображены на скриншоте
+
+
+                   /* for (int i = 0; i < products.Count(); i++)
+                    {
+                        var currentProduct = products[i];
+                        cellRange = paymentsTable.Cell(i + 2, 1).Range;
+                        
+                        
+                        
+                        //Word.InlineShape imageShape = cellRange.InlineShapes.AddPicture(AppDomain.CurrentDomain.BaseDirectory
+                          //  + "..\\..\\" + currentProduct.Id);
+
+                        // Для первой колонки устанавливаются длина, ширина,
+                        // а также горизонтальное выравнивание по центру
+
+                        //imageShape.Width = imageShape.Height = 40;
+                        //cellRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+
+                        cellRange = paymentsTable.Cell(i + 2, 2).Range;
+                        cellRange.Text = currentProduct.Title;
+
+
+                    }*/
+
+            }
+
+```
 
 
 
