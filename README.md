@@ -3,7 +3,7 @@
 ## Алгоритм действий при создании нового проекта WPF .NET 6
 1. App.config, package.config
 2. Install Nuget package
-3. Сделать интерфейс приложения с навигацией
+3. Сделать инMтерфейс приложения с навигацией
 4. Установить EF6, Material Design (Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes). Можно создать package.config с нужными пакетами
 5. Подключить базу данных для EF6, подключить Material Design
 6. Создать модели, сделать структуру проекта
