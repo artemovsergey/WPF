@@ -493,6 +493,7 @@ Scaffold-DbContext "Server=localhost;Database=Users;Trusted_Connection=True;" Mi
 Команда создает модели из каждой сущности в базе данных, учитывая связи, а также создает класс контекста для работы с данными как с классами.
 
 Scaffold-DbContext "Data Source=.\ComputerDatabase.db" Microsoft.EntityFrameworkCore.Sqlite -OutputDir Models
+Примечание: если будет делать Scaffold, ему нужна база из проекта, а не в Debug. При инициализации контекста база создается в Debug по умолчанию
 
 
 ## Привязка данных Binding
