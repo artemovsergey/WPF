@@ -796,42 +796,47 @@ App.xaml
 Пример MaterialDesign
 
 ```xaml
-<Window x:Class="Vosmerka.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        
-        xmlns:local="clr-namespace:Vosmerka"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
-        Title="Восьмерка" Height="500" Width="800">
-    <Grid>
-        <Border MinWidth="100" Margin="15" Background="AliceBlue" VerticalAlignment="Center" Padding="40" MaxHeight="400" CornerRadius="30">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
-            </Border.Effect>
-
-            <StackPanel>
-                <TextBlock Text="Пользователи" FontSize="30" FontWeight="Bold" Margin="0 0 0 20"/>
-
-                <Grid Margin="0 0 0 30">
-                    <Button HorizontalAlignment="Left" Content="Список"/>
-                    <Button HorizontalAlignment="Right" Content="Войти" Style="{StaticResource MaterialDesignFlatButton}"/>
-
-                </Grid>
-
-                <TextBox Name="loginField" materialDesign:HintAssist.Hint="Введите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <PasswordBox Name="passwordField" materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+<Grid>
+        <Grid>
+            <Border MinWidth="100"
+                    Margin="15"
+                    Background="AliceBlue"
+                    VerticalAlignment="Center"
+                    Padding="40"
+                    MaxHeight="400"
+                    CornerRadius="30">
                 
-                <TextBox Name="emailField" materialDesign:HintAssist.Hint="Введите email" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <Button Name="createButton" Content="Создать" Margin="0 20" Click="createButton_Click"/>
-            </StackPanel>
-        </Border>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="30"
+                                      Color="LightGray"
+                                      ShadowDepth="0"/>
+                </Border.Effect>
+
+                <StackPanel>
+                    <TextBlock Text="База данных магазина компьютерной техники"
+                               FontSize="30"
+                               FontWeight="Bold"
+                               Margin="0 0 0 20"/>
+                    <TextBox Name="loginField"
+                             materialDesign:HintAssist.Hint="Введите логин"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    <PasswordBox Name="passwordField"
+                                 materialDesign:HintAssist.Hint="Введите пароль"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+
+                    <TextBox Name="emailField"
+                             materialDesign:HintAssist.Hint="Введите email"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    <Button Name="createButton"
+                            Content="Создать"
+                            Margin="0 20"
+                            />
+                </StackPanel>
+            </Border>
 
 
+        </Grid>
     </Grid>
-</Window>
 
 ```
 
