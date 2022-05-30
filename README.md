@@ -1,5 +1,17 @@
 # WPF
 
+## Алгоритм действий при создании нового проекта WPF .NET 6
+1. App.config, package.config
+2. Install Nuget package
+3. Сделать интерфейс приложения с навигацией
+4. Установить EF6, Material Design (Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes). Можно создать package.config с нужными пакетами
+5. Подключить базу данных для EF6, подключить Material Design
+6. Создать модели, сделать структуру проекта
+7. Создать базу данных в CУБД.
+8. Восстановить модели по готовой базе данных при помощи команды Scaffold-DbContext "Server=localhost;Database=Name;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+9. Можно использовать подход CodeFirst
+
+
 ## Паттерны проектирования
 
 ![](Patterns.png)
@@ -757,14 +769,6 @@ CONSTRAINT [FK_Abiturients_Specialty] FOREIGN KEY ([specialty_id]) REFERENCES [d
 ```
 
 
-## Алгоритм действий при создании нового проекта WPF .NET 6
-1. Сделать интерфейс приложения с навигацией
-2. Установить EF6, Material Design (Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes). Можно создать package.config с нужными пакетами
-3. Подключить базу данных для EF6, подключить Material Design
-4. Создать модели, сделать структуру проекта
-5. Создать базу данных в CУБД.
-6. Восстановить модели по готовой базе данных при помощи команды Scaffold-DbContext "Server=localhost;Database=Name;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
-7. Можно использовать подход CodeFirst
 
 
 ## SQLite
