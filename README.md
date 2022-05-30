@@ -1,5 +1,12 @@
 # WPF
 
+## Паттерны проектирования
+
+![](Patterns.png)
+## SQLite в WPF
+https://metanit.com/sharp/wpf/21.1.php
+
+
 ## Компоновка
 
 В WPF при компоновке и расположении элементов внутри окна нам надо придерживаться следующих принципов:
@@ -7,31 +14,80 @@
 - Нежелательно указывать явные размеры элементов (за исключеним **минимальных** и **максимальных** размеров). Размеры должны определяться контейнерами.
 - Нежелательно указывать явные позицию и координаты элементов внутри окна. Позиционирование элементов всецело должно быть прерогативой контейнеров. И контейнер сам должен определять, как элемент будет располагаться. Если нам надо создать сложную систему компоновки, то мы можем вкладывать один контейнер в другой, чтобы добиться максимально удобного расположения элементов управления.
 
-**Примечание**: Атрибут ShowGridLines="True" у элемента Grid задает видимость сетки, по умолчанию оно равно False.
+**Примечание**: Атрибут ShowGridLines="True" у элемента Grid задает видимость сетки, по умолчанию оно равно False.Это полезно при разработке интерфейса, потом стоит отключать эту опцию.
 
 ## Конфигурация базы данных
-Добавим в проект файл ```app.config```. Настройки для подключения базы данных
+Добавим в проект файл ```App.config```. Подключение для SQL Server и для SQLite
 
 ```xml
 
 <?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <configuration>
+	<configSections>
+		<sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+
+			<!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+			<section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+
+
+			<section name="AdmissionsCommitteeColledge.Properties.Settings"
+                     type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                     requirePermission="false" />
+
+		</sectionGroup>
+	</configSections>
+
+
 	<startup>
 		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
 	</startup>
+
 	<connectionStrings>
 		<add name="DefaultConnection"
-			 connectionString="Data Source=localhost;Initial Catalog=MobileStore;Integrated Security=True"
-			providerName="System.Data.SqlClient"/>
+			 connectionString="Server=localhost;Database=ColledgeStore;Integrated Security=True;"
+			 providerName="System.Data.SqlClient"/>
+
+		<add name="ConnectionSQLite" connectionString="Data Source=.\ColledgeStore.db" providerName="System.Data.SQLite" />
+
 	</connectionStrings>
+
+
+	<!-- 
+
+		<entityFramework>
+
+			<defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework" />
+
+			<providers>
+				<provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+				<provider invariantName="System.Data.SQLite"  type="System.Data.SQLite.EF6.SQLiteProviderServices, System.Data.SQLite.EF6"/>
+				<provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+				<provider invariantName="System.Data.SQLite.EF6" type="System.Data.SQLite.EF6.SQLiteProviderServices, System.Data.SQLite.EF6" />
+			</providers>
+
+		</entityFramework>
+
+
+
+		<system.data>
+			<DbProviderFactories>
+				<add name="SQLite Data Provider (Entity Framework 6)" invariant="System.Data.SQLite.EF6" description=".NET Framework Data Provider for SQLite (Entity Framework 6)" type="System.Data.SQLite.EF6.SQLiteProviderFactory, System.Data.SQLite.EF6" />
+				<add name="SQLite Data Provider" invariant="System.Data.SQLite" description=".NET Framework Data Provider for SQLite" type="System.Data.SQLite.SQLiteFactory, System.Data.SQLite" />
+			</DbProviderFactories>
+		</system.data>
+
+	-->
+
+
+
 </configuration>
 
 ```
 ## Взаимодействие с базой данных SQL Server через ADO.NET
 
-Для операции добавления новой записи в таблицу применим хранимую процедуру
 
-Итак, мы создали базу данных и таблицу, и сделаем последний шаг - добавим в базу данных харнимую процедуру, которая осуществляет добавление нового объекта в базу данных. Для этого выберем в узле базы данных пункт Programmability->Stored Procedures. Нажмем на этот узел правой кнопкой мыши и в контекстном меню выберем пункт Stored Procedure...:
+Хранимая процедура, которая осуществляет добавление нового объекта в базу данных. 
 
 ```sql
 
@@ -51,19 +107,17 @@ GO
 
 Атрибут connectionString собственно хранит строку подключения. Он состоит из трех частей:
 
-Data Source=localhost: указывает на название сервера. По умолчанию для MS SQL Server Express используется "localhost"
+- Data Source=localhost: указывает на название сервера. По умолчанию для MS SQL Server Express используется "localhost"
 
-Initial Catalog=mobiledb: название базы данных. Так как база данных называется mobiledb, то соответственно здесь данное название и указываем
+- Initial Catalog=mobiledb: название базы данных.
+- Integrated Security=True: задает режим аутентификации
 
-Integrated Security=True: задает режим аутентификации
-
-Так как мы будем подключаться к базе данных MS SQL Server, то соответственно мы будем использовать провайдер для SQL Server, функциональность которого заключена в пространстве имен System.Data.SqlClient.
-
-Далее, вывод данных в DataGrid. **AutoGenerateColumns="False"** позволяет делать привязку к нужным столбцам
+Вывод данных в DataGrid. **AutoGenerateColumns="False"** позволяет делать привязку к нужным столбцам.
 
 ```xaml
 
-        <DataGrid AutoGenerateColumns="False" x:Name="phonesGrid">
+        <DataGrid AutoGenerateColumns="False"
+		  x:Name="phonesGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Title}" Header="Модель" Width="120"/>
                 <DataGridTextColumn Binding="{Binding Company}" Header="Производитель" Width="125"/>
@@ -78,12 +132,9 @@ Integrated Security=True: задает режим аутентификации
 ```csharp
 connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 ```
-
 Чтобы задействовать эту функциональность, нам надо добавить в проект библиотеку **System.Configuration.dll**.
 
 Далее в обработчике загрузки окна Window_Loaded создаем объект SqlDataAdapter:
-
-
 ```csharp 
 adapter = new SqlDataAdapter(command);
 ```
@@ -113,13 +164,9 @@ private void UpdateDB()
 ```
 Чтобы обновить данные через SqlDataAdapter, нам нужна команда обновления, которую можно получить с помощью объекта SqlCommandBuilder. Для самого обновления вызывается метод adapter.Update().
 
-Причем не важно, что мы делаем в программе - добавляем, редактируем или удаляем строки. Метод adapter.Update сделает все необходимые действия. Дело в том, что при загрузке данных в объект DataTable система отслеживает состояние загруженных строк. В методе adapter.Update() состояние строк используется для генерации нужных выражений языка SQL, чтобы выполнить обновление базы данных.
-
-В обработчике кнопки обновления просто вызывается этот метод UpdateDB, а в обработчике кнопки удаления предварительно удаляются все выделенные строки.
-
-Таким образом, мы можем вводить в DataGrid новые данные, редактировать там же уже существующие, сделать множество изменений, и после этого нажать на кнопку обновления, и все эти изменения синхронизируются с базой данных.
-
-Причем важно отметить действие хранимой процедуры - при добавлении нового объекта данные уходят на сервер, и процедура возвращает нам id добавленной записи. Этот id играет большую роль при генерации нужного sql-выражения, если мы захотим эту запись изменить или удалить. И если бы не хранимая процедура, то нам пришлось бы после добавления данных загружать заново всю таблицу в datagrid, только чтобы у новой добавленной записи был в datagrid id. И хранимая процедура избавляет нас от этой работы.
+	Причем не важно, что мы делаем в программе - добавляем, редактируем или удаляем строки. Метод adapter.Update сделает все необходимые действия. Дело в том, что при загрузке данных в объект DataTable система отслеживает состояние загруженных строк. В методе adapter.Update() состояние строк используется для генерации нужных выражений языка SQL, чтобы выполнить обновление базы данных. В обработчике кнопки обновления просто вызывается этот метод UpdateDB, а в обработчике кнопки удаления предварительно удаляются все выделенные строки.
+	Таким образом, мы можем вводить в DataGrid новые данные, редактировать там же уже существующие, сделать множество изменений, и после этого нажать на кнопку обновления, и все эти изменения синхронизируются с базой данных.
+	Причем важно отметить действие хранимой процедуры - при добавлении нового объекта данные уходят на сервер, и процедура возвращает нам id добавленной записи. Этот id играет большую роль при генерации нужного sql-выражения, если мы захотим эту запись изменить или удалить. И если бы не хранимая процедура, то нам пришлось бы после добавления данных загружать заново всю таблицу в datagrid, только чтобы у новой добавленной записи был в datagrid id. И хранимая процедура избавляет нас от этой работы.
 
 
 ```csharp
@@ -166,7 +213,7 @@ private void Window_Loaded(object sender, RoutedEventArgs e)
 
  private void UpdateDB()
         {
-            SqlCommandBuilder comandbuilder = new SqlCommandBuilder(adapter);
+            SqlCommandBuilder commandbuilder = new SqlCommandBuilder(adapter);
             adapter.Update(usersTable);
             MessageBox.Show("Данные обновлены");
         }
@@ -177,15 +224,12 @@ private void Window_Loaded(object sender, RoutedEventArgs e)
 
 private void updateButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateDB();
-            
+            UpdateDB();       
         }
         
 ```
 
-
-
-
+Метод удаления
 ```csharp
 
 private void deleteButton_Click(object sender, RoutedEventArgs e)
@@ -207,48 +251,9 @@ private void deleteButton_Click(object sender, RoutedEventArgs e)
 
 ```
 
-## Технология доступа к базе данных через фреймворк Entity Framework 6
+## Entity Framework Core 6
 
-
-Создадим файл **App.config**
-
-Создание строки подключения и провайдеров для Entity Framework
-
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-
-	<configSections>
-		<!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
-		<section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
-	</configSections>
-
-	<startup>
-		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
-	</startup>
-	
-	<connectionStrings>
-		<add name="DefaultConnection"
-			 connectionString="Data Source=localhost;Initial Catalog=MobileStore;Integrated Security=True"
-			providerName="System.Data.SqlClient"/>
-	</connectionStrings>
-	
-  <entityFramework>
-    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework" />
-    <providers>
-      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
-    </providers>
-  </entityFramework>
-	
-	
-</configuration>
-
-```
-
-
-Класс модели
-
-Можно все модели поместить в папку Models
+Класс модели. Можно все модели поместить в папку Models
 
 ```csharp
 
@@ -275,24 +280,42 @@ private void deleteButton_Click(object sender, RoutedEventArgs e)
 
 ```csharp
 
-
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
 
-public class AppContext : DbContext
+public partial class ColledgeStoreContext : DbContext
     {
-  
+        public ColledgeStoreContext() => Database.EnsureCreated();  // создает базу данных, а затем всю структуру
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-        
-    }
 
-    public DbSet<Product> Products { get; set; }
+        public ColledgeStoreContext(DbContextOptions<ColledgeStoreContext> options)
+            : base(options)
+        {
+        }
 
-    }
+        public virtual DbSet<Abiturient> Abiturients { get; set; } = null!;
+        public virtual DbSet<Specialty> Specialties { get; set; } = null!;
+        public virtual DbSet<User> Users { get; set; } = null!;
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+
+
+                // Подключение SQL Server
+                optionsBuilder.UseSqlServer("Server=localhost;Database=ColledgeStore;Trusted_Connection=True;");
+                //optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+
+                // SQlite
+                //optionsBuilder.UseSqlite(ConfigurationManager.ConnectionStrings["ConnectionSQLite"].ToString());
+                //optionsBuilder.UseSqlite(@"DataSource=ColledgeStore.db;");
+
+            }
+        }
 ```
 **Замечание**: Product - это класс модели, Products - это название таблицы в базе данных
 Класс контекста наследуется от класса DbContext. В своем конструкторе он передает в конструктор базового класса название строки подключения из файла App.config. Также в контексте данных определяется свойство по типу DbSet<Phone> - через него мы будем взаимодействовать с таблицей, которая хранит объекты Phone.
@@ -341,9 +364,6 @@ namespace WpfApp
                 ProductGrid.ItemsSource = db.Product.Local.ToBindingList();
 		// using Linq
 		// ProductGrid.ItemsSource = db.Product.ToList(); 
-	
-				
-
             }
             catch(Exception ex)
             {
@@ -354,51 +374,12 @@ namespace WpfApp
 
         }
 
-        private void MainWindow2_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            db.Dispose();
-        }
-	
-        private void updateButton_Click(object sender, RoutedEventArgs e)
-        {
-            db.SaveChanges();
-        }
-
-        private void deleteButton_Click(object sender, RoutedEventArgs e)
-        {
-	
-            if (usersGrid.SelectedItems.Count > 0)
-            {
-                for (int i = 0; i < usersGrid.SelectedItems.Count; i++)
-                {
-                    User user = usersGrid.SelectedItems[i] as User;
-                    if (user != null)
-                    {
-                        db.Users.Remove(user);
-                    }
-                }
-            }
-            db.SaveChanges();
-        }
-
-
     }
 }
 ```
-								  
+	
 **Замечание**: при таком подходе надо изначально создавать базу данных на сервере или в классе AppContext прописать создание базы данных автоматически
-								  
-								  
-	
-	
-
-
-
-![](Patterns.png)
-## SQLite в WPF
-https://metanit.com/sharp/wpf/21.1.php
-								  
-								  
+																  
 ## MaterialDesign
 
 App.xaml
@@ -416,7 +397,7 @@ App.xaml
     </Application.Resources>								  
 ```							
 
-Подключение в разметке XAML
+## Подключение в разметке XAML
 
 ```xaml
 
@@ -436,9 +417,9 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 ## Page навигация в WPF
 
 
-Переход с помощью Navigate можно только по Page, а не по Window
+Переход с помощью Navigate можно только по Page, а не по Window.
 
-Чтобы получить доступ к фрейму из другой страницы можно создать класс посредник Manager, который будет хранить в статическом поле объект фрейма
+Чтобы получить доступ к фрейму из другой страницы можно создать класс посредник ProxyClass, который будет хранить в статическом поле объект фрейма.
 
 ```csharp
 using System;
@@ -452,20 +433,14 @@ namespace WpfApp1
 {
     public class ManagerPages
     {
-
         public static Frame Mainframe { get; set; }
-
     }
 }
-
 ```
 
+**Замечание**: при создание обрабочика кнопки в разметке XAML после нажатия F12 в коде создается обработчик. В средствах VS можно выбрать - Перейти к определению.
 
-При этом либо мы работаем через Page, либо через окна Window
-
-**Замечание**: при создание обрабочика кнопки в разметке XAML после нажатия F12 в коде создается обработчик. В средствах VS можно выбрать - Перейти к определению
-
-**Замечание**: чтобы отправить файлы в ресурсы надо выбрать проект и нажать кнопку с "ключиком" и открыть свойства проекта. Далее перейти в Ресурсы и создаться папка Resources и файл ```Properties/Resources.resx```, в котором можно добавлсять ресурсы. При этом в свойствах отдельного ресурса ```Действия при сборке``` должны быть выбраны ```Ресурс```
+**Замечание**: чтобы отправить файлы в ресурсы надо выбрать проект и нажать кнопку с "ключиком" и открыть свойства проекта. Далее перейти в Ресурсы и создаться папка Resources и файл ```Properties/Resources.resx```, в котором можно добавлять ресурсы. При этом в свойствах отдельного ресурса ```Действия при сборке``` должны быть выбраны ```Ресурс```
 
 ## Стилизация приложения
 
@@ -494,28 +469,23 @@ namespace WpfApp1
 
 **Замечание**: можно создавать базу данных и таблицы в Visual Studio. Также при импорте данных в значениях float SQL Server принимает значения с запятой  - ,
 
-Проблема для создания модели данных в проекте .NET 6
-```Добавление ADO.Net Entity Framework дает «Целевая платформа проекта не содержит сборки среды выполнения Entity Framework»```
-
-Проблема в том, что EF для .Net 6.0 работает только с командами. Коллега прислал мне эту ссылку:
-Инструмент EF 6 работает только с проектом .NET Framework, вы должны добавить его в свое решение, а затем скопировать или связать с созданным кодом. Кроме того, файлы EDMX в проектах .NET Core не поддерживаются, но есть обходные пути.
-
-
-
-**Решение**: В консоли диспетчера пакетов Nuget прописать команду
-Scaffold-DbContext "Server=localhost;Database=Users;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models2
+## Scaffold базы данных
+	
+В консоли диспетчера пакетов Nuget прописать команду
+Scaffold-DbContext "Server=localhost;Database=Users;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+	
 **Замечание**: надо установить Microsoft.EntityFrameworkCore.Tools.
 
 Команда создает модели из каждой сущности в базе данных, учитывая связи, а также создает класс контекста для работы с данными как с классами.
 
 
 
-## Привязка данных
+## Привязка данных Binding
 
 <TextBox Name="textBox" Height="40" Width="100" Text="{Binding ElementName=textBlock,Path=Text,Mode=TwoWay}"   />
 
 
-## Обновление
+## Обновление объектов в таблице
 
 Событие IsVisibleChanged="Page1_InVisibleChanged"
 
@@ -530,6 +500,7 @@ private void Page1_InVisibleChanged(object sender, DependencyPropertyChangedEven
             }
         }
 ```
+
 ## Вызов контекста на кнопке Редактировать
 
 ```Csharp
@@ -538,6 +509,7 @@ private void Page1_InVisibleChanged(object sender, DependencyPropertyChangedEven
             ManagerPages.Mainframe.Navigate(new Page2((sender as Button).DataContext as User));
         }
 ```
+
 ## Кнопка удаления с диалогом
 
 ```Csharp
@@ -601,17 +573,23 @@ private void UpdateUser()
             CheckBox.IsChecked = true;
             ComboBox.SelectedIndex = 0;
 ```
-## Список
+
+	## Список
 
 ```xaml
- <ComboBox Width="100" Name="ComboBox" DisplayMemberPath="Login" SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
+ <ComboBox Width="100"
+	   Name="ComboBox"
+	   DisplayMemberPath="Login"
+	   SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
 ```
 
 ## ListView
 
 ```xaml
 
-<ListView Grid.Row ="0" x:Name="ListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center" >
+<ListView Grid.Row ="0"
+	  x:Name="ListView"
+	  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 			  HorizontalContentAlignment="Center" >
 
 
 
@@ -632,16 +610,15 @@ private void UpdateUser()
                         </Grid.RowDefinitions>
 
                         
-                        <Image Grid.Row="2"  HorizontalAlignment="Center" Height="100" Width="100">
-
-                            
+                        <Image Grid.Row="2"
+			       HorizontalAlignment="Center"
+			       Height="100"
+			       Width="100">
 
                                 <Image.Source>
 
                                 <Binding Path="Password" >
-
-                                    
-                                    
+   
                                     <Binding.TargetNullValue>
                                         <ImageSource>products/tire_0.jpg</ImageSource>
                                     </Binding.TargetNullValue>
@@ -651,18 +628,22 @@ private void UpdateUser()
                         </Image>
                         
 
-                        <TextBlock Text="{Binding Login}"  VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="5 5"
-                                   FontSize="10" Grid.Row="0"/>
-                        <TextBlock Text="{Binding Password, StringFormat={}{0}}"  VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="5 5"
+                        <TextBlock Text="{Binding Login}"
+				   VerticalAlignment="Center"
+				   TextAlignment="Center"
+				   TextWrapping="Wrap"
+				   HorizontalAlignment="Center"
+				   Margin="5 5"
+                                   FontSize="10"
+				   Grid.Row="0"/>
+                        <TextBlock Text="{Binding Password, StringFormat={}{0}}"
+				   VerticalAlignment="Center"
+				   TextAlignment="Center"
+				   TextWrapping="Wrap"
+				   HorizontalAlignment="Center"
+				   Margin="5 5"
                                    FontSize="10" Grid.Row="1"/>
                         
-
-                                               
-
-
-
-
-
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -671,16 +652,6 @@ private void UpdateUser()
 
 ```
 
-## Работа с изображениями через путь
-
-```Csharp
-AppContext db = new AppContext();
-// чтобы картинка подгружалась из папки products
-// сформировать в коде список с измененным полем Password, где путь до изображения
-// в базе данных в поле дописать папку в путь
-db.Users.ToList().ForEach(p => p.Password = "products/" + p.Password);
-ListView.ItemsSource = db.Users.ToList();
-```
 
 ## Передача параметров в конструктор для текущего пользователя
 
@@ -728,7 +699,6 @@ private void SaveButton_Click(object sender, RoutedEventArgs e)
               db.Users.Update(_currentUser);
             }
 
-
             try
             {
                 db.SaveChanges();
@@ -738,7 +708,6 @@ private void SaveButton_Click(object sender, RoutedEventArgs e)
             {
                 MessageBox.Show($"{ex.Message}");
             }
-
 
         }
 ```
@@ -757,17 +726,16 @@ CONSTRAINT [FK_Abiturients_Specialty] FOREIGN KEY ([specialty_id]) REFERENCES [d
 
 
 ## Алгоритм действий при создании нового проекта WPF .NET 6
-1. Определиться как будет осуществляться навигация по проекту. Через окна или через страницы. Сделать интерфейс приложения с навигацией
-2. Установить EF6, Material Design (Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes)
+1. Сделать интерфейс приложения с навигацией
+2. Установить EF6, Material Design (Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes). Можно создать package.config с нужными пакетами
 3. Подключить базу данных для EF6, подключить Material Design
 4. Создать модели, сделать структуру проекта
 5. Создать базу данных в CУБД.
 6. Восстановить модели по готовой базе данных при помощи команды Scaffold-DbContext "Server=localhost;Database=Name;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+7. Можно использовать подход CodeFirst
 
 
 ## SQLite
-
-Замечание: В отличие от работы с MS SQL Server по отношению к SQLite EF 6 не поддерживает автоматическое создание базы данных и ее таблиц через Code First в соответствии со структурой моделей приложения. И в этом случае нам самим надо создавать баз данных и ее таблицы.
 
 После добавления для файла базы данных установим опцию "Copy if newer", чтобы файл копировался при компиляции в каталог приложения:
 
@@ -789,7 +757,7 @@ App.xaml
     </Application.Resources>
 ```
 
-Пример
+Пример MaterialDesign
 
 ```xaml
 <Window x:Class="Vosmerka.MainWindow"
