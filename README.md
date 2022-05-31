@@ -2,17 +2,25 @@
 
 ## Алгоритм действий при создании нового проекта WPF .NET 6
 1. App.config, package.config
-2. Install Nuget package. Установить EF6, Material Design (Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes). Можно создать package.config с нужными пакетами. Подключить базу данных для EF6, подключить Material Design
-3. Быстрее действовать через DbFirst и Scaffold или CodeFirst и Migration
-4. Сделать интерфейс приложения с навигацией
-5. Не надо делать сразу красиво. Надо сделать простой функционал
-6. В главном окне размеcтить сетку и фреймы
-7. На этом этапе надо знать как будет выглядеть приложение и что оно будет делать.
-8. Далее надо определиться CodeFirst или DBfirst
-9. Создать модели, сделать структуру проекта
-10. Создать базу данных в CУБД.
-11. Восстановить модели по готовой базе данных при помощи команды Scaffold-DbContext "Server=localhost;Database=Name;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
-12. Можно использовать подход CodeFirst
+2. Install Nuget package. 
+	Установить EF6, 
+	Material Design
+	(Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes). 
+	Можно создать package.config с нужными пакетами. Подключить базу данных для EF6, подключить Material Design
+4. Script Database 
+5. Scaffold
+6. Настройка структуры
+7. Общий стили приложения в App.xaml
+8. Быстрее действовать через DbFirst и Scaffold или CodeFirst и Migration
+9. Сделать интерфейс приложения с навигацией
+10. Не надо делать сразу красиво. Надо сделать простой функционал
+11. В главном окне размеcтить сетку и фреймы
+12. На этом этапе надо знать как будет выглядеть приложение и что оно будет делать.
+13. Далее надо определиться CodeFirst или DBfirst
+14. Создать модели, сделать структуру проекта
+15. Создать базу данных в CУБД.
+16. Восстановить модели по готовой базе данных при помощи команды Scaffold-DbContext "Server=localhost;Database=Name;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+17. Можно использовать подход CodeFirst
 
 
 ## Паттерны проектирования
