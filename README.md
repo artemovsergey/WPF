@@ -1461,3 +1461,305 @@ private void ImageButton(object sender, RoutedEventArgs e)
 
     </Application.Resources>
 ```
+
+## Каптча
+
+```Csharp
+public static class CaptchaBuild
+    {
+        public static string Refresh()
+        {
+
+            string captcha = "A1fd";
+
+            Random rand = new Random();
+
+            for (int i = 0; i < 4; i++)
+            {
+                captcha += (char)rand.Next('A', 'Z' + 1);
+            }
+
+            return captcha;
+        }
+    }
+				  
+				 
+				  
+```
+				  
+```Csharp
+CaptchaBox.Visibility = Visibility.Visible;
+CaptchaText.Visibility = Visibility.Visible;
+Captcha.Visibility = Visibility.Visible;
+LoginButtonName.IsEnabled = false;
+
+MessageBox.Show(CaptchaBuild.Refresh());
+Captcha.Text = CaptchaBuild.Refresh();
+Captcha.IsReadOnly = true;				  
+```
+```Csharp
+private void CaptchaBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (CaptchaBox.Text == Captcha.Text)
+            {
+                CaptchaBox.Visibility = Visibility.Collapsed;
+                CaptchaText.Visibility = Visibility.Collapsed;
+                Captcha.Visibility = Visibility.Collapsed;
+                LoginButtonName.IsEnabled = true;
+            }
+            else
+            {
+                Captcha.Text = CaptchaBuild.Refresh();
+                disableButton();
+
+            }
+        }
+```
+
+## Асинхронная задача для выключения кнопки
+```Csharp
+async void disableButton()
+        {
+            LoginButtonName.IsEnabled = false;
+            await Task.Delay(TimeSpan.FromSeconds(10));
+            LoginButtonName.IsEnabled = true;
+        }
+```
+
+App.xaml Стили и ресурсы для приложения
+
+```xaml
+<Application.Resources>
+
+        <SolidColorBrush x:Key="ColorPrimery" Color="White"></SolidColorBrush>
+        <SolidColorBrush x:Key="ColorSecondary" Color="#FFFFFFE1"></SolidColorBrush>
+        <SolidColorBrush x:Key="ColorAccent" Color="#FF76E383"></SolidColorBrush>
+
+
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+            <Setter Property="Background" Value="White">
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Page}">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type DataGrid}">
+           
+            <Setter Property="Background" Value="#FF76E383">
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="4"></Setter>
+            <Setter Property="Width" Value="120"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Background" Value="#FF498C51"></Setter>
+        </Style>
+
+        <Style TargetType="StackPanel">
+            <Setter Property="Margin" Value="15"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+
+        <Style TargetType="WrapPanel">
+            <Setter Property="Margin" Value="10"></Setter>
+        </Style>
+
+
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="150"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Margin" Value="1"></Setter>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="Width" Value="150"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Margin" Value="1"></Setter>
+        </Style>
+    </Application.Resources>
+```
+
+## Триггер для ListView
+
+```xaml
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                  
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding QuantityInStock}" Value="0">
+                            <Setter Property="Background" Value="Gray" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+```
+
+## Border
+```xaml
+<Border
+                            CornerRadius="3"
+                            BorderThickness="2"
+                            Width="800"
+                            Height="Auto"
+                            BorderBrush="{StaticResource ColorAccent}"
+	
+			<Border.Effect>
+			    <DropShadowEffect BlurRadius="30"
+			      Color="LightGray"
+			      ShadowDepth="0"/>
+			</Border.Effect>
+
+	
+</Border>
+```
+Замечание: в Border может быть только один элемент	
+
+## Свойство Visibility
+```xaml
+<Button Visibility="Collapsed"  />
+```
+
+## По ролям 
+```Csharp
+ if (Proxy.CurrentUser != null)
+            {
+                nameUser.Text = Proxy.CurrentUser.Name + " " + Proxy.CurrentUser.Surname;
+                roleUser.Text = $"Ваша роль: {Proxy.CurrentUser.RoleNavigation.RoleName}";
+                AddProduct.Visibility = Visibility.Visible;
+                DeleteProduct.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                nameUser.Text = "Вы зашли как гость!";
+            }
+```
+
+## Выборка по столбцу Select в EF
+```Csharp
+ var Suppliers = db.Products.Select(p => p.Supplier).Distinct().ToList();
+```
+
+## Начальные значения для сортировки и фильтрации
+```Csharp
+ SortComboBox.ItemsSource = new List<String>() { "Цена", "По убыванию", "По возрастанию" };   //.Select(p => p.Login);
+                SortComboBox.SelectedIndex = 0;
+
+                Suppliers.Insert(0, "Все производители");
+                FilterComboBox.ItemsSource = Suppliers;
+                FilterComboBox.SelectedIndex = 0;
+```
+Замечания: событие SelectionChanged выбора срабатывает после смены значения в списке, т.е вначале первое значение стоит поставить нейтральное
+
+
+## Обновленный общий метод для сортировки, фильтрации и поиска
+```Csharp
+  private void UpdateProducts()
+        {
+
+            using(FabricShopContext db = new FabricShopContext())
+            {
+                var currentProducts = db.Products.ToList();
+                ListViewProduct.ItemsSource = currentProducts;
+
+                // Сортировка
+                if (SortComboBox.SelectedIndex > 0)
+                {
+                    
+
+
+                    if (SortComboBox.SelectedItem == "По возрастанию")
+                    {
+                        currentProducts = currentProducts.OrderBy(p => p.Cost).ToList();
+                       
+                    }
+
+                    if (SortComboBox.SelectedItem == "По убыванию")
+                    {
+                        currentProducts = currentProducts.OrderByDescending(p => p.Cost).ToList();
+                        
+                    }
+                        
+
+                    ListViewProduct.ItemsSource = currentProducts;
+
+                }
+
+                // Поиск
+                if (Search.Text != "")
+                {
+
+                    currentProducts = currentProducts.Where(p => p.Name.Contains(Search.Text) || p.Description.Contains(Search.Text) || p.Category.Contains(Search.Text)).ToList();
+                    ListViewProduct.ItemsSource = currentProducts;
+
+                };
+
+
+                if (FilterComboBox.SelectedValue == "Все производители")
+                    ListViewProduct.ItemsSource = currentProducts;
+
+
+                // Фильтрация
+                if (FilterComboBox.SelectedValue != null && FilterComboBox.SelectedValue != "Все производители")
+                {
+                    currentProducts = currentProducts.Where(p => p.Supplier.Trim() == FilterComboBox.SelectedValue.ToString()).ToList();
+                    ListViewProduct.ItemsSource = currentProducts;
+
+                    //MessageBox.Show(FilterComboBox.SelectedValue.ToString());
+                    // В базу сохраняеются с пробелами при nchar!!!
+
+                }
+
+
+                CountBlock.Text = $"Количество: {currentProducts.Count} из {db.Products.ToList().Count}";
+
+
+            }
+
+        }
+```
+
+## Добавление изображения
+```Csharp
+private void AddImageToProduct(object sender, RoutedEventArgs e)
+        {
+            Stream myStream;
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            if(dlg.ShowDialog() == true)
+            {
+                if ( (myStream = dlg.OpenFile()) != null )
+                {
+                    string strfilename = dlg.FileName;
+                    string filetext = File.ReadAllText(strfilename);
+
+                    dlg.DefaultExt = ".png";
+                    dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+                    dlg.Title = "Open Image";
+                    dlg.InitialDirectory = "./";
+                    
+                    BitmapImage image = new BitmapImage(new Uri(dlg.FileName));
+                    ImageBox.Source = image;
+
+                    try
+                    {
+                            string newRelativePath = $"{System.DateTime.Now.ToString("HHmmss")}_{dlg.SafeFileName}";
+                            File.Copy(dlg.FileName, System.IO.Path.Combine(Environment.CurrentDirectory, $"images/{newRelativePath}"));
+                            ImagePath = newRelativePath;
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }       
+                myStream.Dispose();
+                
+            }
+        }
+```
+	
