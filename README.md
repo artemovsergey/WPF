@@ -533,58 +533,6 @@ private void DeleteButton_Click(object sender, RoutedEventArgs e)
         }
 ```
 
-## Общий метод для поиска, фильтрации, сортировки
-
-```Csharp
-
-private void UpdateUser()
-        {
-           var currentProducts = db.Abiturients.ToList();
-            productGrid.ItemsSource = currentProducts;
-
-
-            // Сортировка
-            if (SortCombobox.SelectedIndex > 0)
-            {
-                if (SortCombobox.SelectedItem == "FullName")
-                    currentProducts = currentProducts.OrderBy(p => p.FullName).ToList();
-
-                if (SortCombobox.SelectedItem == "Id")
-                    currentProducts = currentProducts.OrderBy(p => p.Id).ToList();
-
-
-                productGrid.ItemsSource = currentProducts;
-
-            }
-
-
-            // Поиск
-            if (SearchBox.Text != "")
-            {
-                currentProducts = currentProducts.Where(p => p.FullName.Contains(SearchBox.Text)).ToList();
-                productGrid.ItemsSource = currentProducts;
-
-            };
-
-            if (FilterComboBox.SelectedValue == "Все типы")
-                productGrid.ItemsSource = currentProducts;
-
-            // Фильтрация
-            if (FilterComboBox.SelectedValue != null && FilterComboBox.SelectedValue != "Все типы")
-            {
-                currentProducts = currentProducts.Where(p => p.FullName.Trim() == FilterComboBox.SelectedValue.ToString()).ToList();
-                productGrid.ItemsSource = currentProducts;
-
-                MessageBox.Show(FilterComboBox.SelectedValue.ToString());
-                // В базу сохраняеются с пробелами при nchar!!!
-
-            }
-
-            CountAbiturients.Text = $"Количество: {currentProducts.Count} из {db.Abiturients.ToList().Count}";
-        }
-
-```
-
 ## Задание начальных значений для списка
 
 ```csharp
@@ -684,85 +632,18 @@ private User _currentUser = new User();
         }
 ```
 
-## Валидация 
-```Csharp
-private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            StringBuilder errors = new StringBuilder();
-            AppContext db = new AppContext();
-
-            if (string.IsNullOrWhiteSpace(_currentUser.Login))
-                errors.AppendLine("Укажите логин");
-
-            //
-            if (errors.Length > 0)
-            {
-                MessageBox.Show(errors.ToString());
-                return;
-            }
-
-            MessageBox.Show(_currentUser.Id.ToString());
-            if (_currentUser.Id == 0)
-            {
-                db.Users.Add(_currentUser);   
-            }
-            else
-            {
-              db.Users.Update(_currentUser);
-            }
-
-            try
-            {
-                db.SaveChanges();
-                MessageBox.Show("Пользователь добавлен!");
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}");
-            }
-
-        }
-```
-
-
-В Visual Studio работа с базой данных. Связь двух таблиц внешним ключом
+## В Visual Studio работа с базой данных. Связь двух таблиц внешним ключом
 
 ```SQL
 CONSTRAINT [FK_Abiturients_Specialty] FOREIGN KEY ([specialty_id]) REFERENCES [dbo].[Specialty] ([Id])
 ```
-Автоинкремент в SQL Server 
+## Автоинкремент в SQL Server 
 
 ```SQL
 [Id] int Identity(1,1)
 ```
 
-
-
-
-## SQLite
-
-После добавления для файла базы данных установим опцию "Copy if newer", чтобы файл копировался при компиляции в каталог приложения:
-
-
-## MaterialDesign
-
-App.xaml
-
-```xaml
-<Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Application.Resources>
-```
-
-Пример MaterialDesign
+## Пример MaterialDesign
 
 ```xaml
 <Grid>
@@ -803,12 +684,10 @@ App.xaml
                 </StackPanel>
             </Border>
 
-
         </Grid>
     </Grid>
 
 ```
-
 
 ## Работа с Word
 
@@ -926,6 +805,7 @@ ProxyFrame.Mainframe.Navigate(new AddAbiturientPage(productGrid.SelectedItem as 
 ```
 
 ## Переход на страницу Вперед
+
 ```Csharp
 private void ForwardButton_Click(object sender, RoutedEventArgs e)
         {
@@ -938,6 +818,7 @@ private void ForwardButton_Click(object sender, RoutedEventArgs e)
 ```
 						   
 ## Переход на страницу Назад
+
 ```Csharp
 private void BackButton_Click(object sender, RoutedEventArgs e)
         {
@@ -949,7 +830,8 @@ private void BackButton_Click(object sender, RoutedEventArgs e)
         }
 ```
 
-## Очистка параметров
+## Очистка параметров сортировки, фильтрации и поиска
+
 ```Csharp
 private void Clear_ButtonClick(object sender, RoutedEventArgs e)
         {
@@ -959,7 +841,7 @@ private void Clear_ButtonClick(object sender, RoutedEventArgs e)
         }
 ```
 
-## Опции для DataGrid
+## Опции атрибуты для DataGrid
 
 ```xaml
 	Grid.Row="1"
@@ -984,24 +866,18 @@ private void Clear_ButtonClick(object sender, RoutedEventArgs e)
             CanUserResizeColumns="True" IsSynchronizedWithCurrentItem="False"
 ```
 
-## Триггеры
+## Триггеры в DataGrid на Row
 
 ```xaml
 <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
-
-                   
-
                     <Style.Triggers>
-
                         <DataTrigger Binding="{Binding Ball}" Value="5" >
                             <Setter Property="Background" Value="Orange"/>
                         </DataTrigger>
-
                     </Style.Triggers>
-
                 </Style>
-            </DataGrid.RowStyle>
+</DataGrid.RowStyle>
 ```
 
 ##  Вinding Stringformat даты
@@ -1015,11 +891,8 @@ Binding="{Binding BirthDay, StringFormat={}{0:dd.MM.yyyy}}"
  	Title="Главное меню"
         Height="700"
         Width="1100"
-        
         Background="White"
-
         WindowStartupLocation="CenterScreen"
-
         MinHeight="500"
         MinWidth="900"
         Icon="emblscc.ico"
@@ -1031,36 +904,27 @@ Binding="{Binding BirthDay, StringFormat={}{0:dd.MM.yyyy}}"
 using(ColledgeStoreContext db = new ColledgeStoreContext())
             {
                 var currentUser = db.Users.Where(user => user.Login == LoginBox.Text && user.Password == PasswordBox.Password).FirstOrDefault();
-
                 if (currentUser != null)
                 {
-
                     ProxyFrame.CurrentUser = currentUser;
-
-
-
                     MainWindow main = new MainWindow();
                     main.Show();
                     this.Close();
-
-
-
                 }
                 else
                 {
                     MessageBox.Show("Неправильный логин или пароль");
                 }
-
-
-
             }
 ```
 	
-
 ## Дополнительный свойства на основе существующих свойств
+
 ```Csharp
-        public string? Image { get; set; }
-        public string? ImagePath
+        
+	public string? Image { get; set; }
+        
+	public string? ImagePath
         {
             get
             {
@@ -1072,32 +936,28 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
 ```
 
 ## Binding по полному пути картинки
-```Csharp
+
+```csharp
                                 <Image>
-
                                     <Image.Source>
-
                                         <BitmapImage DecodePixelWidth="100" DecodePixelHeight="100"
-                                        UriSource = "{Binding ImagePath}"             
-                                                     
-                                                     />
+                                        UriSource = "{Binding ImagePath}"/>
                                     </Image.Source>
-
-
                                 </Image>
 ```
 
 ## DataPicker
+
 ```xaml
 <DatePicker
-SelectedDate="{Binding BirthDay}"
-Name="birth_day"  />
+	SelectedDate="{Binding BirthDay}" 
+	Name="birth_day"/>
 ```
 	
 ## ComboBox
+
 ```xaml
 <ComboBox
-
 SelectedValue="{Binding Specialty}"
 Text="{Binding Specialty.Name}"
 Name="specialty_id"
@@ -1107,12 +967,13 @@ Width="150"
 IsEditable="True" />
 ```
 	
-```Csharp
+```csharp
  specialty_id.ItemsSource = db.Specialties.ToList(); // загрузка в комбобокс объектов специальностей
  specialty_id.DisplayMemberPath = "Name"; // отображение в списке объектов конкретные свойства, а не весь объект
 ```
 
 ## Изображение по абсолютному пути
+
 ```Csharp
 BitmapImage image = new BitmapImage(new Uri(System.IO.Path.Combine(Environment.CurrentDirectory, $"{_currentAbiturient.Image}"), UriKind.Absolute));
 ImagePicture.Source = image;
@@ -1146,89 +1007,19 @@ ImagePicture.Source = image;
 	
 ## Замена . на , для SQL Server
 
-```Csharp
+```csharp
 Ball = Convert.ToDouble(ball.Text.Replace(".", ",")) // SQL Server принимает дробные значения с запятой
 ```
 	
 ## Полные сообщения об ошибках
-```Csharp
+
+```csharp
 catch (Exception ex)
 {
     MessageBox.Show($"Ошибка: {ex.InnerException.Message}");
 }
 ```
 	
-## Open File Dialog и сохранение
-```Csharp
-private void ImageButton(object sender, RoutedEventArgs e)
-        {
-
-
-            
-
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.DefaultExt = ".png";
-            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
-
-            Nullable<bool> result = dlg.ShowDialog();
-            dlg.Title = "Open Image";
-
-            dlg.InitialDirectory = "./";
-
-            if (result == true)
-            {
-                BitmapImage image = new BitmapImage(new Uri(dlg.FileName));
-                ImagePicture.Source = image;
-            }
-
-
-
-            try
-                {
-                    if (result == true)
-                    {
-
-                        // покажем картинку на экран по абсолютному пути
-
-                        if (_currentAbiturient.Image != null)
-                        {
-                            //BitmapImage image = new BitmapImage(new Uri(System.IO.Path.Combine(Environment.CurrentDirectory, $"{_currentAbiturient.Image}"), UriKind.Absolute));
-
-                            //BitmapImage image = new BitmapImage(new Uri(dlg.FileName));
-                            //ImagePicture.Source = image;
-                        }
-
-                        // скопируем  выбранную картинку в нужный каталог /images/
-
-                        string newRelativePath = $"images/{System.DateTime.Now.ToString("HHmmss")}_image.jpeg";
-                        File.Copy(dlg.FileName, System.IO.Path.Combine(Environment.CurrentDirectory, newRelativePath));
-
-                        // сохраним в свойство модели Abiturient.Image относительный путь к новой картинке
-
-                        _currentAbiturient.Image = newRelativePath;
-                         MessageBox.Show("Изображение добавлено!");
-
-                     }
-
-
-
-
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-
-/*
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                if (saveFileDialog.ShowDialog() == true)
-                {
-                    MessageBox.Show(saveFileDialog.FileName); // полный путь
-                    MessageBox.Show(saveFileDialog.SafeFileName); // имя файла
-                }*/
-        }
-```
 	
 ## Работа с Word. Поиск и замена значений
 ```Csharp
@@ -1242,16 +1033,6 @@ private void ImageButton(object sender, RoutedEventArgs e)
                 Word.Range range = aDoc.Content;
 
                 //range.Find.ClearFormatting();
-
-
-
-
-
-
-
-
-
-
                 range.Find.Execute(FindText: "[Фамилия]", ReplaceWith: abiturient.FullName.Split(" ")[0], Replace: Word.WdReplace.wdReplaceAll);
                 range.Find.Execute(FindText: "[Имя]", ReplaceWith: abiturient.FullName.Split(" ")[1], Replace: Word.WdReplace.wdReplaceAll);
                 range.Find.Execute(FindText: "[Отчество]", ReplaceWith: abiturient.FullName.Split(" ")[2], Replace: Word.WdReplace.wdReplaceAll);
@@ -1264,27 +1045,17 @@ private void ImageButton(object sender, RoutedEventArgs e)
                 range.Find.Execute(FindText: "[Адрес регистрации]", ReplaceWith: abiturient.RegistrationAddress, Replace: Word.WdReplace.wdReplaceAll);
                 range.Find.Execute(FindText: "[Адрес фактического проживания]", ReplaceWith: abiturient.AddressActualResidence, Replace: Word.WdReplace.wdReplaceAll);
                 range.Find.Execute(FindText: "[телефон]", ReplaceWith: abiturient.NumberPhone, Replace: Word.WdReplace.wdReplaceAll);
-
-
-
                 range.Find.Execute(FindText: "[код] ", ReplaceWith: (db.Specialties.Find(abiturient.SpecialtyId) as Specialty).Code   , Replace: Word.WdReplace.wdReplaceAll);
-
                 range.Find.Execute(FindText: "[наименование]", ReplaceWith: db.Specialties.Find(abiturient.SpecialtyId).Name, Replace: Word.WdReplace.wdReplaceAll);
-
                 range.Find.Execute(FindText: "[образовательное учреждение]", ReplaceWith: abiturient.Education, Replace: Word.WdReplace.wdReplaceAll);
                 range.Find.Execute(FindText: "[год окончания]", ReplaceWith: abiturient.SchoolGraduationYear, Replace: Word.WdReplace.wdReplaceAll);
                 range.Find.Execute(FindText: "[номер аттестата]", ReplaceWith: abiturient.CertificateNumber, Replace: Word.WdReplace.wdReplaceAll);
                 range.Find.Execute(FindText: "[дата выдачи]", ReplaceWith: abiturient.DateCertificate, Replace: Word.WdReplace.wdReplaceAll);
                 range.Find.Execute(FindText: "[иностранный язык]", ReplaceWith: abiturient.Language, Replace: Word.WdReplace.wdReplaceAll);
                 range.Find.Execute(FindText: "[национальность]", ReplaceWith: abiturient.Nationality, Replace: Word.WdReplace.wdReplaceAll);
-
                 range.Find.Execute(FindText: "[общежитие]", ReplaceWith: abiturient.NeedHostel, Replace: Word.WdReplace.wdReplaceAll);
-
-
                 range.Find.Execute(FindText: "[дата]", ReplaceWith: DateTime.Now.ToShortDateString(), Replace: Word.WdReplace.wdReplaceAll);
-
-
-
+		
                 if (abiturient.Specialty.Base == "9")
                 {
                     if (range.Find.Execute("общего"))
@@ -1297,7 +1068,6 @@ private void ImageButton(object sender, RoutedEventArgs e)
                         
                         range.Font.Underline = Word.WdUnderline.wdUnderlineDouble;
                 }
-
 
                 // создаю новый range так как старый range становится весь другой. С этим можно разобраться
 
@@ -1317,23 +1087,17 @@ private void ImageButton(object sender, RoutedEventArgs e)
                          range1.Font.Underline = Word.WdUnderline.wdUnderlineSingle;
                 }
 
-
-
-
-
-
                 MessageBox.Show("Заявление создано!", MessageBoxButton.OK.ToString());
               
                 // Надо сохранять в файл с правами записи
                 string gesturefile = System.IO.Path.Combine(Environment.CurrentDirectory + "/" + $"заявление {abiturient.FullName}.doc");
                 string gesturefilePdf = System.IO.Path.Combine(Environment.CurrentDirectory + "/" + $"заявление {abiturient.FullName}.pdf");
-
-
+		
                 if (PdfCheck.IsChecked == true)
                 {
                     aDoc.SaveAs2(gesturefilePdf, Word.WdExportFormat.wdExportFormatPDF);
                 }
-
+		
                 aDoc.Close();
                 wordApp.Quit();
 
@@ -1345,25 +1109,23 @@ private void ImageButton(object sender, RoutedEventArgs e)
 ```
 
 ## Добавление фото в Word
-```Csharp
+
+```csharp
  // находим диапазон с фото
                 Word.Range range1 = aDoc.Content;
                 range1.Find.Execute(FindText: "[Фото]");
                 
                 // добавляем рядом картинку
                 Word.InlineShape ils = aDoc.InlineShapes.AddPicture(abiturient.ImagePath, false, true, Range: range1);
-                
+		
                 // удаляем слово фото
                 range1.Find.Execute(FindText: "[Фото]", ReplaceWith: "", Replace: Word.WdReplace.wdReplaceAll);
 ```
 	
 ## Style
+
 ```xaml
 <Application.Resources>
-
-
-
-
         <Style TargetType="{x:Type Window}">
             <Setter Property="FontSize" Value="20"></Setter>
             <Setter Property="FontFamily" Value="Gabriola"></Setter>
@@ -1374,16 +1136,9 @@ private void ImageButton(object sender, RoutedEventArgs e)
             <Setter Property="FontFamily" Value="Gabriola"></Setter>
         </Style>
 
-
         <Style TargetType="{x:Type Grid}">
             <Setter Property="ShowGridLines" Value="False"></Setter>
         </Style>
-
-
-
-
-
-
 
         <Style TargetType="Button">
             <Setter Property="Margin" Value="1"></Setter>
@@ -1414,7 +1169,6 @@ private void ImageButton(object sender, RoutedEventArgs e)
             <Setter Property="Margin" Value="1"></Setter>
         </Style>
 
-
     </Application.Resources>
 ```
 
@@ -1438,51 +1192,50 @@ public static class CaptchaBuild
             return captcha;
         }
     }
-				  
-				 
-				  
+								  
 ```
 				  
-```Csharp
-CaptchaBox.Visibility = Visibility.Visible;
-CaptchaText.Visibility = Visibility.Visible;
-Captcha.Visibility = Visibility.Visible;
-LoginButtonName.IsEnabled = false;
+```csharp
+	CaptchaBox.Visibility = Visibility.Visible;
+	CaptchaText.Visibility = Visibility.Visible;
+	Captcha.Visibility = Visibility.Visible;
+	LoginButtonName.IsEnabled = false;
 
-MessageBox.Show(CaptchaBuild.Refresh());
-Captcha.Text = CaptchaBuild.Refresh();
-Captcha.IsReadOnly = true;				  
+	MessageBox.Show(CaptchaBuild.Refresh());
+	Captcha.Text = CaptchaBuild.Refresh();
+	Captcha.IsReadOnly = true;				  
 ```
-```Csharp
-private void CaptchaBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (CaptchaBox.Text == Captcha.Text)
-            {
-                CaptchaBox.Visibility = Visibility.Collapsed;
-                CaptchaText.Visibility = Visibility.Collapsed;
-                Captcha.Visibility = Visibility.Collapsed;
-                LoginButtonName.IsEnabled = true;
-            }
-            else
-            {
-                Captcha.Text = CaptchaBuild.Refresh();
-                disableButton();
+```csharp
+	private void CaptchaBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+		    if (CaptchaBox.Text == Captcha.Text)
+		    {
+			CaptchaBox.Visibility = Visibility.Collapsed;
+			CaptchaText.Visibility = Visibility.Collapsed;
+			Captcha.Visibility = Visibility.Collapsed;
+			LoginButtonName.IsEnabled = true;
+		    }
+		    else
+		    {
+			Captcha.Text = CaptchaBuild.Refresh();
+			disableButton();
 
-            }
-        }
+		    }
+		}
 ```
 
 ## Асинхронная задача для выключения кнопки
-```Csharp
-async void disableButton()
-        {
-            LoginButtonName.IsEnabled = false;
-            await Task.Delay(TimeSpan.FromSeconds(10));
-            LoginButtonName.IsEnabled = true;
-        }
+
+```csharp
+	async void disableButton()
+		{
+		    LoginButtonName.IsEnabled = false;
+		    await Task.Delay(TimeSpan.FromSeconds(10));
+		    LoginButtonName.IsEnabled = true;
+		}
 ```
 
-App.xaml Стили и ресурсы для приложения
+## App.xaml. Стили и ресурсы для приложения
 
 ```xaml
 <Application.Resources>
@@ -1560,30 +1313,24 @@ App.xaml Стили и ресурсы для приложения
 ## Border
 ```xaml
 <Border
-                            CornerRadius="3"
-                            BorderThickness="2"
-                            Width="800"
-                            Height="Auto"
-                            BorderBrush="{StaticResource ColorAccent}"
-	
-			<Border.Effect>
-			    <DropShadowEffect BlurRadius="30"
-			      Color="LightGray"
-			      ShadowDepth="0"/>
-			</Border.Effect>
+	CornerRadius="3"
+	BorderThickness="2"
+	Width="800"
+	Height="Auto"
+	BorderBrush="{StaticResource ColorAccent}"
 
-	
+	<Border.Effect>
+		<DropShadowEffect BlurRadius="30"
+		Color="LightGray"
+		ShadowDepth="0"/>
+	</Border.Effect>
 </Border>
 ```
-Замечание: в Border может быть только один элемент	
-
-## Свойство Visibility
-```xaml
-<Button Visibility="Collapsed"  />
-```
+Замечание: в Border может быть только один элемент.
 
 ## По ролям 
-```Csharp
+
+```сsharp
  if (Proxy.CurrentUser != null)
             {
                 nameUser.Text = Proxy.CurrentUser.Name + " " + Proxy.CurrentUser.Surname;
@@ -1598,12 +1345,14 @@ App.xaml Стили и ресурсы для приложения
 ```
 
 ## Выборка по столбцу Select в EF
-```Csharp
+
+```сsharp
  var Suppliers = db.Products.Select(p => p.Supplier).Distinct().ToList();
 ```
 
 ## Начальные значения для сортировки и фильтрации
-```Csharp
+
+```сsharp
  SortComboBox.ItemsSource = new List<String>() { "Цена", "По убыванию", "По возрастанию" };   //.Select(p => p.Login);
                 SortComboBox.SelectedIndex = 0;
 
@@ -1615,10 +1364,10 @@ App.xaml Стили и ресурсы для приложения
 
 
 ## Обновленный общий метод для сортировки, фильтрации и поиска
-```Csharp
+
+```сsharp
   private void UpdateProducts()
         {
-
             using(FabricShopContext db = new FabricShopContext())
             {
                 var currentProducts = db.Products.ToList();
@@ -1628,39 +1377,27 @@ App.xaml Стили и ресурсы для приложения
                 if (SortComboBox.SelectedIndex > 0)
                 {
                     
-
-
                     if (SortComboBox.SelectedItem == "По возрастанию")
                     {
                         currentProducts = currentProducts.OrderBy(p => p.Cost).ToList();
-                       
                     }
 
                     if (SortComboBox.SelectedItem == "По убыванию")
                     {
                         currentProducts = currentProducts.OrderByDescending(p => p.Cost).ToList();
-                        
                     }
-                        
-
                     ListViewProduct.ItemsSource = currentProducts;
-
                 }
 
                 // Поиск
                 if (Search.Text != "")
                 {
-
-                    currentProducts = currentProducts.Where(p => p.Name.Contains(Search.Text) || p.Description.Contains(Search.Text) || p.Category.Contains(Search.Text)).ToList();
+                    currentProducts = currentProducts.Where(p => p.Name.Contains(Search.Text) || p.Description.Contains(Search.Text) || 			p.Category.Contains(Search.Text)).ToList();
                     ListViewProduct.ItemsSource = currentProducts;
-
                 };
-
 
                 if (FilterComboBox.SelectedValue == "Все производители")
                     ListViewProduct.ItemsSource = currentProducts;
-
-
                 // Фильтрация
                 if (FilterComboBox.SelectedValue != null && FilterComboBox.SelectedValue != "Все производители")
                 {
@@ -1669,19 +1406,16 @@ App.xaml Стили и ресурсы для приложения
 
                     //MessageBox.Show(FilterComboBox.SelectedValue.ToString());
                     // В базу сохраняеются с пробелами при nchar!!!
-
                 }
 
-
                 CountBlock.Text = $"Количество: {currentProducts.Count} из {db.Products.ToList().Count}";
-
-
             }
 
         }
 ```
 
 ## Добавление изображения
+
 ```Csharp
 private void AddImageToProduct(object sender, RoutedEventArgs e)
         {
