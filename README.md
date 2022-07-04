@@ -467,20 +467,19 @@ namespace WpfApp1
 ## Scaffold базы данных
 	
 В консоли диспетчера пакетов Nuget прописать команду
-Scaffold-DbContext "Server=localhost;Database=Users;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+```Scaffold-DbContext "Server=localhost;Database=Users;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models```
 	
-**Замечание**: надо установить Microsoft.EntityFrameworkCore.Tools.
+**Замечание**: надо установить ```Microsoft.EntityFrameworkCore.Tools```.
 
 Команда создает модели из каждой сущности в базе данных, учитывая связи, а также создает класс контекста для работы с данными как с классами.
 
-Scaffold-DbContext "Data Source=.\ComputerDatabase.db" Microsoft.EntityFrameworkCore.Sqlite -OutputDir Models
-Примечание: если будет делать Scaffold, ему нужна база из проекта, а не в Debug. При инициализации контекста база создается в Debug по умолчанию
+```Scaffold-DbContext "Data Source=.\ComputerDatabase.db" Microsoft.EntityFrameworkCore.Sqlite -OutputDir Models```
+**Примечание**: если будет делать Scaffold, ему нужна база из проекта, а не в Debug. При инициализации контекста база данных SQLite создается в Debug по умолчанию.
 
 
 ## Привязка данных Binding
 
 <TextBox Name="textBox" Height="40" Width="100" Text="{Binding ElementName=textBlock,Path=Text,Mode=TwoWay}"   />
-
 
 ## Обновление объектов в таблице
 
