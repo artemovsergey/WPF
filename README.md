@@ -580,11 +580,6 @@ private void UpdateUser()
 
             }
 
-
-
-
-
-
             CountAbiturients.Text = $"Количество: {currentProducts.Count} из {db.Abiturients.ToList().Count}";
         }
 
@@ -592,7 +587,7 @@ private void UpdateUser()
 
 ## Задание начальных значений для списка
 
-```Csharp
+```csharp
             var allTypes = db.Users.ToList();
 
             allTypes.Insert(0, new User { Login = "Все типы" });
@@ -602,7 +597,7 @@ private void UpdateUser()
             ComboBox.SelectedIndex = 0;
 ```
 
-	## Список
+## Список combobox в xaml
 
 ```xaml
  <ComboBox Width="100"
@@ -614,20 +609,16 @@ private void UpdateUser()
 ## ListView
 
 ```xaml
-
 <ListView Grid.Row ="0"
 	  x:Name="ListView"
-	  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 			  HorizontalContentAlignment="Center" >
-
-
-
+	  ScrollViewer.HorizontalScrollBarVisibility="Disabled"HorizontalContentAlignment="Center" >
+	  
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
-
-
+	    
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -636,8 +627,7 @@ private void UpdateUser()
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-
-                        
+			
                         <Image Grid.Row="2"
 			       HorizontalAlignment="Center"
 			       Height="100"
@@ -655,7 +645,6 @@ private void UpdateUser()
                             </Image.Source>
                         </Image>
                         
-
                         <TextBlock Text="{Binding Login}"
 				   VerticalAlignment="Center"
 				   TextAlignment="Center"
@@ -670,16 +659,12 @@ private void UpdateUser()
 				   TextWrapping="Wrap"
 				   HorizontalAlignment="Center"
 				   Margin="5 5"
-                                   FontSize="10" Grid.Row="1"/>
-                        
+                                   FontSize="10" Grid.Row="1"/>     
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
-
 ```
-
 
 ## Передача параметров в конструктор для текущего пользователя
 
