@@ -529,13 +529,13 @@ private void DeleteButton_Click(object sender, RoutedEventArgs e)
 ## Задание начальных значений для списка
 
 ```csharp
-            var allTypes = db.Users.ToList();
+var allTypes = db.Users.ToList();
 
-            allTypes.Insert(0, new User { Login = "Все типы" });
-            ComboBox.ItemsSource = allTypes;//.Select(p => p.Login);
+allTypes.Insert(0, new User { Login = "Все типы" });
+ComboBox.ItemsSource = allTypes;//.Select(p => p.Login);
 
-            CheckBox.IsChecked = true;
-            ComboBox.SelectedIndex = 0;
+CheckBox.IsChecked = true;
+ComboBox.SelectedIndex = 0;
 ```
 
 ## Список combobox в xaml
