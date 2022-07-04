@@ -1,26 +1,15 @@
 # WPF
 
-## Алгоритм действий при создании нового проекта WPF .NET 6
+## Алгоритм действий при создании нового проекта WPF .NET Core 6
+
 1. App.config, package.config
-2. Install Nuget package. 
-	Установить EF6, 
-	Material Design
-	(Microsoft.EntityFrameworkCore,Microsoft.EntityFrameworkCore.SqlServer,MaterialDesignThemes). 
-	Можно создать package.config с нужными пакетами. Подключить базу данных для EF6, подключить Material Design
-4. Script Database 
-5. Scaffold
-6. Настройка структуры
-7. Общий стили приложения в App.xaml
-8. Быстрее действовать через DbFirst и Scaffold или CodeFirst и Migration
-9. Сделать интерфейс приложения с навигацией
-10. Не надо делать сразу красиво. Надо сделать простой функционал
-11. В главном окне размеcтить сетку и фреймы
-12. На этом этапе надо знать как будет выглядеть приложение и что оно будет делать.
-13. Далее надо определиться CodeFirst или DBfirst
-14. Создать модели, сделать структуру проекта
-15. Создать базу данных в CУБД.
-16. Восстановить модели по готовой базе данных при помощи команды Scaffold-DbContext "Server=localhost;Database=Name;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
-17. Можно использовать подход CodeFirst
+2. Install Nuget package: EF,MaterialDesign.
+3. Script Database 
+4. Scaffold
+5. Настройка структуры папок в проекте и решении.
+6. Общие стили приложения в App.xaml
+7. DbFirst и Scaffold или CodeFirst и Migration
+8. Сделать интерфейс приложения с навигацией.Надо сделать простой функционалВ главном окне размеcтить сетку и фреймы
 
 
 ## Паттерны проектирования
