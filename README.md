@@ -245,21 +245,24 @@ private void deleteButton_Click(object sender, RoutedEventArgs e)
 Класс модели. Можно все модели поместить в папку Models
 
 ```csharp
+using System;
+using System.Collections.Generic;
 
+namespace FabricShop.Models
 {
-    public class Product
+    public partial class User
     {
-
         public int Id { get; set; }
-        public string Title { get; set; }
-        public int ProductTypeID { get; set; }
-        public string ArticleNumber { get; set; }
-        public string Description { get; set; }
-        public string Image { get; set; }
-        public int ProductionPersonCount { get; set; }
-        public int ProductionWorkshopNumber { get; set; }
-        public decimal MinCostForAgent { get; set; }
+        public string Surname { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public string Patronymic { get; set; } = null!;
+        public string Login { get; set; } = null!;
+        public string Password { get; set; } = null!;
+        
+        
+        public int RoleId { get; set; }
 
+        public virtual Role Role { get; set; }
     }
 }
 
@@ -268,46 +271,54 @@ private void deleteButton_Click(object sender, RoutedEventArgs e)
 Для взаимодействия с базой данных через Entity Framework нам нужен контекст данных, поэтому добавим в папку Models еще один класс, который назовем AppContext:
 
 ```csharp
-
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
-
-public partial class ColledgeStoreContext : DbContext
+namespace FabricShop.Models
+{
+    public partial class FabricShopContext : DbContext
     {
-        public ColledgeStoreContext() => Database.EnsureCreated();  // создает базу данных, а затем всю структуру
+        public FabricShopContext()
+        {
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
+        }
 
-
-        public ColledgeStoreContext(DbContextOptions<ColledgeStoreContext> options)
+        public FabricShopContext(DbContextOptions<FabricShopContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Abiturient> Abiturients { get; set; } = null!;
-        public virtual DbSet<Specialty> Specialties { get; set; } = null!;
+        public virtual DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<OrderProduct> OrderProducts { get; set; } = null!;
+        public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<Category> Categories { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-
-
-                // Подключение SQL Server
-                optionsBuilder.UseSqlServer("Server=localhost;Database=ColledgeStore;Trusted_Connection=True;");
-                //optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+                //optionsBuilder.UseSqlServer("Server=localhost;Database=FabricShop;Trusted_Connection=True;");
 
 
                 // SQlite
-                //optionsBuilder.UseSqlite(ConfigurationManager.ConnectionStrings["ConnectionSQLite"].ToString());
+                optionsBuilder.UseSqlite(ConfigurationManager.ConnectionStrings["ConnectionSQLite"].ToString());
                 //optionsBuilder.UseSqlite(@"DataSource=ColledgeStore.db;");
 
             }
         }
+        
+    }
+}
+
 ```
 **Замечание**: Product - это класс модели, Products - это название таблицы в базе данных
-Класс контекста наследуется от класса DbContext. В своем конструкторе он передает в конструктор базового класса название строки подключения из файла App.config. Также в контексте данных определяется свойство по типу DbSet<Phone> - через него мы будем взаимодействовать с таблицей, которая хранит объекты Phone.
+Класс контекста наследуется от класса **DbContext**. В своем конструкторе он передает в конструктор базового класса название строки подключения из файла ```App.config```. Также в контексте данных определяется свойство по типу ```DbSet<Product>``` - через него мы будем взаимодействовать с таблицей, которая хранит объекты Product.
 
 
 В разметки Xaml
@@ -323,13 +334,10 @@ public partial class ColledgeStoreContext : DbContext
             </DataGrid.Columns>
         </DataGrid>
 	
-```
-	
+```	
 Определим в файле кода c# привязку данных и возможные обработчики кнопок:
-
 	
 ```csharp
-
 
 using Microsoft.EntityFrameworkCore;
 using System.Windows;
@@ -359,8 +367,6 @@ namespace WpfApp
                 MessageBox.Show($"{ex.Message}");
             }
             
-
-
         }
 
     }
