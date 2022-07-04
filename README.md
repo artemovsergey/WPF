@@ -1387,4 +1387,64 @@ private void AddImageToProduct(object sender, RoutedEventArgs e)
             }
         }
 ```
-	
+
+## DataGrid определение
+
+```csharp
+        <DataGrid 
+                  AutoGenerateColumns="False"
+		  x:Name="productGrid"
+                  Grid.Row="1"
+                  Grid.RowSpan="1"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  RowDetailsVisibilityMode="VisibleWhenSelected"
+                  HorizontalContentAlignment="Left"
+         >
+            
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Фото" IsReadOnly="True" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Height="100" Width="100" Source="{Binding ImagePath}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTextColumn Binding="{Binding Title}" Header="Название"/>
+               
+                <DataGridTextColumn Binding="{Binding Price}" Header="Цена"/>
+                <DataGridTextColumn Binding="{Binding Category.Name}" Header="Категория" />
+               
+                <DataGridTextColumn Width="*" Header="Описание" Binding="{Binding Description}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                <Setter Property="TextBlock.TextAlignment" Value="Justify" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+
+```
+
+## Односторонняя привязка Binding One Way
+
+```csharp
+
+<ComboBox 
+	Name ="categoryBox"
+	Width="200"
+	Margin="5"
+	DisplayMemberPath="Name"
+	Text = "{Binding Category.Name, Mode=OneWay}"                     
+/>
+
+```
+
+
+
+
