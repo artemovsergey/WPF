@@ -231,8 +231,11 @@ private void deleteButton_Click(object sender, RoutedEventArgs e)
 
 ## Entity Framework Core 6
 
+## Cвязь моделей 1 : M
+
 Класс модели. Можно все модели поместить в папку Models
 
+Модель ```User```
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -247,15 +250,41 @@ namespace FabricShop.Models
         public string Patronymic { get; set; } = null!;
         public string Login { get; set; } = null!;
         public string Password { get; set; } = null!;
-        
-        
+       
         public int RoleId { get; set; }
-
         public virtual Role Role { get; set; }
     }
 }
 
 ```
+Модель ```Role```
+
+```csharp
+
+using System;
+using System.Collections.Generic;
+
+namespace FabricShop.Models
+{
+    public partial class Role
+    {
+        public Role()
+        {
+            Users = new HashSet<User>();
+        }
+
+        public int Id { get; set; }
+        public string RoleName { get; set; } = null!;
+        
+	public virtual ICollection<User> Users { get; set; }
+    }
+}
+
+
+```
+
+
+
 
 Для взаимодействия с базой данных через Entity Framework нам нужен контекст данных, поэтому добавим в папку Models еще один класс, который назовем AppContext:
 
