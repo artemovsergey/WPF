@@ -915,17 +915,9 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
 
 ```Csharp
         
-	public string? Image { get; set; }
-        
-	public string? ImagePath
-        {
-            get
-            {
-                //string newRelativePath = $"images/{System.DateTime.Now.ToString("HHmmss")}_image.jpeg";
-                return System.IO.Path.Combine(Environment.CurrentDirectory, Image);
-            }
-            
-        }
+public string? Image { get; set; }
+public string? ImagePath { get { return System.IO.Path.Combine(Environment.CurrentDirectory, $"images/{Image}"); }  }
+
 ```
 
 ## Binding по полному пути картинки
