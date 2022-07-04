@@ -43,16 +43,12 @@ https://metanit.com/sharp/wpf/21.1.php
 Добавим в проект файл ```App.config```. Подключение для SQL Server и для SQLite
 
 ```xml
-
 <?xml version="1.0" encoding="utf-8" ?>
-<?xml version="1.0" encoding="utf-8"?>
 <configuration>
 	<configSections>
 		<sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
 
-			<!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
 			<section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
-
 
 			<section name="AdmissionsCommitteeColledge.Properties.Settings"
                      type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
@@ -68,44 +64,14 @@ https://metanit.com/sharp/wpf/21.1.php
 
 	<connectionStrings>
 		<add name="DefaultConnection"
-			 connectionString="Server=localhost;Database=ColledgeStore;Integrated Security=True;"
+			 connectionString="Server=localhost;Database=FabricShop;Integrated Security=True;"
 			 providerName="System.Data.SqlClient"/>
 
-		<add name="ConnectionSQLite" connectionString="Data Source=.\ColledgeStore.db" providerName="System.Data.SQLite" />
+		<add name="ConnectionSQLite" connectionString="Data Source=FabricShop.db" providerName="System.Data.SQLite" />
 
 	</connectionStrings>
 
-
-	<!-- 
-
-		<entityFramework>
-
-			<defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework" />
-
-			<providers>
-				<provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
-				<provider invariantName="System.Data.SQLite"  type="System.Data.SQLite.EF6.SQLiteProviderServices, System.Data.SQLite.EF6"/>
-				<provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
-				<provider invariantName="System.Data.SQLite.EF6" type="System.Data.SQLite.EF6.SQLiteProviderServices, System.Data.SQLite.EF6" />
-			</providers>
-
-		</entityFramework>
-
-
-
-		<system.data>
-			<DbProviderFactories>
-				<add name="SQLite Data Provider (Entity Framework 6)" invariant="System.Data.SQLite.EF6" description=".NET Framework Data Provider for SQLite (Entity Framework 6)" type="System.Data.SQLite.EF6.SQLiteProviderFactory, System.Data.SQLite.EF6" />
-				<add name="SQLite Data Provider" invariant="System.Data.SQLite" description=".NET Framework Data Provider for SQLite" type="System.Data.SQLite.SQLiteFactory, System.Data.SQLite" />
-			</DbProviderFactories>
-		</system.data>
-
-	-->
-
-
-
 </configuration>
-
 ```
 ## Взаимодействие с базой данных SQL Server через ADO.NET
 
