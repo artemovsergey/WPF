@@ -455,31 +455,6 @@ namespace WpfApp1
 
 **Замечание**: чтобы отправить файлы в ресурсы надо выбрать проект и нажать кнопку с "ключиком" и открыть свойства проекта. Далее перейти в Ресурсы и создаться папка Resources и файл ```Properties/Resources.resx```, в котором можно добавлять ресурсы. При этом в свойствах отдельного ресурса ```Действия при сборке``` должны быть выбраны ```Ресурс```
 
-## Стилизация приложения
-
-Все стили можно прописать в отдельном файле App.xaml
-
-```xaml
-<Application x:Class="WpfApp1.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WpfApp1"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
-        
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="15"></Setter>
-            <Setter Property="Width" Value="100"></Setter>
-            <Setter Property="Height" Value="50"></Setter>
-            <Setter Property="Background" Value="White"></Setter>
-        </Style>
-         
-    </Application.Resources>
-    
-</Application>
-
-```
-
 **Замечание**: можно создавать базу данных и таблицы в Visual Studio. Также при импорте данных в значениях float SQL Server принимает значения с запятой  - ,
 
 ## Scaffold базы данных
@@ -1138,56 +1113,6 @@ catch (Exception ex)
 		
                 // удаляем слово фото
                 range1.Find.Execute(FindText: "[Фото]", ReplaceWith: "", Replace: Word.WdReplace.wdReplaceAll);
-```
-	
-## Style
-
-```xaml
-<Application.Resources>
-        <Style TargetType="{x:Type Window}">
-            <Setter Property="FontSize" Value="20"></Setter>
-            <Setter Property="FontFamily" Value="Gabriola"></Setter>
-        </Style>
-
-        <Style TargetType="{x:Type Page}">
-            <Setter Property="FontSize" Value="20"></Setter>
-            <Setter Property="FontFamily" Value="Gabriola"></Setter>
-        </Style>
-
-        <Style TargetType="{x:Type Grid}">
-            <Setter Property="ShowGridLines" Value="False"></Setter>
-        </Style>
-
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="1"></Setter>
-            <Setter Property="Width" Value="120"></Setter>
-            <Setter Property="Height" Value="30"></Setter>
-            <Setter Property="Background" Value="#BCDAF0"></Setter>
-        </Style>
-
-        <Style TargetType="StackPanel">
-            <Setter Property="Margin" Value="10"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-        </Style>
-
-        <Style TargetType="WrapPanel">
-            <Setter Property="Margin" Value="10"></Setter>
-        </Style>
-
-        <Style TargetType="TextBox">
-            <Setter Property="Width" Value="150"></Setter>
-            <Setter Property="Height" Value="30"></Setter>
-            <Setter Property="Margin" Value="1"></Setter>
-        </Style>
-
-        <Style TargetType="DatePicker">
-            <Setter Property="Width" Value="150"></Setter>
-            <Setter Property="Height" Value="30"></Setter>
-            <Setter Property="Margin" Value="1"></Setter>
-        </Style>
-
-    </Application.Resources>
 ```
 
 ## Каптча
