@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1..md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-wpf">Введение в WPF</h1>
+<h2 id="%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D1%8B-wpf">Особенности платформы WPF</h2>
+<p>Технология WPF (Windows Presentation Foundation) является часть экосистемы платформы .NET и представляет собой подсистему для построения графических интерфейсов.</p>
+<p>Если при создании традиционных приложений на основе WinForms за отрисовку элементов управления и графики отвечали такие части ОС Windows, как User32 и GDI+, то приложения WPF основаны на DirectX. В этом состоит ключевая особенность рендеринга графики в WPF: используя WPF, значительная часть работы по отрисовке графики, как простейших кнопочек, так и сложных 3D-моделей, ложиться на графический процессор на видеокарте, что также позволяет воспользоваться аппаратным ускорением графики.</p>
+<p>Одной из важных особенностей является использование языка декларативной разметки интерфейса XAML, основанного на XML: вы можете создавать насыщенный графический интерфейс, используя или декларативное объявление интерфейса, или код на управляемых языках C#, VB.NET и F#, либо совмещать и то, и другое.</p>
+<p>Первая версия - WPF 3.0 вышла вместе с .NET Framework 3.0 и операционной системой Windows Vista в 2006 году. И с тех пор платформа WPF является частью экосистемы .NET и развивается вместе с фреймворком .NET. Например, на сегодняшний день последней версией фреймворка .NET является .NET 6, и WPF полностью поддерживается этой версией фреймворка.</p>
+<h2 id="%D0%BF%D1%80%D0%B5%D0%B8%D0%BC%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0-wpf">Преимущества WPF</h2>
+<p>Что вам, как разработчику, предлагает WPF?</p>
+<ul>
+<li>Использование традиционных языков .NET-платформы - C#, F# и VB.NET для создания логики приложения</li>
+<li>Возможность декларативного определения графического интерфейса с помощью специального языка разметки XAML, основанном на xml и представляющем альтернативу программному созданию графики и элементов управления, а также возможность комбинировать XAML и C#/VB.NET</li>
+<li>Независимость от разрешения экрана: поскольку в WPF все элементы измеряются в независимых от устройства единицах, приложения на WPF легко масштабируются под разные экраны с разным разрешением.</li>
+<li>Новые возможности, которых сложно было достичь в WinForms, например, создание трехмерных моделей, привязка данных, использование таких элементов, как стили, шаблоны, темы и др.</li>
+<li>Хорошее взаимодействие с WinForms, благодаря чему, например, в приложениях WPF можно использовать традиционные элементы управления из WinForms.</li>
+<li>Богатые возможности по созданию различных приложений: это и мультимедиа, и двухмерная и трехмерная графика, и богатый набор встроенных элементов управления, а также возможность самим создавать новые элементы, создание анимаций, привязка данных, стили, шаблоны, темы и многое другое</li>
+<li>Аппаратное ускорение графики - вне зависимости от того, работаете ли вы с 2D или 3D, графикой или текстом, все компоненты приложения транслируются в объекты, понятные Direct3D, и затем визуализируются с помощью процессора на видеокарте, что повышает производительность, делает графику более плавной.</li>
+<li>Создание приложений под множество ОС семейства Windows</li>
+<li>В тоже время WPF имеет определенные ограничения. Несмотря на поддержку трехмерной визуализации, для создания приложений с большим количеством трехмерных изображений, прежде всего игр, лучше использовать другие средства - DirectX или специальные фреймворки, такие как Monogame или Unity.</li>
+</ul>
+<p>Также стоит учитывать, что по сравнению с приложениями на Windows Forms объем программ на WPF и потребление ими памяти в процессе работы в среднем несколько выше. Но это с лихвой компенсируется более широкими графическими возможностями и провышенной производительностью при отрисовке графики.</p>
+<p>Кроме того, несмотря на то, что WPF работает поверх кроссплатформенной среды .NET 5/6, но в силу природы WPF и зависимости от компонентов Windows, на данный момент создавать приложения на WPF можно только под ОС Windows.</p>
+<h1 id="%D0%B0%D1%80%D1%85%D0%B8%D1%82%D0%B5%D0%BA%D1%82%D1%83%D1%80%D0%B0-wpf">Архитектура WPF</h1>
+<p>Схематически архитектуру WPF можно представить следующим образом:</p>
+<p><img src="file:///c:/Users/admin/Desktop/Курс WPF/image1.png" alt=""></p>
+<p>Как видно на схеме, WPF разбивается на два уровня: managed API и unmanaged API (уровень интеграции с DirectX). Managed API (управляемый API-интерфейс) содержит код, исполняемый под управлением общеязыковой среды выполнения .NET - Common Language Runtime. Этот API описывает основной функционал платформы WPF и состоит из следующих компонентов:</p>
+<ul>
+<li>PresentationFramework.dll: содержит все основные реализации компонентов и элементов управления, которые можно использовать при построении графического интерфейса</li>
+<li>PresentationCore.dll: содержит все базовые типы для большинства классов из PresentationFramework.dll</li>
+<li>WindowsBase.dll: содержит ряд вспомогательных классов, которые применяются в WPF, но могут также использоваться и вне данной платформы</li>
+</ul>
+<p>Unmanaged API используется для интеграции вышележащего уровня с DirectX:</p>
+<ul>
+<li>milcore.dll: собственно обеспечивает интеграцию компонентов WPF с DirectX. Данный компонент написан на неуправляемом коде (С/С++) для взаимодействия с DirectX.</li>
+<li>WindowsCodecs.dll: библиотека, которая предоставляет низкоуровневую поддержку для изображений в WPF</li>
+</ul>
+<p>Еще ниже собственно находятся компоненты операционной системы и DirectX, которые произвоят визуализацию компонентов приложения, либо выполняют прочую низкоуровневую обработку. В частности, с помощью низкоуровневого интерфейса Direct3D, который входит в состав DirectX, происходит трансляция</p>
+<p>Здесь также на одном уровне находится библиотека user32.dll. И хотя выше говорилось, что WPF не использует эту библиотеку для рендеринга и визуализации, однако для ряда вычислительных задач (не включающих визуализацию) данная библиотека продолжает использоваться.</p>
+<h1 id="%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D0%BE-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-wpf">Начало работы с WPF</h1>
+<p>Для создания приложений с помощью технологии WPF нам потребуется среда разработки Visual Studio. В дальнейшем мы будем использовать бесплатную и полнофункциональную среду разработки - Visual Studio Community 2022, которую можно загрузить по следующему адресу: https://www.visualstudio.com/en-us/downloads.</p>
+<p><img src="file:///c:/Users/admin/Desktop/Курс WPF/image2.png" alt=""></p>
+<p>Чтобы добавить в Visual Studio поддержку проектов для WPF и C# и .NET 6, в программе установки среди рабочих нагрузок нужно выбрать только пункт Разработка классических приложений .NET. Можно выбрать и больше опций или вообще все опции, однако стоит учитывать свободный размер на жестком диске - чем больше опций будет выбрано, соответственно тем больше места на диске будет занято.</p>
+<p><img src="file:///c:/Users/admin/Desktop/Курс WPF/image3.png" alt=""></p>
+<p>После установки среды и всех ее компонентов, запустим Visual Studio и создадим проект графического приложения. На стартовом экране выберем Create a new project (Создать новый проект)</p>
+<p><img src="file:///c:/Users/admin/Desktop/Курс WPF/image4.png" alt=""></p>
+<p>На следующем окне в качестве типа проекта выберем WPF Application:</p>
+<p><img src="file:///c:/Users/admin/Desktop/Курс WPF/image5.png" alt=""></p>
+<p>Далее на следующем этапе нам будет предложено указать имя проекта и каталог, где будет располагаться проект.</p>
+<p><img src="file:///c:/Users/admin/Desktop/Курс WPF/image6.png" alt=""></p>
+<p>В поле Project Name дадим проекту какое-либо название. В моем случае это HelloApp.</p>
+<p>На следующем окне Visual Studio предложит нам выбрать версию .NET, которая будет использоваться для проекта. По умолчанию здесь выбрана последняя на данный момент версия - .NET 6.0. Оставим и нажмен на кнопку Create (Создать) для создания проекта.</p>
+<p><img src="file:///c:/Users/admin/Desktop/Курс WPF/image7.png" alt=""></p>
+<p>После этого Visual Studio откроет наш проект с созданными по умолчанию файлами:</p>
+<p><img src="file:///c:/Users/admin/Desktop/Курс WPF/image8.png" alt=""></p>
+<h1 id="%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0">Структура проекта</h1>
+<p>Справа находится окно Solution Explorer, в котором можно увидеть структуру нашего проекта. В данном случае у нас сгенерированная по умолчанию структура:</p>
+<ul>
+<li>Dependencies - это узел содержит сборки dll, которые добавлены в проект по умолчанию. Эти сборки как раз содержат классы библиотеки .NET, которые будет использовать C#</li>
+<li>App.xaml задает ресурсы приложения и ряд конфигурационных настроек в виде кода XAML. В частности, в файле App.xaml задается файл окна программы, которое будет открываться при запуске приложения. Если вы откроете этот файл, то можете найти в нем строку StartupUri=&quot;MainWindow.xaml&quot; - то есть в данном случае, когда мы запустим приложение, будет создаваться интерфейс из файла MainWindow.xaml.
+App.xaml.cs - это файл кода на C#, связанный с файл App.xaml, который также позволяет задать ряд общих ресурсов и общую логику для приложения, но в вид кода C#.</li>
+<li>AssemblyInfo.cs содержит информацию о создаваемой в процессе компиляции сборке</li>
+<li>MainWindow.xaml.cs - это файл логики кода на C#, связанный с окном MainWindow.xaml.</li>
+</ul>
+<p>По умолчанию эти файлы открыти в текстовом редакторе Visual Studio. Причем файл MainWindow.xaml имеет два представления: визуальное - в режиме WYSIWIG отображает весь графический интерфейс данного окна приложения, и под ним декларативное объявление интерфейса в XAML. Если мы изменим декларативную разметку, например, определим там кнопку, то эти изменения отображаться в визуальном представлении. Таким образом, мы сможем сразу же получить представление об интерфейсе окна приложения.</p>
+<h1 id="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%86%D0%B8%D0%B8-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0">Настройка компиляции проекта</h1>
+<p>Кроме того, проект WPF имеет еще один важный файл, как и все проекты на языке C# - файл конфигурации проекта. Для его открытия нажмем двойным кликом левой кнопкой мыши на название проекта или нажмем правой кнопкой мыши на название проекта и появившемся контекстном меню выберем пункт Edit Project File</p>
+<p><img src="file:///c:/Users/admin/Desktop/Курс WPF/image9.png" alt=""></p>
+<p>В итоге нам откроектся файл с расширением csproj, который называется по имени проекта (например, HelloApp.csproj) со следующим содержимым:</p>
+<pre class="hljs"><code><div>&lt;Project Sdk=<span class="hljs-string">"Microsoft.NET.Sdk"</span>&gt;
+ 
+  &lt;PropertyGroup&gt;
+    &lt;OutputType&gt;WinExe&lt;/OutputType&gt;
+    &lt;TargetFramework&gt;net6<span class="hljs-number">.0</span>-windows&lt;/TargetFramework&gt;
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+    &lt;UseWPF&gt;<span class="hljs-literal">true</span>&lt;/UseWPF&gt;
+  &lt;/PropertyGroup&gt;
+ 
+&lt;/Project&gt;
+</div></code></pre>
+<p>Для компиляции приложения WPF указаны следующие настройки:</p>
+<ul>
+<li>OutputType: определяет выходной тип проекта. Должен иметь значение WinExe - то есть выполняемое приложение с расширением exe под Windows</li>
+<li>TargetFramework: определяет применяемую для компиляции версию фреймворка .NET. Поскольку при создании проекта была выбрана версия .NET 6, а сам проект зависит от компонентов Windows, то здесь должно быть значение net6.0-windows</li>
+<li>Nullable: подключает в проект функциональность ссылочных nullable-типов</li>
+<li>UseWPF: указывает, будет ли проект использовать WPF. (при значении true проект использует WPF)</li>
+</ul>
+<h1 id="%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0">Запуск проекта</h1>
+<p>Чтобы запустить приложение в режиме отладки, нажмем на клавишу F5 или на зеленую стрелочку на панели Visual Studio. И после этого запустится пустое окно по умолчанию.</p>
+<p>После запуска приложения студия компилирует его в файл с расширением exe. Найти данный файл можно, зайдя в папку проекта и далее в каталог \bin\Debug\net6.0-windows</p>
+<p>Рассмотрев вкратце создание проекта графического приложения, мы можем перейти к обзору основных компонентов и начнем мы с форм.</p>
+<h1 id="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%B3%D0%BE-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F">Создание первого приложения</h1>
+<p>Однако приложение с пустым окном - не слишком показательный пример. Добавим в него чуть больше функционала. Для этого откроем файл логики кода окна приложения - MainWindow.xaml.cs. Сейчас он имеет следующий код:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> System.Linq;
+<span class="hljs-keyword">using</span> System.Text;
+<span class="hljs-keyword">using</span> System.Threading.Tasks;
+<span class="hljs-keyword">using</span> System.Windows;
+<span class="hljs-keyword">using</span> System.Windows.Controls;
+<span class="hljs-keyword">using</span> System.Windows.Data;
+<span class="hljs-keyword">using</span> System.Windows.Documents;
+<span class="hljs-keyword">using</span> System.Windows.Input;
+<span class="hljs-keyword">using</span> System.Windows.Media;
+<span class="hljs-keyword">using</span> System.Windows.Media.Imaging;
+<span class="hljs-keyword">using</span> System.Windows.Navigation;
+<span class="hljs-keyword">using</span> System.Windows.Shapes;
+ 
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">HelloApp</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">partial</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span> : <span class="hljs-title">Window</span>
+    {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MainWindow</span>(<span class="hljs-params"></span>)</span>
+        {
+            InitializeComponent();
+        }
+    }
+}
+</div></code></pre>
+<p>Здесь определен класс MainWindow, который наследуется от класса Window и берет от него всю базовую функциональность окон. А в конструкторе этого класса вызывается метод InitializeComponent(), который позволяет применить интерфейс из файла MainWindow.xaml.</p>
+<p>Теперь изменим файл MainWindow.xaml.cs следующим образом:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">using</span> System.Windows;
+ 
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">HelloApp</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">partial</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span> : <span class="hljs-title">Window</span>
+    {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MainWindow</span>(<span class="hljs-params"></span>)</span>
+        {
+            InitializeComponent();
+        }
+ 
+        <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Button_Click</span>(<span class="hljs-params"><span class="hljs-keyword">object</span> sender, RoutedEventArgs e</span>)</span>
+        {
+            MessageBox.Show(<span class="hljs-string">"WPF на METANIT.COM"</span>);
+        }    
+    }
+}
+</div></code></pre>
+<p>Здесь добавлен метод Button_Click, который будет выступать в качестве обработчика нажатия кнопки. Ообработчики нажатия кнопки должны принимать два параметра типов object и RoutedEventArgs. В самом обработчике вызывается метод MessageBox.Show, который отображает окно с сообщением. Отображаемое сообщение передается в качестве параметра.</p>
+<p>Теперь определим саму кнопку. Для этого перейдем к файлу MainWindow.xaml, который содержит разметку визуального интерфейса в виде кода XAML. По умолчанию он имее следующее содержимое:</p>
+<pre class="hljs"><code><div>&lt;Window x:Class=<span class="hljs-string">"HelloApp.MainWindow"</span>
+        xmlns=<span class="hljs-string">"http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span>
+        xmlns:x=<span class="hljs-string">"http://schemas.microsoft.com/winfx/2006/xaml"</span>
+        xmlns:d=<span class="hljs-string">"http://schemas.microsoft.com/expression/blend/2008"</span>
+        xmlns:mc=<span class="hljs-string">"http://schemas.openxmlformats.org/markup-compatibility/2006"</span>
+        xmlns:local=<span class="hljs-string">"clr-namespace:HelloApp"</span>
+        mc:Ignorable=<span class="hljs-string">"d"</span>
+        Title=<span class="hljs-string">"MainWindow"</span> Height=<span class="hljs-string">"450"</span> Width=<span class="hljs-string">"800"</span>&gt;
+    &lt;Grid&gt;
+ 
+    &lt;/Grid&gt;
+&lt;/Window&gt;
+</div></code></pre>
+<p>XAML в целом напоминает язык разметки HTML: здесь у нас сначала определен элемент верхнего уровня Window - окно приложения, в нем определен элемент Grid - контейнер верхнего уровня, в который мы можем добавлять другие элементы. Каждый элемент может иметь определенные атрибуты. Более подробно с языком XAML и элементами мы познакомимся позднее, а пока изменим эту разметку на следующую:</p>
+<pre class="hljs"><code><div>&lt;Window x:Class=<span class="hljs-string">"HelloApp.MainWindow"</span>
+        xmlns=<span class="hljs-string">"http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span>
+        xmlns:x=<span class="hljs-string">"http://schemas.microsoft.com/winfx/2006/xaml"</span>
+        xmlns:d=<span class="hljs-string">"http://schemas.microsoft.com/expression/blend/2008"</span>
+        xmlns:mc=<span class="hljs-string">"http://schemas.openxmlformats.org/markup-compatibility/2006"</span>
+         
+        mc:Ignorable=<span class="hljs-string">"d"</span>
+        Title=<span class="hljs-string">"MainWindow"</span> Height=<span class="hljs-string">"450"</span> Width=<span class="hljs-string">"800"</span>&gt;
+    &lt;Grid&gt;
+        &lt;Button Content=<span class="hljs-string">"Нажать"</span> FontSize=<span class="hljs-string">"22"</span> Width=<span class="hljs-string">"200"</span> Height=<span class="hljs-string">"80"</span>
+                Click=<span class="hljs-string">"Button_Click"</span> /&gt;
+    &lt;/Grid&gt;
+&lt;/Window&gt;
+</div></code></pre>
+<p>Для определения кнопки внутри элемента Grid определен элемент Button. Для этого элемента с помощью атрибутов можно установать различные его характеристика. Так, в данном случае устанавливаются следующие атрибуты:</p>
+<ul>
+<li>Content: содержимое кнопки</li>
+<li>FontSize: высота шрифта</li>
+<li>Width: ширина кнопки</li>
+<li>Height: высота кнопки</li>
+<li>Click: обработчик нажатия кнопки. Здесь подключается созданные выше в файле кода C# метод Button_Click. В итоге по нажатию на эту кнопку сработает метод Button_Click</li>
+</ul>
+<p>Запустим приложение и нажмем на кнопку, и нам должно отобразиться сообщение:</p>
+<p><img src="file:///c:/Users/admin/Desktop/Курс WPF/image11.png" alt=""></p>
+
+</body>
+</html>
