@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication1", "WpfApplication1\WpfApplication1.csproj", "{B736EFD3-2262-468E-BA7D-2E1B53393BED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XAML", "XAML\XAML.csproj", "{5BC91959-898E-46C0-8448-8327866160B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Layout", "Layout\Layout.csproj", "{C528C241-CB80-4D3E-9196-1890535E4175}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B736EFD3-2262-468E-BA7D-2E1B53393BED}.Debug|x86.ActiveCfg = Debug|x86
+		{B736EFD3-2262-468E-BA7D-2E1B53393BED}.Debug|x86.Build.0 = Debug|x86
+		{B736EFD3-2262-468E-BA7D-2E1B53393BED}.Release|x86.ActiveCfg = Release|x86
+		{B736EFD3-2262-468E-BA7D-2E1B53393BED}.Release|x86.Build.0 = Release|x86
+		{5BC91959-898E-46C0-8448-8327866160B9}.Debug|x86.ActiveCfg = Debug|x86
+		{5BC91959-898E-46C0-8448-8327866160B9}.Debug|x86.Build.0 = Debug|x86
+		{5BC91959-898E-46C0-8448-8327866160B9}.Release|x86.ActiveCfg = Release|x86
+		{5BC91959-898E-46C0-8448-8327866160B9}.Release|x86.Build.0 = Release|x86
+		{C528C241-CB80-4D3E-9196-1890535E4175}.Debug|x86.ActiveCfg = Debug|x86
+		{C528C241-CB80-4D3E-9196-1890535E4175}.Debug|x86.Build.0 = Debug|x86
+		{C528C241-CB80-4D3E-9196-1890535E4175}.Release|x86.ActiveCfg = Release|x86
+		{C528C241-CB80-4D3E-9196-1890535E4175}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,12 @@
+﻿<Window x:Class="Layout.StackPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="StackPanel" Height="300" Width="300">
+    <Grid>
+        <StackPanel>
+            <Button Background="Blue" Content="1" />
+            <Button Background="White" Content="2" />
+            <Button Background="Red" Content="3" />
+        </StackPanel>
+    </Grid>
+</Window>
