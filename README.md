@@ -1445,6 +1445,14 @@ private void AddImageToProduct(object sender, RoutedEventArgs e)
 
 ```
 
+# Перезапуск localDb в Visual Studio
 
+1.Open Nuget Console in Tools -> Nuget Package Manager -> Package Manager Console
+
+2.Stop LocalDB Instance typing: sqllocaldb stop MSSQLLocalDB
+
+3.Try to update the table
+
+4.Start LocalDB Instance typing: sqllocaldb start MSSQLLocalDB
 
 
