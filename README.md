@@ -1455,4 +1455,8 @@ private void AddImageToProduct(object sender, RoutedEventArgs e)
 
 4.Start LocalDB Instance typing: sqllocaldb start MSSQLLocalDB
 
+## Подключение LocalDb в Dbeaver
+
+https://github.com/dbeaver/dbeaver/issues/2959
+
 
