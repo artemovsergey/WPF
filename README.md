@@ -28,40 +28,64 @@ https://metanit.com/sharp/wpf/21.1.php
 
 **Примечание**: Атрибут ShowGridLines="True" у элемента Grid задает видимость сетки, по умолчанию оно равно False.Это полезно при разработке интерфейса, потом стоит отключать эту опцию.
 
-## Конфигурация базы данных
-Добавим в проект файл ```App.config```. Подключение для SQL Server и для SQLite
+## Файл конфигурации приложения App.config
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-	<configSections>
-		<sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
 
-			<section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
-
-			<section name="AdmissionsCommitteeColledge.Properties.Settings"
-                     type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-                     requirePermission="false" />
-
-		</sectionGroup>
-	</configSections>
-
-
-	<startup>
-		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
-	</startup>
 
 	<connectionStrings>
-		<add name="DefaultConnection"
-			 connectionString="Server=localhost;Database=FabricShop;Integrated Security=True;"
+		<add 
+			 name="DefaultConnection"
+			 connectionString="Server=localhost,63027;Database=UserDatabase;Trusted_Connection=True"
 			 providerName="System.Data.SqlClient"/>
 
-		<add name="ConnectionSQLite" connectionString="Data Source=FabricShop.db" providerName="System.Data.SQLite" />
+		<add
+			 name="ConnectionLocalDb"
+			 connectionString="Server=(localdb)\mssqllocaldb;Database=UserDatabase;Trusted_Connection=True;"
+			 providerName="System.Data.SqlClient"/>
+
+
+		<add name="ConnectionSQLite"
+			 connectionString="Data Source=FabricShop.db"
+			 providerName="System.Data.SQLite" />
 
 	</connectionStrings>
 
+
 </configuration>
 ```
+
+## Подключение базы данных для контекста данных EF
+
+```Csharp
+
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+
+                // SQL Server connection with port
+                //optionsBuilder.UseSqlServer("Server=localhost,63027;Database=UserDatabase;Trusted_Connection=True;");
+
+                // SQL Server connection with localdb
+                //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=UserDatabase;Trusted_Connection=True;");
+
+                // SQL Server connection from App.config
+                //optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+                optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["ConnectionLocalDb"].ToString());
+
+                // SQlite connection 
+                //optionsBuilder.UseSqlite(ConfigurationManager.ConnectionStrings["ConnectionSQLite"].ToString());
+                //optionsBuilder.UseSqlite(@"DataSource=ColledgeStore.db;");
+
+            }
+        }
+```
+
+
 ## Взаимодействие с базой данных SQL Server через ADO.NET
 
 
