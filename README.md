@@ -494,6 +494,17 @@ namespace WpfApp1
 **Примечание**: если будет делать Scaffold, ему нужна база из проекта, а не в Debug. При инициализации контекста база данных SQLite создается в Debug по умолчанию.
 
 
+В консоле диспетчера пакетов для SQLServer
+
+```
+
+Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=UserDatabase;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models2
+
+```
+
+
+
+
 ## Привязка данных Binding
 
 <TextBox Name="textBox" Height="40" Width="100" Text="{Binding ElementName=textBlock,Path=Text,Mode=TwoWay}"   />
