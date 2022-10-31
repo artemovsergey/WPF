@@ -1,64 +1,35 @@
 # WPF
-
-## Алгоритм действий при создании нового проекта WPF .NET Core 6
-
-1. App.config, package.config
-2. Install Nuget package: EF,MaterialDesign.
-3. Script Database 
-4. Scaffold
-5. Настройка структуры папок в проекте и решении.
-6. Общие стили приложения в App.xaml
-7. DbFirst и Scaffold или CodeFirst и Migration
-8. Сделать интерфейс приложения с навигацией. Надо сделать простой функционалВ главном окне размеcтить сетку и фреймы
-
-
 ## Паттерны проектирования
 
 ![](Patterns.png)
-## SQLite в WPF
-https://metanit.com/sharp/wpf/21.1.php
 
 
-## Компоновка
 
-В WPF при компоновке и расположении элементов внутри окна нам надо придерживаться следующих принципов:
-
-- Нежелательно указывать явные размеры элементов (за исключеним **минимальных** и **максимальных** размеров). Размеры должны определяться контейнерами.
-- Нежелательно указывать явные позицию и координаты элементов внутри окна. Позиционирование элементов всецело должно быть прерогативой контейнеров. И контейнер сам должен определять, как элемент будет располагаться. Если нам надо создать сложную систему компоновки, то мы можем вкладывать один контейнер в другой, чтобы добиться максимально удобного расположения элементов управления.
-
-**Примечание**: Атрибут ShowGridLines="True" у элемента Grid задает видимость сетки, по умолчанию оно равно False.Это полезно при разработке интерфейса, потом стоит отключать эту опцию.
-
-## Конфигурация базы данных
-Добавим в проект файл ```App.config```. Подключение для SQL Server и для SQLite
+## App.config
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-	<configSections>
-		<sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
 
-			<section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
-
-			<section name="AdmissionsCommitteeColledge.Properties.Settings"
-                     type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-                     requirePermission="false" />
-
-		</sectionGroup>
-	</configSections>
-
-
-	<startup>
-		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
-	</startup>
 
 	<connectionStrings>
-		<add name="DefaultConnection"
-			 connectionString="Server=localhost;Database=FabricShop;Integrated Security=True;"
+		<add 
+			 name="DefaultConnection"
+			 connectionString="Server=localhost,63027;Database=UserDatabase;Trusted_Connection=True"
 			 providerName="System.Data.SqlClient"/>
 
-		<add name="ConnectionSQLite" connectionString="Data Source=FabricShop.db" providerName="System.Data.SQLite" />
+		<add
+			 name="ConnectionLocalDb"
+			 connectionString="Server=(localdb)\mssqllocaldb;Database=UserDatabase;Trusted_Connection=True;"
+			 providerName="System.Data.SqlClient"/>
+
+
+		<add name="ConnectionSQLite"
+			 connectionString="Data Source=FabricShop.db"
+			 providerName="System.Data.SQLite" />
 
 	</connectionStrings>
+
 
 </configuration>
 ```
