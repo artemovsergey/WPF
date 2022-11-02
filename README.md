@@ -1,26 +1,11 @@
 # WPF
-
-## Алгоритм действий при создании нового проекта WPF .NET Core 6
-
-1. App.config, package.config
-2. Install Nuget package: EF,MaterialDesign.
-3. Script Database 
-4. Scaffold
-5. Настройка структуры папок в проекте и решении.
-6. Общие стили приложения в App.xaml
-7. DbFirst и Scaffold или CodeFirst и Migration
-8. Сделать интерфейс приложения с навигацией. Надо сделать простой функционалВ главном окне размеcтить сетку и фреймы
-
-
 ## Паттерны проектирования
 
 ![](Patterns.png)
-## SQLite в WPF
-https://metanit.com/sharp/wpf/21.1.php
 
 
-## Компоновка
 
+<<<<<<< HEAD
 В WPF при компоновке и расположении элементов внутри окна нам надо придерживаться следующих принципов:
 
 - Нежелательно указывать явные размеры элементов (за исключеним **минимальных** и **максимальных** размеров). Размеры должны определяться контейнерами.
@@ -29,6 +14,9 @@ https://metanit.com/sharp/wpf/21.1.php
 **Примечание**: Атрибут ShowGridLines="True" у элемента Grid задает видимость сетки, по умолчанию оно равно False.Это полезно при разработке интерфейса, потом стоит отключать эту опцию.
 
 ## Файл конфигурации приложения App.config
+=======
+## App.config
+>>>>>>> 658312fff86b5ae3eae22ca0ffdf307adde29b03
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -57,10 +45,16 @@ https://metanit.com/sharp/wpf/21.1.php
 </configuration>
 ```
 
+<<<<<<< HEAD
 ## Подключение базы данных для контекста данных EF
 
 ```Csharp
 
+=======
+## UserContext
+
+```Csharp
+>>>>>>> 658312fff86b5ae3eae22ca0ffdf307adde29b03
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -77,7 +71,11 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
                 optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["ConnectionLocalDb"].ToString());
 
+<<<<<<< HEAD
                 // SQlite connection 
+=======
+                // SQlite
+>>>>>>> 658312fff86b5ae3eae22ca0ffdf307adde29b03
                 //optionsBuilder.UseSqlite(ConfigurationManager.ConnectionStrings["ConnectionSQLite"].ToString());
                 //optionsBuilder.UseSqlite(@"DataSource=ColledgeStore.db;");
 
