@@ -61,6 +61,62 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         }
 ```
 
+## ИнтерфейсINotifyPropertyChanged
+
+```Csharp
+  public class User : INotifyPropertyChanged
+    {
+
+        private int id;
+        private string name;
+        private int age;
+
+        public int Id
+        {
+            get {return id; }
+
+            set {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
+        public string Name
+        {
+            get { return name; }
+
+            set
+            {
+                name = value;
+                OnPropertyChanged("Name");
+            }
+
+        }
+
+        public int Age
+        {
+            get { return age; }
+
+            set
+            {
+                age = value;
+                OnPropertyChanged("Age");
+            }
+
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        public void OnPropertyChanged(string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+    }
+```
+
 
 ## Взаимодействие с базой данных SQL Server через ADO.NET
 
