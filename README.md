@@ -64,43 +64,43 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 ## DataGrid определение
 
 ```csharp
-        <DataGrid 
-                  AutoGenerateColumns="False"
-		  x:Name="productGrid"
-                  Grid.Row="1"
-                  Grid.RowSpan="1"
-                  IsReadOnly="True"
-                  SelectionMode="Single"
-                  RowDetailsVisibilityMode="VisibleWhenSelected"
-                  HorizontalContentAlignment="Left"
-         >
+    <DataGrid 
+                AutoGenerateColumns="False"
+        x:Name="productGrid"
+                Grid.Row="1"
+                Grid.RowSpan="1"
+                IsReadOnly="True"
+                SelectionMode="Single"
+                RowDetailsVisibilityMode="VisibleWhenSelected"
+                HorizontalContentAlignment="Left"
+        >
+        
+        <DataGrid.Columns>
+            <DataGridTemplateColumn Header="Фото" IsReadOnly="True" >
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Image Height="100" Width="100" Source="{Binding ImagePath}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+
+            <DataGridTextColumn Binding="{Binding Title}" Header="Название"/>
             
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Фото" IsReadOnly="True" >
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Height="100" Width="100" Source="{Binding ImagePath}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-
-                <DataGridTextColumn Binding="{Binding Title}" Header="Название"/>
-               
-                <DataGridTextColumn Binding="{Binding Price}" Header="Цена"/>
-                <DataGridTextColumn Binding="{Binding Category.Name}" Header="Категория" />
-               
-                <DataGridTextColumn Width="*" Header="Описание" Binding="{Binding Description}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                <Setter Property="TextBlock.TextAlignment" Value="Justify" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                
-            </DataGrid.Columns>
-        </DataGrid>
+            <DataGridTextColumn Binding="{Binding Price}" Header="Цена"/>
+            <DataGridTextColumn Binding="{Binding Category.Name}" Header="Категория" />
+            
+            <DataGridTextColumn Width="*" Header="Описание" Binding="{Binding Description}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Justify" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+            
+        </DataGrid.Columns>
+    </DataGrid>
 
 ```
 
@@ -163,12 +163,13 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ## Entity Framework Core 6. Cвязь моделей 1 : M
 
-using System;
-using System.Collections.Generic;
-
 ### Model User
 
 ```csharp
+
+using System;
+using System.Collections.Generic;
+
 namespace FabricShop.Models
 {
     public partial class User
@@ -345,10 +346,10 @@ private void Page1_InVisibleChanged(object sender, DependencyPropertyChangedEven
 ## Вызов контекста на кнопке Редактировать
 
 ```Csharp
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            ManagerPages.Mainframe.Navigate(new Page2((sender as Button).DataContext as User));
-        }
+    private void EditButton_Click(object sender, RoutedEventArgs e)
+    {
+        ManagerPages.Mainframe.Navigate(new Page2((sender as Button).DataContext as User));
+    }
 ```
 
 ## Кнопка удаления с диалогом
@@ -515,43 +516,43 @@ ProxyFrame.Mainframe.Navigate(new AddAbiturientPage(productGrid.SelectedItem as 
 
 ```Csharp
 private void ForwardButton_Click(object sender, RoutedEventArgs e)
-        {
-            productGrid.ItemsSource = db.Abiturients.Skip(step).Take(10).ToList();
-            if (step + 10 < db.Abiturients.Count())
-                step += 10;
+    {
+        productGrid.ItemsSource = db.Abiturients.Skip(step).Take(10).ToList();
+        if (step + 10 < db.Abiturients.Count())
+            step += 10;
 
-            CountAbiturients.Text = $"Количество: {db.Abiturients.Skip(step).Take(10).ToList().Count} из {db.Abiturients.ToList().Count}";
-        }	
+        CountAbiturients.Text = $"Количество: {db.Abiturients.Skip(step).Take(10).ToList().Count} из {db.Abiturients.ToList().Count}";
+    }	
 ```
 						   
 ## Переход на страницу Назад
 
 ```Csharp
 private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (step > 0)
-                step -= 10;
-            productGrid.ItemsSource = db.Abiturients.Skip(step).Take(10).ToList();
+    {
+        if (step > 0)
+            step -= 10;
+        productGrid.ItemsSource = db.Abiturients.Skip(step).Take(10).ToList();
 
-            CountAbiturients.Text = $"Количество: {db.Abiturients.Skip(step).Take(10).ToList().Count} из {db.Abiturients.ToList().Count}";
-        }
+        CountAbiturients.Text = $"Количество: {db.Abiturients.Skip(step).Take(10).ToList().Count} из {db.Abiturients.ToList().Count}";
+    }
 ```
 
 ## Очистка параметров сортировки, фильтрации и поиска
 
 ```Csharp
 private void Clear_ButtonClick(object sender, RoutedEventArgs e)
-        {
-            SortCombobox.Text = "Сортировка";
-            FilterComboBox.Text = "Все типы";
-            SearchBox.Text = "";
-        }
+    {
+        SortCombobox.Text = "Сортировка";
+        FilterComboBox.Text = "Все типы";
+        SearchBox.Text = "";
+    }
 ```
 
 ## Атрибуты для DataGrid
 
 ```xml
-	Grid.Row="1"
+    Grid.Row="1"
             Margin="5"
             AutoGenerateColumns="False"
             x:Name="productGrid"
@@ -576,21 +577,21 @@ private void Clear_ButtonClick(object sender, RoutedEventArgs e)
 ## Триггеры в DataGrid на Row
 
 ```xml
-<DataGrid.RowStyle>
-    <Style TargetType="DataGridRow">
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Ball}" Value="5" >
-                <Setter Property="Background" Value="Orange"/>
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-</DataGrid.RowStyle>
+    <DataGrid.RowStyle>
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Ball}" Value="5" >
+                    <Setter Property="Background" Value="Orange"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </DataGrid.RowStyle>
 ```
 
-##  Вinding Stringformat даты
+## Вinding даты через Stringformat
 	
 ```xml
-Binding="{Binding BirthDay, StringFormat={}{0:dd.MM.yyyy}}"
+    Binding="{Binding BirthDay, StringFormat={}{0:dd.MM.yyyy}}"
 ```
 	
 ## Атрибуты окна Window
@@ -609,60 +610,58 @@ Binding="{Binding BirthDay, StringFormat={}{0:dd.MM.yyyy}}"
 
 ```Csharp
 using(ColledgeStoreContext db = new ColledgeStoreContext())
-            {
-                var currentUser = db.Users.Where(user => user.Login == LoginBox.Text && user.Password == PasswordBox.Password).FirstOrDefault();
-                if (currentUser != null)
-                {
-                    ProxyFrame.CurrentUser = currentUser;
-                    MainWindow main = new MainWindow();
-                    main.Show();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Неправильный логин или пароль");
-                }
-            }
+    {
+        var currentUser = db.Users.Where(user => user.Login == LoginBox.Text && user.Password == PasswordBox.Password).FirstOrDefault();
+        if (currentUser != null)
+        {
+            ProxyFrame.CurrentUser = currentUser;
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
+        }
+        else
+        {
+            MessageBox.Show("Неправильный логин или пароль");
+        }
+    }
 ```
 
 	
 ## Валидация
 
 ```Csharp
-// Валидация полей
+    
+    StringBuilder errors = new StringBuilder();
+    if (string.IsNullOrWhiteSpace(full_name.Text))
+        errors.AppendLine("Укажите имя");
+    if (string.IsNullOrWhiteSpace(specialty_id.Text))
+        errors.AppendLine("Укажите специальность");
+    if (string.IsNullOrWhiteSpace(birth_day.Text))
+        errors.AppendLine("Укажите дату рождения");
+    if (string.IsNullOrWhiteSpace(date_certificate.Text))
+        errors.AppendLine("Укажите дату выдачи аттестата");
+    if (string.IsNullOrWhiteSpace(passport_issued.Text))
+        errors.AppendLine("Укажите дату выдачи паспорта");
 
-                StringBuilder errors = new StringBuilder();
-                if (string.IsNullOrWhiteSpace(full_name.Text))
-                    errors.AppendLine("Укажите имя");
-                if (string.IsNullOrWhiteSpace(specialty_id.Text))
-                    errors.AppendLine("Укажите специальность");
-                if (string.IsNullOrWhiteSpace(birth_day.Text))
-                    errors.AppendLine("Укажите дату рождения");
-                if (string.IsNullOrWhiteSpace(date_certificate.Text))
-                    errors.AppendLine("Укажите дату выдачи аттестата");
-                if (string.IsNullOrWhiteSpace(passport_issued.Text))
-                    errors.AppendLine("Укажите дату выдачи паспорта");
-
-                //
-                if (errors.Length > 0)
-                {
-                    MessageBox.Show(errors.ToString());
-                    return;
-                }
+    //
+    if (errors.Length > 0)
+    {
+        MessageBox.Show(errors.ToString());
+        return;
+    }
 ```
 
 
-## Дополнительный свойства на основе существующих свойств
+## Дополнительное свойство на основе существующего свойства
 
 ```Csharp       
-public string? Image { get; set; }
-public string? ImagePath { get { return System.IO.Path.Combine(Environment.CurrentDirectory, $"images/{Image}"); }  }
-
+    public string? Image { get; set; }
+    public string? ImagePath { get { return System.IO.Path.Combine(Environment.CurrentDirectory, $"images/{Image}"); }  }
 ```
 
 ## Binding по полному пути картинки
 
-```csharp
+```xml
     <Image>
         <Image.Source>
             <BitmapImage DecodePixelWidth="100" DecodePixelHeight="100"
@@ -674,72 +673,68 @@ public string? ImagePath { get { return System.IO.Path.Combine(Environment.Curre
 ## DataPicker
 
 ```xml
-<DatePicker
-	SelectedDate="{Binding BirthDay}" 
-	Name="birth_day"/>
+    <DatePicker SelectedDate="{Binding BirthDay}"  Name="birth_day"/>
 ```
 	
 ## ComboBox
 
 ```xml
-<ComboBox
-    SelectedValue="{Binding Specialty}"
-    Text="{Binding Specialty.Name}"
-    Name="specialty_id"
-    Margin="1"
-    Height="30"
-    Width="150" 
-    IsEditable="True" />
+<ComboBox SelectedValue="{Binding Specialty}"
+          Text="{Binding Specialty.Name}"
+          Name="specialty_id"
+          Margin="1"
+          Height="30"
+          Width="150" 
+          IsEditable="True" />
 ```
 	
 ```csharp
- specialty_id.ItemsSource = db.Specialties.ToList(); // загрузка в комбобокс объектов специальностей
- specialty_id.DisplayMemberPath = "Name"; // отображение в списке объектов конкретные свойства, а не весь объект
+    specialty_id.ItemsSource = db.Specialties.ToList(); // загрузка в комбобокс объектов специальностей
+    specialty_id.DisplayMemberPath = "Name"; // отображение в списке объектов конкретные свойства, а не весь объект
 ```
 
 ## Изображение по абсолютному пути
 
 ```Csharp
-BitmapImage image = new BitmapImage(new Uri(System.IO.Path.Combine(Environment.CurrentDirectory, $"{_currentAbiturient.Image}"), UriKind.Absolute));
-ImagePicture.Source = image;
+    BitmapImage image = new BitmapImage(new Uri(System.IO.Path.Combine(Environment.CurrentDirectory, $"{_currentAbiturient.Image}"), UriKind.Absolute));
+    ImagePicture.Source = image;
 ```
 		
 ## Замена . на , для SQL Server
 
 ```csharp
-Ball = Convert.ToDouble(ball.Text.Replace(".", ",")) // SQL Server принимает дробные значения с запятой
+    Ball = Convert.ToDouble(ball.Text.Replace(".", ",")) // SQL Server принимает дробные значения с запятой
 ```
 	
 ## Полные сообщения об ошибках
 
 ```csharp
-catch (Exception ex)
-{
-    MessageBox.Show($"Ошибка: {ex.InnerException.Message}");
-}
+    catch (Exception ex)
+    {
+        MessageBox.Show($"Ошибка: {ex.InnerException.Message}");
+    }
 ```
 
 ## Captcha
 
 ```Csharp
-public static class CaptchaBuild
-    {
-        public static string Refresh()
+    public static class CaptchaBuild
         {
-
-            string captcha = "A1fd";
-
-            Random rand = new Random();
-
-            for (int i = 0; i < 4; i++)
+            public static string Refresh()
             {
-                captcha += (char)rand.Next('A', 'Z' + 1);
-            }
 
-            return captcha;
-        }
-    }
-								  
+                string captcha = "A1fd";
+
+                Random rand = new Random();
+
+                for (int i = 0; i < 4; i++)
+                {
+                    captcha += (char)rand.Next('A', 'Z' + 1);
+                }
+
+                return captcha;
+            }
+        }								  
 ```
 				  
 ```csharp
@@ -786,7 +781,7 @@ public static class CaptchaBuild
 ## App.xaml. Стили и ресурсы для приложения
 
 ```xml
-<Application.Resources>
+    <Application.Resources>
 
         <SolidColorBrush x:Key="ColorPrimery" Color="White"></SolidColorBrush>
         <SolidColorBrush x:Key="ColorSecondary" Color="#FFFFFFE1"></SolidColorBrush>
@@ -806,7 +801,7 @@ public static class CaptchaBuild
         </Style>
 
         <Style TargetType="{x:Type DataGrid}">
-           
+            
             <Setter Property="Background" Value="#FF76E383">
             </Setter>
         </Style>
@@ -840,40 +835,41 @@ public static class CaptchaBuild
             <Setter Property="Height" Value="30"></Setter>
             <Setter Property="Margin" Value="1"></Setter>
         </Style>
+        
     </Application.Resources>
 ```
 
 ## Триггер для ListView
 
 ```xml
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                  
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding QuantityInStock}" Value="0">
-                            <Setter Property="Background" Value="Gray" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ListView.ItemContainerStyle>
+    <ListView.ItemContainerStyle>
+        <Style TargetType="ListViewItem">
+            
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding QuantityInStock}" Value="0">
+                    <Setter Property="Background" Value="Gray" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </ListView.ItemContainerStyle>
 ```
 
 ## Border
 
 ```xml
-<Border
-	CornerRadius="3"
-	BorderThickness="2"
-	Width="800"
-	Height="Auto"
-	BorderBrush="{StaticResource ColorAccent}"
+    <Border
+        CornerRadius="3"
+        BorderThickness="2"
+        Width="800"
+        Height="Auto"
+        BorderBrush="{StaticResource ColorAccent}"
 
-	<Border.Effect>
-		<DropShadowEffect BlurRadius="30"
-		Color="LightGray"
-		ShadowDepth="0"/>
-	</Border.Effect>
-</Border>
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="30"
+            Color="LightGray"
+            ShadowDepth="0"/>
+        </Border.Effect>
+    </Border>
 ```
 
 **Замечание**: в Border может быть только один элемент.
@@ -882,12 +878,12 @@ public static class CaptchaBuild
 
 ```csharp
     if (Proxy.CurrentUser != null)
-            {
-                nameUser.Text = Proxy.CurrentUser.Name + " " + Proxy.CurrentUser.Surname;
-                roleUser.Text = $"Ваша роль: {Proxy.CurrentUser.RoleNavigation.RoleName}";
-                AddProduct.Visibility = Visibility.Visible;
-                DeleteProduct.Visibility = Visibility.Visible;
-            }
+        {
+            nameUser.Text = Proxy.CurrentUser.Name + " " + Proxy.CurrentUser.Surname;
+            roleUser.Text = $"Ваша роль: {Proxy.CurrentUser.RoleNavigation.RoleName}";
+            AddProduct.Visibility = Visibility.Visible;
+            DeleteProduct.Visibility = Visibility.Visible;
+        }
     else
     {
         nameUser.Text = "Вы зашли как гость!";
@@ -897,18 +893,18 @@ public static class CaptchaBuild
 ## Выборка по столбцу Select в EF
 
 ```csharp
- var Suppliers = db.Products.Select(p => p.Supplier).Distinct().ToList();
+    var Suppliers = db.Products.Select(p => p.Supplier).Distinct().ToList();
 ```
 
 ## Начальные значения для сортировки и фильтрации
 
 ```csharp
- SortComboBox.ItemsSource = new List<String>() { "Цена", "По убыванию", "По возрастанию" };   //.Select(p => p.Login);
-                SortComboBox.SelectedIndex = 0;
+    SortComboBox.ItemsSource = new List<String>() { "Цена", "По убыванию", "По возрастанию" };   //.Select(p => p.Login);
+    SortComboBox.SelectedIndex = 0;
 
-                Suppliers.Insert(0, "Все производители");
-                FilterComboBox.ItemsSource = Suppliers;
-                FilterComboBox.SelectedIndex = 0;
+    Suppliers.Insert(0, "Все производители");
+    FilterComboBox.ItemsSource = Suppliers;
+    FilterComboBox.SelectedIndex = 0;
 ```
 **Замечания**: событие SelectionChanged выбора срабатывает после смены значения в списке, т.е вначале первое значение стоит поставить нейтральное
 
@@ -916,7 +912,7 @@ public static class CaptchaBuild
 ## Обновленный общий метод для сортировки, фильтрации и поиска
 
 ```csharp
-  private void UpdateProducts()
+    private void UpdateProducts()
         {
             using(FabricShopContext db = new FabricShopContext())
             {
@@ -968,39 +964,39 @@ public static class CaptchaBuild
 
 ```Csharp
 private void AddImageToProduct(object sender, RoutedEventArgs e)
+    {
+        Stream myStream;
+        Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+        if(dlg.ShowDialog() == true)
         {
-            Stream myStream;
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            if(dlg.ShowDialog() == true)
+            if ( (myStream = dlg.OpenFile()) != null )
             {
-                if ( (myStream = dlg.OpenFile()) != null )
-                {
-                    string strfilename = dlg.FileName;
-                    string filetext = File.ReadAllText(strfilename);
+                string strfilename = dlg.FileName;
+                string filetext = File.ReadAllText(strfilename);
 
-                    dlg.DefaultExt = ".png";
-                    dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
-                    dlg.Title = "Open Image";
-                    dlg.InitialDirectory = "./";
-                    
-                    BitmapImage image = new BitmapImage(new Uri(dlg.FileName));
-                    ImageBox.Source = image;
-
-                    try
-                    {
-                            string newRelativePath = $"{System.DateTime.Now.ToString("HHmmss")}_{dlg.SafeFileName}";
-                            File.Copy(dlg.FileName, System.IO.Path.Combine(Environment.CurrentDirectory, $"images/{newRelativePath}"));
-                            ImagePath = newRelativePath;
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }       
-                myStream.Dispose();
+                dlg.DefaultExt = ".png";
+                dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+                dlg.Title = "Open Image";
+                dlg.InitialDirectory = "./";
                 
-            }
+                BitmapImage image = new BitmapImage(new Uri(dlg.FileName));
+                ImageBox.Source = image;
+
+                try
+                {
+                        string newRelativePath = $"{System.DateTime.Now.ToString("HHmmss")}_{dlg.SafeFileName}";
+                        File.Copy(dlg.FileName, System.IO.Path.Combine(Environment.CurrentDirectory, $"images/{newRelativePath}"));
+                        ImagePath = newRelativePath;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }       
+            myStream.Dispose();
+            
         }
+    }
 ```
 
 
