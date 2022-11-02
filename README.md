@@ -1,22 +1,11 @@
 # WPF
 ## Паттерны проектирования
 
-![](Patterns.png)
+![](image/Patterns.png)
 
 
 
-<<<<<<< HEAD
-В WPF при компоновке и расположении элементов внутри окна нам надо придерживаться следующих принципов:
-
-- Нежелательно указывать явные размеры элементов (за исключеним **минимальных** и **максимальных** размеров). Размеры должны определяться контейнерами.
-- Нежелательно указывать явные позицию и координаты элементов внутри окна. Позиционирование элементов всецело должно быть прерогативой контейнеров. И контейнер сам должен определять, как элемент будет располагаться. Если нам надо создать сложную систему компоновки, то мы можем вкладывать один контейнер в другой, чтобы добиться максимально удобного расположения элементов управления.
-
-**Примечание**: Атрибут ShowGridLines="True" у элемента Grid задает видимость сетки, по умолчанию оно равно False.Это полезно при разработке интерфейса, потом стоит отключать эту опцию.
-
-## Файл конфигурации приложения App.config
-=======
 ## App.config
->>>>>>> 658312fff86b5ae3eae22ca0ffdf307adde29b03
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -45,16 +34,9 @@
 </configuration>
 ```
 
-<<<<<<< HEAD
-## Подключение базы данных для контекста данных EF
-
-```Csharp
-
-=======
 ## UserContext
 
 ```Csharp
->>>>>>> 658312fff86b5ae3eae22ca0ffdf307adde29b03
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -71,11 +53,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
                 optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["ConnectionLocalDb"].ToString());
 
-<<<<<<< HEAD
-                // SQlite connection 
-=======
                 // SQlite
->>>>>>> 658312fff86b5ae3eae22ca0ffdf307adde29b03
                 //optionsBuilder.UseSqlite(ConfigurationManager.ConnectionStrings["ConnectionSQLite"].ToString());
                 //optionsBuilder.UseSqlite(@"DataSource=ColledgeStore.db;");
 
