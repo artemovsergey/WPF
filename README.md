@@ -1017,3 +1017,26 @@ private void AddImageToProduct(object sender, RoutedEventArgs e)
 https://github.com/dbeaver/dbeaver/issues/2959
 
 
+# Миграции для WPF
+
+## Установка Nuget-пакетов:
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Tools
+
+## Обновление пакета инструментов в консоле:
+dotnet tool update --global dotnet-ef
+
+## Создание миграции:
+dotnet ef migrations add Itinial
+
+## Применение миграции
+dotnet ef database update
+
+### Результат:
+В папке с проектом будет создана папка Migration
+
+**Замечание**: если база данных уже существует:
+dotnet ef migration add Initial
+комментирование методов Up и Down
+dotnet ef database update 
+
