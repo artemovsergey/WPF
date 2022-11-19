@@ -1040,3 +1040,7 @@ dotnet ef migration add Initial
 комментирование методов Up и Down
 dotnet ef database update 
 
+### Application.Current.MainWindow
+
+Application.MainWindow автоматически устанавливается в первое окно, открытое в приложении. Когда окно закрывается, оно устанавливается либо на следующее открытое окно, либо на ноль, если открытых окон нет.
+
