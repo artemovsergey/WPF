@@ -1,0 +1,28 @@
+﻿<Window x:Class="ElementsControl.TreeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TreeView" Height="300" Width="300">
+    <Grid>
+        <TreeView>
+            <TextBox>Элемент TreeView</TextBox>
+            <TreeViewItem Header="Базы данных">
+                <TreeViewItem Header="MS SQL Server" />
+                <TreeViewItem Header="MySQL" />
+                <TreeViewItem Header="MongoDB" />
+                <TreeViewItem Header="Postgres" />
+            </TreeViewItem>
+            <TreeViewItem Header="Языки программирования">
+                <TreeViewItem Header="C-языки">
+                    <TreeViewItem Header="C#" Selected="TreeViewItem_Selected" />
+                    <TreeViewItem Header="C/C++" />
+                    <TreeViewItem Header="Java" />
+                </TreeViewItem>
+                <TreeViewItem Header="Basic">
+                    <TreeViewItem Header="Visual Basic" />
+                    <TreeViewItem Header="VB.Net" />
+                    <TreeViewItem Header="PureBasic" />
+                </TreeViewItem>
+            </TreeViewItem>
+        </TreeView>
+    </Grid>
+</Window>

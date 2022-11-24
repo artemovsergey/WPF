@@ -1,0 +1,52 @@
+﻿<Window x:Class="Resources.Example1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Example1" Height="300" Width="300">
+    
+    
+    <!--
+    
+    Когда один и тот же ресурс используется в разных местах,
+    то фактически мы используем один и тот же объект.
+    Однако это не всегда желательно.
+    Иногда необходимо, чтобы примение ресурса
+    к разным объектам различалось.
+    То есть нам необходимо, чтобы при каждом применении создавался отдельный 
+    объект ресурса. В этом случае мы можем использовать
+    выражение x:Shared="False"
+    
+    -->
+    
+    <Window.Resources>
+        <SolidColorBrush x:Shared="False"  x:Key="bg1" Color="Green" />
+    </Window.Resources>
+    
+    <Grid>
+        
+        
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            <Button 
+                Name="bt1"
+                Height="30"
+                Width="100"
+                Background="{StaticResource ResourceKey=bg1}"
+                >
+                Кнопка 1
+            </Button>
+
+            <Button 
+                Name="bt2"
+                Height="30"
+                Width="100"
+                Background="{StaticResource ResourceKey=bg1}"
+                >
+                Кнопка 2
+            </Button>
+
+        </StackPanel>
+        
+
+    </Grid>
+</Window>

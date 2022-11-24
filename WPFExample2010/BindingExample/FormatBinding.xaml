@@ -1,0 +1,53 @@
+﻿<Window x:Class="BindingExample.FormatBinding"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        xmlns:local="clr-namespace:BindingExample"
+        
+        Title="FormatBinding" Height="300" Width="300">
+
+    <Window.Resources>
+        <local:User x:Key="user" Name="user1" Age="10"/>
+    </Window.Resources>
+
+    <Grid>
+        
+        <StackPanel>
+            
+            <TextBlock Text="{Binding StringFormat=Возраст: {0} лет, Source={StaticResource user}, Path=Age}" />
+            <TextBlock Text="{Binding StringFormat=Возраст: {0:C} лет, Source={StaticResource user}, Path=Age}" />
+            <TextBlock Text="{Binding StringFormat=Возраст: {0:P} лет, Source={StaticResource user}, Path=Age}" />
+
+            
+            
+            
+            <!--
+            
+            В зависимости от типа элемента доступны различные типы форматировщиков значений:
+
+            StringFormat: используется для класса Binding
+
+            ContentStringFormat: используется для классов ContentControl, ContentPresenter, TabControl
+
+            ItemStringFormat: используется для класса ItemsControl
+
+            HeaderStringFormat: используется для класса HeaderContentControl
+
+            ColumnHeaderStringFormat: используется для классов GridView, GridViewHeaderRowPresenter
+
+            SelectionBoxItemStringFormat: используется для классов ComboBox, RibbonComboBox
+            
+            -->
+
+            <Button 
+                    Margin="5"
+                    Height="30"
+                    Width="100"
+                    ContentStringFormat="{}{0:C}"
+                    Content="{Binding Source={StaticResource user}, Path=Age}" />
+
+
+        </StackPanel>
+        
+    </Grid>
+</Window>

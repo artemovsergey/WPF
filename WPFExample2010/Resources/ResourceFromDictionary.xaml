@@ -1,0 +1,33 @@
+﻿<Window x:Class="Resources.ResourceFromDictionary"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        Title="ResourceFromDictionary" Height="300" Width="300">
+    <Grid>
+
+        <StackPanel VerticalAlignment="Center">
+
+
+            <Button Margin="5"
+                    Background="{DynamicResource ResourceKey=buttonBrush}"
+                    Width="100"
+                    Height="30"
+                    Content="Кнопка 1"
+                />
+
+            <Button 
+                    Name="button2"
+                    Margin="5"
+                    Width="100"
+                    Height="30"
+                    Content="Кнопка 1"
+                    Background="{DynamicResource buttonBrush}"
+                />
+
+        </StackPanel>
+        
+       
+
+    </Grid>
+</Window>

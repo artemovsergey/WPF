@@ -1,0 +1,13 @@
+﻿<Window x:Class="Resources.ResourceFromCodebehind"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ResourceFromCodebehind" Height="300" Width="300">
+    <Grid>
+        <Button x:Name="button1"
+                MaxHeight="40"
+                MaxWidth="120"
+                Content="Ресурсы в WPF">
+
+        </Button>   
+    </Grid>
+</Window>

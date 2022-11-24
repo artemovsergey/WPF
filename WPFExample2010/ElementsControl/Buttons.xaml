@@ -1,0 +1,99 @@
+﻿<Window x:Class="ElementsControl.Buttons"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Buttons" Height="500" Width="300">
+    <Grid>
+
+        <StackPanel VerticalAlignment="Center"
+                    
+                    >
+
+            <Button x:Name="button1"
+                Margin="10"
+                Width="100"
+                Height="30"
+                Background="LightGray"
+                IsDefault="True"
+                IsCancel="True"
+                Content="Button"
+                />
+            
+            <RepeatButton 
+                Margin="10"
+                Width="100"
+                Height="30"
+                Delay="10"
+                Interval="10"
+                Content="RepeatButton"
+                Click="button1_Click"/>
+            
+            <TextBlock
+                Margin="10"
+                Name="textBlock"
+                Width="100"
+                Height="20"
+                />
+            
+            
+            <ToggleButton
+                
+                Name="tb1"
+                Margin="10"
+                Width="100"
+                Height="30"
+                IsChecked="False"
+                Click="ToggleButton_Click"
+                />
+
+
+            
+            <!-- Checkbox -->
+            
+            <CheckBox x:Name="checkBox1" IsThreeState="True" IsChecked="False" Height="20" Content="Неотмечен"/>
+            <CheckBox x:Name="checkBox2" IsThreeState="True" IsChecked="True" Height="20" Content="Отмечен"/>
+            <CheckBox x:Name="checkBox3" IsThreeState="True" IsChecked="{x:Null}" Height="20" Content="Неопределен"/>
+            
+            
+            <!-- RadioButton -->
+
+            <RadioButton GroupName="Languages" Content="C#" IsChecked="True" />
+            <RadioButton GroupName="Languages" Content="VB.NET" />
+            <RadioButton GroupName="Languages" Content="C++" />
+            <RadioButton GroupName="Technologies" Content="WPF" IsChecked="True" />
+            <RadioButton GroupName="Technologies" Content="WinForms" />
+            <RadioButton GroupName="Technologies" Content="ASP.NET" />
+
+
+
+            <!-- Всплывающие подсказки ToolTip и Popup -->
+
+            <Button Content="Tooltip" ToolTip="Всплывающая подсказка для кнопки" Height="30" Width="80" />
+
+
+            <!-- Всплывающее окно -->
+
+            <StackPanel>
+                <Button Content="Popup" Width="80" MouseEnter="Button_MouseEnter_1" HorizontalAlignment="Left"/>
+                    <Popup x:Name="popup1" StaysOpen="False" Placement="Mouse" MaxWidth="180"
+                    AllowsTransparency="True" >
+                    <TextBlock TextWrapping="Wrap" Width="180" Background="LightPink" Opacity="0.8" >
+                    Чтобы узнать больше, посетите сайт metanit.com
+                    </TextBlock>
+                    </Popup>
+            </StackPanel>
+
+
+
+
+
+
+
+
+        </StackPanel>
+                
+        
+        
+
+
+    </Grid>
+</Window>

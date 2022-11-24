@@ -1,0 +1,25 @@
+﻿<Window x:Class="Resources.Example3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        
+        Title="Example3" Height="300" Width="300">
+
+    <!-- 
+    Определение объектов для списковых элементов
+    -->
+    
+    <Window.Resources>
+        <col:ArrayList x:Key="phones">
+            <sys:String>iPhone 6S</sys:String>
+            <sys:String>Nexus 6P</sys:String>
+            <sys:String>Lumia 950</sys:String>
+            <sys:String>Xiaomi MI5</sys:String>
+        </col:ArrayList>
+    </Window.Resources>
+
+    <Grid>
+        <ListBox ItemsSource="{StaticResource phones}" />
+    </Grid>
+</Window>

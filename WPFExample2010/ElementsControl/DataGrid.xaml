@@ -1,0 +1,82 @@
+﻿<Window x:Class="ElementsControl.DataGrid"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        
+        xmlns:local="clr-namespace:ElementsControl"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        
+        Title="DataGrid" Height="300" Width="300">
+    <Grid>
+
+        
+        <StackPanel>
+
+
+            <!-- DataGrid Auto-->
+
+            <DataGrid Margin="5" x:Name="phonesGrid"
+                  AutoGenerateColumns="True"
+                  ItemsSource="{DynamicResource ResourceKey=phones}"
+                  RowBackground="Aqua"
+                  AlternatingRowBackground="AliceBlue"
+                  ColumnHeaderHeight="25"
+                  ColumnWidth="*"
+                  RowHeight="25"
+                  GridLinesVisibility="None"
+                  HeadersVisibility="All"
+                  HorizontalGridLinesBrush="Azure"
+                  VerticalGridLinesBrush ="Bisque"
+                  
+                  >
+                <DataGrid.Resources>
+
+                    <col:ArrayList x:Key="phones">
+                        <local:User Name="user1" Age="10" />
+                    </col:ArrayList>
+
+                </DataGrid.Resources>
+            </DataGrid>
+            
+            <!-- DataGrid -->
+
+            <DataGrid x:Name="phonesGrid1" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray" RowBackground="LightGray" AlternatingRowBackground="White">
+                <DataGrid.Items>
+                    <local:User Name="user1" Age="10" />
+                </DataGrid.Items>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding Path=Name}" Width="90" />
+                    <DataGridHyperlinkColumn Header="Возраст" Binding="{Binding Path=Age}" Width="80" />
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            
+            <!-- RowDetailTemplate-->
+
+            <DataGrid x:Name="phonesGrid2" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray" RowBackground="LightGray" AlternatingRowBackground="White">
+                <DataGrid.Items>
+                    <local:User Name="user1" Age="10" />
+                </DataGrid.Items>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding Path=Name}" Width="90" />
+                    <DataGridHyperlinkColumn Header="Возраст" Binding="{Binding Path=Age}" Width="80" />
+                </DataGrid.Columns>
+                
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Name}" />
+                            <TextBlock Text=" Иванович" />
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+
+        </StackPanel>
+        
+        
+        
+        
+    </Grid>
+</Window>

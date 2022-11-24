@@ -1,0 +1,63 @@
+﻿<Window x:Class="DataContextExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        xmlns:local="clr-namespace:DataContextExample"
+        
+        Title="MainWindow" Height="350" Width="525"
+        Name="mainWindow">
+
+
+    <Window.Resources>
+        <local:Company x:Key="GoogleResource" Title="Google" />
+        <local:User x:Key="User" Name="user2" Age="25" Company="{StaticResource GoogleResource}"  />
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel>
+
+
+            <TextBlock Text="{Binding Path=Name}" />
+
+            <!--
+            Элементы внутри окна могут конкретизировать контекст, взять какую-то его часть:
+            -->
+            <TextBlock DataContext="{Binding Path=Company}" Text="{Binding Path=Title}" />
+
+            <!-- С помощью нотации точки можно обратиться к свойству Title -->
+
+            <TextBlock Text="{Binding Path=Company.Title}" />
+
+
+            
+            
+            <!-- Свойсво зависимостей User -->
+
+            <TextBlock Text="{Binding ElementName=mainWindow, Path=User.Name}" />
+            <TextBlock  Text="{Binding ElementName=mainWindow, Path=User.Company.Title}" />
+
+
+
+            <!-- Свойство зависимостей User с приминением DataContext -->
+
+            <StackPanel DataContext="{Binding ElementName=mainWindow, Path=User}">
+                <TextBlock Text="{Binding Path=Name}" />
+                <TextBlock DataContext="{Binding Path=Company}" Text="{Binding Path=Title}" />
+            </StackPanel>
+            
+            
+            <!-- Определение данных в ресурсах -->
+            
+            <StackPanel DataContext="{StaticResource User}">
+                <TextBlock Text="{Binding Path=Name}" />
+                <TextBlock DataContext="{Binding Path=Company}" Text="{Binding Path=Title}" />
+            </StackPanel>
+
+
+
+        </StackPanel>
+
+
+
+    </Grid>
+</Window>

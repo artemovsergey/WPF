@@ -1,0 +1,11 @@
+C:\Users\user\Desktop\WPFExample2010\TriggerExample\bin\Debug\TriggerExample.exe
+C:\Users\user\Desktop\WPFExample2010\TriggerExample\bin\Debug\TriggerExample.pdb
+C:\Users\user\Desktop\WPFExample2010\TriggerExample\obj\x86\Debug\MainWindow.baml
+C:\Users\user\Desktop\WPFExample2010\TriggerExample\obj\x86\Debug\MainWindow.g.cs
+C:\Users\user\Desktop\WPFExample2010\TriggerExample\obj\x86\Debug\App.g.cs
+C:\Users\user\Desktop\WPFExample2010\TriggerExample\obj\x86\Debug\TriggerExample_MarkupCompile.cache
+C:\Users\user\Desktop\WPFExample2010\TriggerExample\obj\x86\Debug\TriggerExample.g.resources
+C:\Users\user\Desktop\WPFExample2010\TriggerExample\obj\x86\Debug\TriggerExample.Properties.Resources.resources
+C:\Users\user\Desktop\WPFExample2010\TriggerExample\obj\x86\Debug\TriggerExample.csproj.GenerateResource.Cache
+C:\Users\user\Desktop\WPFExample2010\TriggerExample\obj\x86\Debug\TriggerExample.exe
+C:\Users\user\Desktop\WPFExample2010\TriggerExample\obj\x86\Debug\TriggerExample.pdb

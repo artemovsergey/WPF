@@ -1,0 +1,42 @@
+﻿<Window x:Class="Provider.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Provider"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        Title="MainWindow" Height="350" Width="525">
+
+    <Window.Resources>
+        
+        <!-- ObjectType-->
+        <ObjectDataProvider x:Key="userProvider"
+                ObjectType="{x:Type local:UserRepository}" MethodName="GetUsers" />
+       
+        <!-- ObjectInstance-->
+        <col:ArrayList x:Key ="users2">
+            <local:User Name ="user1" Age="1" />
+            <local:User Name ="user2" Age="2" />
+            <local:User Name ="user3" Age="3" />
+        </col:ArrayList>
+        <ObjectDataProvider x:Key="userProvider2" ObjectInstance="{StaticResource users2}" />
+
+    </Window.Resources>
+
+    <Grid>
+        
+        <StackPanel>
+
+            <ListBox x:Name="userList"
+                 DisplayMemberPath="Name"
+                 ItemsSource="{Binding Source={StaticResource userProvider}}" />
+
+            <ListBox x:Name="userList2"
+                 DisplayMemberPath="Name"
+                 ItemsSource="{Binding Source={StaticResource userProvider2}}" />
+
+        </StackPanel>
+        
+        
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,52 @@
+﻿<Window x:Class="ElementsControl.TextElements"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TextElements" Height="400" Width="300">
+    <Grid>
+        
+        <StackPanel>
+
+
+            <!-- TextBlock-->
+            
+            <StackPanel>
+                <TextBlock>Текст1</TextBlock>
+                <TextBlock Text="Текст2" />
+            </StackPanel>
+
+
+            <TextBlock TextWrapping="Wrap">
+                <Run FontSize="20" Foreground="Red" FontWeight="Bold">О</Run>
+                <Run FontSize="16" Foreground="LightSeaGreen">негин был, по мненью многих...</Run>
+            </TextBlock>
+
+            
+            <!-- TextBox -->
+
+            <TextBox MaxLength="250" AcceptsReturn="True">Начальный текст</TextBox>
+            <TextBox MaxLength="250" SpellCheck.IsEnabled="True">Начальный текст</TextBox>
+
+
+            <!-- Label -->
+
+            <Label Target="{Binding ElementName=TextBox1}">_привет</Label>
+            <TextBox Name="TextBox1" Margin="0 30 0 0" Height="30" Width="100"></TextBox>
+
+
+            <!-- PasswordBox-->
+
+            <StackPanel Margin="10">
+                <PasswordBox PasswordChar="*" MinHeight="20" Width="100" />
+                <PasswordBox MinHeight="20" Width="100" />
+            </StackPanel>
+            <!-- RichTextBox -->
+            
+            <RichTextBox Margin="10" Height="20" Width="100"  />
+            
+
+
+        </StackPanel>
+        
+        
+    </Grid>
+</Window>

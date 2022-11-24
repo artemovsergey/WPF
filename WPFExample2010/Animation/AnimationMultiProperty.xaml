@@ -1,0 +1,8 @@
+﻿<Window x:Class="Animation.AnimationMultiProperty"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AnimationMultiProperty" Height="300" Width="300">
+    <Grid>
+        <Button x:Name="helloButton" Width="70" Height="30" Content="Hello" />
+    </Grid>
+</Window>

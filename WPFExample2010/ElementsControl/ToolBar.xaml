@@ -1,0 +1,68 @@
+﻿<Window x:Class="ElementsControl.ToolBar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ToolBar" Height="300" Width="300">
+    <Grid>
+
+        <StackPanel>
+
+            <ToolBarTray>
+                <ToolBar Margin="5" Height="25" VerticalAlignment="Top">
+                    <ToggleButton>
+                        <Image Source="1.gif" />
+                    </ToggleButton>
+                    <Separator />
+                    <Button>
+                        <Image Source="2.gif" />
+                    </Button>
+                    <Separator />
+                    <Button>
+                        <Image  />
+                    </Button>
+                    <Separator />
+                    <Button>
+                        <Image />
+                    </Button>
+                    <TextBox Foreground="LightGray" Width="100">Поиск...</TextBox>
+                </ToolBar>
+                <ToolBar>
+                    <Button>
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Width="10" Height="10" Fill="Black" HorizontalAlignment="Left"/>
+                            <TextBlock HorizontalAlignment="Right" Width="60" Margin="5 0 0 0">Найти</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+
+            <ToolBar Margin="5" Height="25" VerticalAlignment="Top">
+                <ToggleButton>
+                    <Image Source="1.gif" />
+                </ToggleButton>
+                <Separator />
+                <Button>
+                    <Image Source="2.gif" />
+                </Button>
+                <Separator />
+
+                <Separator />
+
+                <TextBox Foreground="LightGray" Width="100">Поиск...</TextBox>
+            </ToolBar>
+            
+            
+            <StatusBar>
+                
+                <TextBlock Name="timeText"/>
+                
+            </StatusBar>
+
+
+
+        </StackPanel>
+        
+
+
+
+    </Grid>
+</Window>

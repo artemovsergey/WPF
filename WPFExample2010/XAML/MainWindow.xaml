@@ -1,0 +1,79 @@
+﻿<Window x:Class="XAML.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Основы XAML" Height="350" Width="525">
+    <Grid x:Name="grid">
+        
+        
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <Button  x:Name="button1"
+                     Width="100"
+                     Height="30"
+                     Content="Кнопка"
+                     Padding="5"
+                     Margin="5"/>
+
+            <Button Content="&lt;&quot;Hello1&quot;&gt;"
+                    Width="100"
+                    Height="30"
+                    Margin="5"
+                    Padding="5"/>
+
+            <Button xml:space="preserve">Hello           World</Button>
+            
+            <Button>
+                Hello      World
+            </Button>
+
+
+            <Button  
+                     Background="Green"
+                     Foreground="White"
+                     Width="Auto"
+                     Height="30"
+                     Content="Создание обработчика"
+                     Padding="5"
+                     Margin="5"
+                     Click="Button_Click"
+                />
+
+            <Button  
+                     Background="Green"
+                     Foreground="White"
+                     Width="Auto"
+                     Height="30"
+                     Content="Создание кнопки из кода"
+                     Padding="5"
+                     Margin="5"
+                     Click="CreateButtonFromCodeBehind_Click"
+                />
+
+            <Button  
+                     Background="Green"
+                     Foreground="White"
+                     Width="Auto"
+                     Height="30"
+                     Content="Конвертеры типов"
+                     Padding="5"
+                     Margin="5"
+                     Click="ConverterType_Click"
+                />
+
+            <Button  
+                     Background="Green"
+                     Foreground="White"
+                     Width="Auto"
+                     Height="30"
+                     Content="Конвертеры типов"
+                     Padding="5"
+                     Margin="5"
+                     Click="UsingNamespaceFromCsharp_Click"
+                />
+
+
+
+        </StackPanel>
+
+    </Grid>
+</Window>

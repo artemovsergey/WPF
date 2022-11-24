@@ -1,0 +1,15 @@
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\bin\Debug\HierarchicalDataTemplate.exe
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\bin\Debug\HierarchicalDataTemplate.pdb
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\MainWindow.baml
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\MainWindow.g.cs
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\App.g.cs
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\HierarchicalDataTemplate_MarkupCompile.cache
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\HierarchicalDataTemplate.g.resources
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\HierarchicalDataTemplate.Properties.Resources.resources
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\HierarchicalDataTemplate.csproj.GenerateResource.Cache
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\HierarchicalDataTemplate.exe
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\HierarchicalDataTemplate.pdb
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\Example.baml
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\Example.g.cs
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\Example2.baml
+C:\Users\user\Desktop\WPFExample2010\HierarchicalDataTemplate\obj\x86\Debug\Example2.g.cs

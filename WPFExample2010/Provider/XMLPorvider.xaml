@@ -1,0 +1,17 @@
+﻿<Window x:Class="Provider.XMLPorvider"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="XMLPorvider" Height="300" Width="300">
+
+    <Window.Resources>
+        <XmlDataProvider x:Key="usersProvider"
+                         Source="users.xml"
+                         XPath="users" />
+    </Window.Resources>
+    
+    <Grid>
+        <ListBox x:Name="usersList"
+                 DisplayMemberPath="name"
+                 ItemsSource="{Binding Source={StaticResource usersProvider}, XPath=user}" />
+    </Grid>
+</Window>

@@ -1,0 +1,47 @@
+﻿<Window x:Class="ItemTemplate.TemplatFromResource"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TemplatFromResource" Height="300" Width="300">
+
+    <Window.Resources>
+        
+        
+        <!--
+        Формат данных
+        -->
+        <DataTemplate x:Key="listTemplate">
+            
+            <StackPanel Margin="5">
+                <Image Width="100" Height="75" Source="{Binding Path=ImagePath}" />
+                <TextBlock  Name="userBlock" FontSize="16" Text="{Binding Path=Name}" HorizontalAlignment="Center" />
+                <TextBlock FontSize="16" Text="{Binding Path=Age}" HorizontalAlignment="Center" />
+            </StackPanel>
+
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Name}" Value="user1">
+                    <Setter TargetName="userBlock" Property="FontWeight" Value="Bold" />
+                    <Setter TargetName="userBlock" Property="FontSize" Value="21" />
+                    <Setter TargetName="userBlock" Property="FontFamily" Value="Times New Roman" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+
+
+        </DataTemplate>
+
+
+        <!--
+        Формат расположения элементов
+        -->
+        <ItemsPanelTemplate x:Key="listPanelTemplate">
+            <WrapPanel />
+        </ItemsPanelTemplate>
+
+    </Window.Resources>
+
+    <Grid>
+        <ListBox x:Name="userList" 
+                 ItemTemplate="{StaticResource listTemplate}"
+                 ItemsPanel="{StaticResource listPanelTemplate}"
+                 SelectionChanged="userList_SelectionChanged"  />
+    </Grid>
+</Window>

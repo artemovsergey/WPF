@@ -1,0 +1,40 @@
+﻿<Window x:Class="DataContextExample.ObservableCollection"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ObservableCollection" Height="300" Width="300">
+    <Grid>
+        <StackPanel>
+
+            
+            <ListBox x:Name="userBox"
+                     Margin="5"
+                     />
+            
+            <TextBox 
+                     x:Name="userField"
+                     Height="20"
+                     Width="100"
+                     Margin="5"
+                     Text="{Binding ElementName=userBox, Path=SelectedItem,TargetNullValue=user}"
+                     />
+            
+            <Button x:Name="addUser"
+                    Width="100"
+                    Height="20"
+                    Margin="5"
+                    Content="Добавить"
+                    Click="addUser_Click"
+                    />
+
+            <Button x:Name="delUser"
+                    Width="100"
+                    Height="20"
+                    Margin="5"
+                    Content="Удалить"
+                    Click="delUser_Click"
+                    />
+
+        </StackPanel>
+        
+    </Grid>
+</Window>

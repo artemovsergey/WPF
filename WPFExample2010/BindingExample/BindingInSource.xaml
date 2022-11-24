@@ -1,0 +1,57 @@
+﻿<Window x:Class="BindingExample.BindingInSource"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        xmlns:local="clr-namespace:BindingExample"
+        
+        Title="BindingInSource" Height="300" Width="300"
+       
+        >
+    
+    <Window.Resources>
+        <local:User x:Key="user1"  Age="10" Name="user1"  ></local:User>
+        <local:User x:Key="user2" Name="user2" Age="10"></local:User>
+    </Window.Resources>
+
+
+
+
+    <Grid DataContext="{DynamicResource ResourceKey=user1}">
+        
+        
+        <StackPanel>
+
+            <TextBlock Text="{Binding Name, Source={StaticResource ResourceKey=user1}, TargetNullValue=Текст}" />
+            <TextBlock Text="{Binding Name, Source={StaticResource ResourceKey=user2}}" />
+
+            
+            <!-- Relative Source -->
+            
+            <TextBox Text="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Background, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <!-- Relative Source : Ancestor-->
+            
+            <Grid Background="Black">
+                <TextBlock Foreground="White"
+                           Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}}, Path=Background}" />
+            </Grid>
+            
+            
+            <!-- DataContext -->
+            
+            <TextBox Text="{Binding Age}"/>
+            
+            
+            <!-- 
+            
+            Изменение источника привязки
+            Отображение не будет работать без реализации в модели интерфейса INotifyPropertyChanged
+            -->
+            <Button Margin="5" Height="30" Width="100" Content="Изменить ресурс" Click="Button_Click"  />
+
+        </StackPanel>
+       
+        
+        
+    </Grid>
+</Window>

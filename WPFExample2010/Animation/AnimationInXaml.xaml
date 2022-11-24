@@ -1,0 +1,32 @@
+﻿<Window x:Class="Animation.AnimationInXaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AnimationInXaml" Height="300" Width="300">
+
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Width" TargetName="helloButton">
+                        <DoubleAnimation From="70" To="150"
+                                         AutoReverse="True"
+                                         RepeatBehavior="0:0:10"
+                                         Duration="0:0:3">
+                                         <!-- Completed="ButtonAnimation_Completed" -->
+                                         
+                                         
+                            </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Window.Triggers>
+
+
+
+
+    <Grid>
+        <Button x:Name="helloButton" Width="70" Height="30" Content="Hello" />
+    </Grid>
+</Window>

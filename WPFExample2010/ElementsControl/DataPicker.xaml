@@ -1,0 +1,8 @@
+﻿<Window x:Class="ElementsControl.DataPicker"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DataPicker" Height="300" Width="300">
+    <Grid>
+        <DatePicker Name="datePicker1" IsDropDownOpen="True" SelectedDateFormat="Short" />
+    </Grid>
+</Window>

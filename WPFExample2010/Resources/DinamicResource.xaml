@@ -1,0 +1,64 @@
+﻿<Window x:Class="Resources.DinamicResource"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DinamicResource" Height="300" Width="300">
+    
+    
+    <!--
+    
+    Различие между статическими и динамическими ресурсами
+    касается поиска системой нужного ресурса. 
+    Так, при определении статических ресурсов ресурсы элемента 
+    применяются только к вложенным элементам, 
+    но не к внешним контейнерам.
+    
+    Поэтому, как правило, большинство ресурсов определяются в коллекции Window.Resources 
+    в качестве ресурсов всего окна, чтобы они были доступны для любого элемента данного окна.
+
+    В случае с динамическими ресурсами такого ограничения нет.
+    -->
+    
+    <Window.Resources>
+        <SolidColorBrush x:Key="buttonBrush" Color="LightGray"  />
+    </Window.Resources>
+    
+    <Grid>
+        
+        <StackPanel VerticalAlignment="Center">
+
+            <!-- 
+            Один и тот же ресурс может быть и статическим и динамическим
+            -->
+            
+            
+            <Button Margin="5" MaxWidth="80" MaxHeight="40" Content="OK" Background="{StaticResource buttonBrush}" />
+
+            <Button Margin="5" MaxWidth="80" MaxHeight="40" Content="OK" Background="{DynamicResource buttonBrush}" />
+
+            <Button x:Name="button1"
+                    Margin="5"
+                    MaxWidth="80"
+                    MaxHeight="40"
+                    Content="OK"
+                    Background="{DynamicResource buttonBrush}"
+                    Click="Button_Click" />
+
+            <Button 
+                    x:Name="button2"
+                    Margin="5"
+                    MaxWidth="80"
+                    MaxHeight="40"
+                    Content="OK"
+                    Background="{StaticResource buttonBrush}"
+                    Click="Button1_Click"    
+                />
+
+
+
+        </StackPanel>
+        
+        
+
+
+    </Grid>
+</Window>

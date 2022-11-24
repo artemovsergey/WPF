@@ -1,0 +1,14 @@
+﻿<Window x:Class="Resources.DynamicResourceFromCodebehind"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DynamicResourceFromCodebehind" Height="300" Width="300">
+    <Grid>
+        <Button x:Name="button1"
+                MaxWidth="80"
+                MaxHeight="40"
+                Content="OK"
+                Click="Button_Click"
+               
+                />
+    </Grid>
+</Window>

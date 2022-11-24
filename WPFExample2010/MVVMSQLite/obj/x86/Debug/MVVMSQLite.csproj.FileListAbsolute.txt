@@ -1,0 +1,17 @@
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\MainWindow.baml
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\UserWindow.baml
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\MainWindow.g.cs
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\UserWindow.g.cs
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\App.g.cs
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\MVVMSQLite_MarkupCompile.cache
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\MVVMSQLite.g.resources
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\MVVMSQLite.Properties.Resources.resources
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\MVVMSQLite.csproj.GenerateResource.Cache
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\MVVMSQLite.csprojResolveAssemblyReference.cache
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\bin\Debug\MVVMSQLite.exe
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\bin\Debug\MVVMSQLite.pdb
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\bin\Debug\EntityFramework.dll
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\MVVMSQLite.exe
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\obj\x86\Debug\MVVMSQLite.pdb
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\bin\Debug\MVVMSQLite.exe.config
+C:\Users\user\Desktop\WPFExample2010\MVVMSQLite\bin\Debug\EntityFramework.SqlServer.dll

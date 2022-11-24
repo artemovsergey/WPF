@@ -1,0 +1,40 @@
+﻿<Window x:Class="ElementsControl.Calendar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        
+        Title="Calendar" Height="300" Width="300">
+    <Grid>
+        
+        
+        <StackPanel>
+
+            <Calendar x:Name="calendar1"
+                      FirstDayOfWeek="Monday"
+                      SelectedDatesChanged="calendar_SelectedDatesChanged">
+                
+                <Calendar.BlackoutDates>
+                    <CalendarDateRange Start="10/5/2013" End="10/8/2013"></CalendarDateRange>
+                </Calendar.BlackoutDates>
+            </Calendar>
+
+
+            
+            
+            <Calendar x:Name="calendar2"
+                      FirstDayOfWeek="Monday"
+                      SelectionMode="MultipleRange"
+>
+                <Calendar.SelectedDates>
+                    <sys:DateTime>10/28/2022</sys:DateTime>
+                    <sys:DateTime>10/27/2022</sys:DateTime>
+                    <sys:DateTime>10/24/2022</sys:DateTime>
+                </Calendar.SelectedDates>
+            </Calendar>
+
+        </StackPanel>
+        
+
+    </Grid>
+</Window>
