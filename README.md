@@ -441,35 +441,11 @@ ComboBox.SelectedIndex = 0;
         </ListView>
 ```
 
-## Передача параметров в конструктор для текущего пользователя
-
-```Csharp
-private User _currentUser = new User();
-
-        public Page2(User selectedUser)
-        {
-            InitializeComponent();
-
-            if(selectedUser != null)
-            {
-                _currentUser = selectedUser;
-            }
-
-            DataContext = _currentUser;
-        }
-```
-
-## SQL Server create foreign key
+## Внешний ключ SQL Server
 
 ```SQL
 CONSTRAINT [FK_Abiturients_Specialty] FOREIGN KEY ([specialty_id]) REFERENCES [dbo].[Specialty] ([Id])
 ```
-## Автоинкремент в SQL Server 
-
-```SQL
-[Id] int Identity(1,1)
-```
-
 
 ## Применение глобального шрифта к страницам Page или Window
 							    
@@ -477,21 +453,11 @@ CONSTRAINT [FK_Abiturients_Specialty] FOREIGN KEY ([specialty_id]) REFERENCES [d
 Style = (Style)FindResource(typeof(Page));
 ```
 
-## Количество элементов
-```Csharp
-CountAbiturients.Text = $"Количество: {db.Abiturients.Take(10).ToList().Count} из {db.Abiturients.ToList().Count}";
-```
-
-## Include relation
+## Include
 
 ```Csharp
 productGrid.ItemsSource = db.Abiturients.Include(p => p.Specialty).ToList();
 //Без использования метода Include мы бы не могли бы получить связанную команду и ее свойства: p.Specialty.Name
-```
-
-## Переход на страницу и передача объекта
-```Csharp
-ProxyFrame.Mainframe.Navigate(new AddAbiturientPage(productGrid.SelectedItem as Abiturient));
 ```
 
 ## Переход на страницу Вперед
@@ -517,17 +483,6 @@ private void BackButton_Click(object sender, RoutedEventArgs e)
         productGrid.ItemsSource = db.Abiturients.Skip(step).Take(10).ToList();
 
         CountAbiturients.Text = $"Количество: {db.Abiturients.Skip(step).Take(10).ToList().Count} из {db.Abiturients.ToList().Count}";
-    }
-```
-
-## Очистка параметров сортировки, фильтрации и поиска
-
-```Csharp
-private void Clear_ButtonClick(object sender, RoutedEventArgs e)
-    {
-        SortCombobox.Text = "Сортировка";
-        FilterComboBox.Text = "Все типы";
-        SearchBox.Text = "";
     }
 ```
 
@@ -576,19 +531,7 @@ private void Clear_ButtonClick(object sender, RoutedEventArgs e)
     Binding="{Binding BirthDay, StringFormat={}{0:dd.MM.yyyy}}"
 ```
 	
-## Атрибуты окна Window
-```xml
- 	Title="Главное меню"
-        Height="700"
-        Width="1100"
-        Background="White"
-        WindowStartupLocation="CenterScreen"
-        MinHeight="500"
-        MinWidth="900"
-        Icon="emblscc.ico"
-```
-	
-## Авторизация
+## Авторизация логика
 
 ```Csharp
 using(ColledgeStoreContext db = new ColledgeStoreContext())
@@ -633,13 +576,6 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
     }
 ```
 
-
-## Дополнительное свойство на основе существующего свойства
-
-```Csharp       
-    public string? Image { get; set; }
-    public string? ImagePath { get { return System.IO.Path.Combine(Environment.CurrentDirectory, $"images/{Image}"); }  }
-```
 
 ## Binding по полному пути картинки
 
@@ -717,36 +653,6 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
                 return captcha;
             }
         }								  
-```
-				  
-```csharp
-	CaptchaBox.Visibility = Visibility.Visible;
-	CaptchaText.Visibility = Visibility.Visible;
-	Captcha.Visibility = Visibility.Visible;
-	LoginButtonName.IsEnabled = false;
-
-	MessageBox.Show(CaptchaBuild.Refresh());
-	Captcha.Text = CaptchaBuild.Refresh();
-	Captcha.IsReadOnly = true;				  
-```
-
-```csharp
-	private void CaptchaBox_TextChanged(object sender, TextChangedEventArgs e)
-		{
-		    if (CaptchaBox.Text == Captcha.Text)
-		    {
-			CaptchaBox.Visibility = Visibility.Collapsed;
-			CaptchaText.Visibility = Visibility.Collapsed;
-			Captcha.Visibility = Visibility.Collapsed;
-			LoginButtonName.IsEnabled = true;
-		    }
-		    else
-		    {
-			Captcha.Text = CaptchaBuild.Refresh();
-			disableButton();
-
-		    }
-		}
 ```
 
 ## Асинхронная задача для выключения кнопки
@@ -856,21 +762,6 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
 
 **Замечание**: в Border может быть только один элемент.
 
-## Роли 
-
-```csharp
-    if (Proxy.CurrentUser != null)
-        {
-            nameUser.Text = Proxy.CurrentUser.Name + " " + Proxy.CurrentUser.Surname;
-            roleUser.Text = $"Ваша роль: {Proxy.CurrentUser.RoleNavigation.RoleName}";
-            AddProduct.Visibility = Visibility.Visible;
-            DeleteProduct.Visibility = Visibility.Visible;
-        }
-    else
-    {
-        nameUser.Text = "Вы зашли как гость!";
-    }
-```
 
 ## Выборка по столбцу Select в EF
 
@@ -891,56 +782,6 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
 **Замечания**: событие SelectionChanged выбора срабатывает после смены значения в списке, т.е вначале первое значение стоит поставить нейтральное
 
 
-## Обновленный общий метод для сортировки, фильтрации и поиска
-
-```csharp
-    private void UpdateProducts()
-        {
-            using(FabricShopContext db = new FabricShopContext())
-            {
-                var currentProducts = db.Products.ToList();
-                ListViewProduct.ItemsSource = currentProducts;
-
-                // Сортировка
-                if (SortComboBox.SelectedIndex > 0)
-                {
-                    
-                    if (SortComboBox.SelectedItem == "По возрастанию")
-                    {
-                        currentProducts = currentProducts.OrderBy(p => p.Cost).ToList();
-                    }
-
-                    if (SortComboBox.SelectedItem == "По убыванию")
-                    {
-                        currentProducts = currentProducts.OrderByDescending(p => p.Cost).ToList();
-                    }
-                    ListViewProduct.ItemsSource = currentProducts;
-                }
-
-                // Поиск
-                if (Search.Text != "")
-                {
-                    currentProducts = currentProducts.Where(p => p.Name.Contains(Search.Text) || p.Description.Contains(Search.Text) || 			p.Category.Contains(Search.Text)).ToList();
-                    ListViewProduct.ItemsSource = currentProducts;
-                };
-
-                if (FilterComboBox.SelectedValue == "Все производители")
-                    ListViewProduct.ItemsSource = currentProducts;
-                // Фильтрация
-                if (FilterComboBox.SelectedValue != null && FilterComboBox.SelectedValue != "Все производители")
-                {
-                    currentProducts = currentProducts.Where(p => p.Supplier.Trim() == FilterComboBox.SelectedValue.ToString()).ToList();
-                    ListViewProduct.ItemsSource = currentProducts;
-
-                    //MessageBox.Show(FilterComboBox.SelectedValue.ToString());
-                    // В базу сохраняеются с пробелами при nchar!!!
-                }
-
-                CountBlock.Text = $"Количество: {currentProducts.Count} из {db.Products.ToList().Count}";
-            }
-
-        }
-```
 
 ## Добавление изображения
 
@@ -1030,9 +871,9 @@ Application.MainWindow автоматически устанавливается
 
 ```xml
 
-                    <TextBlock.Effect>
-                        <BlurEffect RenderingBias="Quality" KernelType="Box" Radius="0.5"/>
-                    </TextBlock.Effect>
+<TextBlock.Effect>
+ <BlurEffect RenderingBias="Quality" KernelType="Box" Radius="0.5"/>
+</TextBlock.Effect>
 
 ```
 
@@ -1448,7 +1289,7 @@ MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOr
 
 ```
 
-## Авторизация
+## Разметка xaml для авторизации
 
 ```xml
 
@@ -1504,7 +1345,7 @@ MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOr
 
 ```
 
-## Разметка MainWindow
+## Разметка xaml MainWindow
 
 ```xml
 
