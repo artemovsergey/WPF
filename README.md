@@ -227,8 +227,8 @@ App.xaml
     </Application.Resources>								  
 ```							
 
-## Подключение
-
+## Подключение MaterialDesign
+ 
 ```xml
 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         
@@ -288,37 +288,19 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 ```
 
 
-## Page в WPF
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls; // for Frame
-
-namespace WpfApp1
-{
-    public class ManagerPages
-    {
-        public static Frame Mainframe { get; set; }
-    }
-}
-```
-
-## Scaffold базы данных
+## Scaffold
 
 **Замечание**: надо установить ```Microsoft.EntityFrameworkCore.Tools```.
 
 В консоли диспетчера пакетов Nuget прописать команду
+
 ```Scaffold-DbContext "Server=localhost;Database=Users;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models```
 	
 Команда создает модели из каждой сущности в базе данных, учитывая связи, а также создает класс контекста для работы с данными как с классами.
 
 ```Scaffold-DbContext "Data Source=.\ComputerDatabase.db" Microsoft.EntityFrameworkCore.Sqlite -OutputDir Models```
 
-**Примечание**: если будет делать Scaffold для SQLite, ему нужна база из проекта, а не в Debug. При инициализации контекста база данных SQLite создается в Debug по умолчанию.
+**Примечание**: если Scaffold для SQLite, ему нужна база из проекта, а не в ```Debug```. При инициализации контекста база данных ```SQLite``` создается в ```Debug``` по умолчанию.
 
 
 В консоле диспетчера пакетов для SQLServer
@@ -343,7 +325,7 @@ private void Page1_InVisibleChanged(object sender, DependencyPropertyChangedEven
         }
 ```
 
-## Вызов контекста на кнопке Редактировать
+## Вызов контекста на кнопке
 
 ```Csharp
     private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -390,7 +372,7 @@ ComboBox.ItemsSource = allTypes;//.Select(p => p.Login);
 ComboBox.SelectedIndex = 0;
 ```
 
-## Список combobox в xaml
+## Список ```Combobox``` в xaml
 
 ```xml
  <ComboBox Width="100"
@@ -399,7 +381,7 @@ ComboBox.SelectedIndex = 0;
 	   SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
 ```
 
-## ListView
+## ```ListView```
 
 ```xml
 <ListView Grid.Row ="0"
@@ -1043,4 +1025,47 @@ dotnet ef database update
 ### Application.Current.MainWindow
 
 Application.MainWindow автоматически устанавливается в первое окно, открытое в приложении. Когда окно закрывается, оно устанавливается либо на следующее открытое окно, либо на ноль, если открытых окон нет.
+
+## TextBlock
+
+```xml
+
+                    <TextBlock.Effect>
+                        <BlurEffect RenderingBias="Quality" KernelType="Box" Radius="0.5"/>
+                    </TextBlock.Effect>
+
+```
+
+## Стили в ```App.xaml```
+
+```
+
+ <Style TargetType="Button">
+            <Setter Property="Background" Value="#FF76E383" />
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="10"/>
+        </Style>
+
+        <Style TargetType="ListBox">
+            <Setter Property="Background" Value="#FF498C51" />
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="10"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="10"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="10"/>
+        </Style>
+
+        <Style TargetType="Window">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="10"/>
+        </Style>
+
+```
 
