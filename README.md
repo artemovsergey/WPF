@@ -1069,3 +1069,94 @@ Application.MainWindow автоматически устанавливается
 
 ```
 
+## Image в ListView
+
+```xml
+
+ <Border BorderBrush="#FF498C51" BorderThickness="2">
+                            <Image 
+			                       HorizontalAlignment="Center"
+			                       Height="200"
+			                       Width="200"
+                                   ToolTip="{Binding Description}">
+
+                                <Image.Source>
+                                    <BitmapImage UriSource = "{Binding ImagePath,TargetNullValue=Resources/picture.png}"
+                                                 CacheOption="OnLoad"
+                                                 CreateOptions="IgnoreImageCache"
+                                                 
+                                                 >
+                                    </BitmapImage>
+
+                                </Image.Source>
+                            </Image>
+                        </Border>
+
+```
+
+## UpdateProducts
+
+```Csharp
+
+ using (SportStoreContext db = new SportStoreContext())
+            {
+
+                var currentProducts = db.Products.ToList();
+                productlistView.ItemsSource = currentProducts;
+
+                //Сортировка
+                if (sortUserComboBox.SelectedIndex != -1)
+                {
+                    if (sortUserComboBox.SelectedValue == "По убыванию цены")
+                    {
+                        currentProducts = currentProducts.OrderByDescending(u => u.Cost).ToList();
+
+                    }
+
+                    if (sortUserComboBox.SelectedValue == "По возрастанию цены")
+                    {
+                        currentProducts = currentProducts.OrderBy(u => u.Cost).ToList();
+
+                    }
+                }
+
+
+                // Фильтрация
+                if (filterUserComboBox.SelectedIndex != -1)
+                {
+                    if (db.Products.Select(u => u.Manufacturer).Distinct().ToList().Contains(filterUserComboBox.SelectedValue))
+                    {
+                        currentProducts = currentProducts.Where(u => u.Manufacturer == filterUserComboBox.SelectedValue.ToString()).ToList();
+                    }
+                    else
+                    {
+                        currentProducts = currentProducts.ToList();
+                    }
+                }
+
+                // Поиск
+
+                if (searchBox.Text.Length > 0)
+                {
+
+                    currentProducts = currentProducts.Where(u => u.Name.Contains(searchBox.Text) || u.Description.Contains(searchBox.Text)).ToList();
+
+                }
+
+                productlistView.ItemsSource = currentProducts;
+
+                countProducts.Text = $"Количество: {currentProducts.Count} из {db.Products.ToList().Count}";
+
+            }
+
+```
+
+## MainWindow
+
+```Csharp
+
+MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+
+```
+
+
