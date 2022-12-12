@@ -2027,9 +2027,28 @@ internal class TestCommand : Command
                 </Rectangle.InputBindings>
             </Rectangle>
 
-
 ```
 
+# Загрузка ```View``` вручную в ```App.cs```
+
+```Csharp
+
+public partial class App : Application
+    {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            CV19.MainWindow mv = new CV19.MainWindow();
+           
+            //MainWindowViewModel vm = new MainWindowViewModel();
+            //mv.DataContext = vm;
+
+            mv.Show(); 
+        }
+
+    }
+
+```
 
 
 
