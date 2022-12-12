@@ -1771,4 +1771,271 @@ CREATE TABLE [dbo].[RelatedProducts] (
 ```
 
 
+## Базовая ```ViewModel```
+
+```Csharp
+
+internal abstract class ViewModel : INotifyPropertyChanged, IDisposable 
+    {
+
+        #region NotifyPropertyChanged
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+
+        // разрешить кольцевые обновления свойств без зацикливания
+        protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
+        {
+            if (Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(PropertyName);
+            return true;
+        }
+        #endregion
+
+        #region Disposable
+        // деструктор
+        ~ViewModel()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        private bool _Disposed;
+
+        protected virtual void Dispose(bool Disposing)
+        {
+            if (!Disposing || _Disposed) return;
+            _Disposed = true;
+            // Освобождение управляемых ресурсов 
+        } 
+        #endregion
+
+    }
+
+```
+
+## Базовый класс ```Command```
+
+```Csharp
+
+// команды тоже как свойства ViewModel
+
+    internal abstract class Command : ICommand
+    {
+
+        /*
+         CanExecuteChanged уведомляет любые источники команд
+         (такие как Button или CheckBox), привязанные к этому ICommand,
+         об изменении значения, возвращаемого CanExecute.
+         Источники команд заботятся об этом, потому что обычно им необходимо
+         соответствующим образом обновлять свой статус (например, кнопка отключится, если CanExecute() вернет false).
+         */
+
+        public event EventHandler? CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested+= value;
+            remove => CommandManager.RequerySuggested-=value;
+        }
+
+        // возможно ли выполнить команду?
+        public abstract bool CanExecute(object? parameter);
+        
+
+        // логика команды
+        public abstract void Execute(object? parameter);    
+        
+    }
+
+```
+
+# Общая команда ```LambdaCommand```
+
+```Csharp
+
+internal class LambdaCommand : Command
+    {
+
+        // если поля помечены readonly, то они будут работать быстрее
+        private readonly Action<object> _execute;
+        private readonly Func<object, bool> _canExecute;
+
+        // в конструкторе надо получить два делегата Action и Func
+        public LambdaCommand(Action<object> Execute, Func<object, bool>  CanExecute = null) 
+        {
+            _execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
+            _canExecute = CanExecute;
+        }
+
+        public override bool CanExecute(object? parameter) => _canExecute?.Invoke(parameter) ?? true;
+                
+        public override void Execute(object? parameter)
+        {
+            _execute(parameter);
+        }
+    }
+    
+```
+
+## Команда ```TestCommand``` как отдельный класс
+
+```Csharp
+
+internal class TestCommand : Command
+    {
+
+        /*
+          при загрузке окна он проверит возвращаемое значение CanExecute,
+          и если он вернет true, то он включит элемент управления кнопки,
+          и метод Execute готов к использованию, 
+          в противном случае элемент управления кнопки отключен.
+         */
+
+        public override bool CanExecute(object? parameter)
+        {
+            return true;
+        }
+
+
+        // CommandParameter отправляется как для событий CanExecute, так и для событий Execute.
+
+        public override void Execute(object? parameter)
+        {
+            //MessageBox.Show("Логика команды");
+
+            MessageBox.Show(CanExecute(null).ToString());
+
+            new Window1(parameter).Show();
+
+            Application.Current.MainWindow.Close();
+
+        }
+    }
+
+```
+
+## Применение команды во ```ViewModel`` в конструкторе
+
+```Csharp
+
+#region Команда CloseApplicationCommand
+        public ICommand CloseApplicationCommand { get; set; }
+
+        private void OnCloseApplicationCommandExecuteed(object p)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private bool CanCloseApplicationCommandExecute(object p)
+        {
+            return true;
+        }
+        #endregion
+
+        #region Команда MessageCommand
+        private TestCommand messageCommand;
+        public TestCommand MessageCommand
+        {
+            get
+            {
+                if (messageCommand == null)
+                    messageCommand = new TestCommand();
+                return messageCommand;
+            }
+            set
+            {
+                messageCommand = value;
+            }
+        } 
+        #endregion
+
+
+        public MainWindowViewModel()
+        {
+            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuteed, CanCloseApplicationCommandExecute);
+        }
+
+```
+
+**Замечание**: дизайнер WPF работает с бинарниками, поэтому каждый раз как что-то поменяли в коде надо пересобрать проект
+
+
+## Вынесение команды в ресурсы как синглтон
+
+```xml
+
+    <Window.Resources>
+        <command:TestCommand x:Key="TestCommand"/>
+    </Window.Resources>
+```
+
+## Команда на клавиши
+
+```xml
+
+<Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}"/>
+</Window.InputBindings>
+
+```
+
+## Подключение команды в XAML
+
+```xml
+<!-- Подключение команды как свойства ViewModel
+ Command="{Binding CloseApplicationCommand}" CommandParameter="{Binding ElementName=items, Path=SelectedItem}"
+ -->
+```
+
+## Подключение команды в разметке XAML как контент
+```xml
+
+<!-- Отдельная команда в отдельном классе 
+                
+ Лучше вынести в отдельные ресурсы, ибо может быть расточительно для памяти
+                
+<Button.Command>
+  <command:TestCommand/>
+</Button.Command>
+-->
+
+```
+
+## Применение команд через ```InputBinding```
+```xml
+            <Rectangle Width="45"
+                               Height="45"
+                               Fill="Green"
+                               RadiusX="3"
+                               RadiusY="3">
+
+                <Rectangle.InputBindings>
+                    <MouseBinding Command="{Binding CloseApplicationCommand}" MouseAction="LeftDoubleClick" />
+                </Rectangle.InputBindings>
+            </Rectangle>
+
+            <Rectangle Width="45"
+                               Height="45"
+                               Fill="Blue"
+                               RadiusX="3"
+                               RadiusY="3">
+
+                <Rectangle.InputBindings>
+                    <MouseBinding Command="{StaticResource TestCommand}" MouseAction="LeftDoubleClick" />
+                </Rectangle.InputBindings>
+            </Rectangle>
+
+
+```
+
+
+
+
 
