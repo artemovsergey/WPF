@@ -1921,7 +1921,7 @@ internal class TestCommand : Command
 
 ```
 
-## Применение команды во ```ViewModel`` в конструкторе
+## Применение команды во ```ViewModel``` в конструкторе
 
 ```Csharp
 
