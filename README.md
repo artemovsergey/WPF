@@ -1989,22 +1989,20 @@ internal class TestCommand : Command
 ## Подключение команды в XAML
 
 ```xml
-<!-- Подключение команды как свойства ViewModel
+<!-- Подключение команды как свойства ViewModel  -->
  Command="{Binding CloseApplicationCommand}" CommandParameter="{Binding ElementName=items, Path=SelectedItem}"
- -->
+
 ```
 
 ## Подключение команды в разметке XAML как контент
 ```xml
 
-<!-- Отдельная команда в отдельном классе 
-                
- Лучше вынести в отдельные ресурсы, ибо может быть расточительно для памяти
+<!-- Отдельная команда в отдельном классе            
+ Лучше вынести в отдельные ресурсы, ибо может быть расточительно для памяти -->
                 
 <Button.Command>
   <command:TestCommand/>
 </Button.Command>
--->
 
 ```
 
