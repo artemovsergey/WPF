@@ -1766,12 +1766,9 @@ CREATE TABLE [dbo].[RelatedProducts] (
     CONSTRAINT [FK__RelatedProducts__RelatedProdutId__571DF1D5] FOREIGN KEY ([RelatedProdutId]) REFERENCES [dbo].[Product] ([Id])
 );
 
-
-
 ```
 
-
-## Базовая ```ViewModel```
+# Базовая ```ViewModel```
 
 ```Csharp
 
@@ -1822,7 +1819,7 @@ internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
 
 ```
 
-## Базовый класс ```Command```
+# Базовый класс ```Command```
 
 ```Csharp
 
@@ -1856,7 +1853,7 @@ internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
 
 ```
 
-# Общая команда ```LambdaCommand```
+# Команда ```LambdaCommand```
 
 ```Csharp
 
