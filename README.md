@@ -2038,12 +2038,10 @@ public partial class App : Application
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            CV19.MainWindow mv = new CV19.MainWindow();
-           
+            MainWindow mv = new MainWindow();
             //MainWindowViewModel vm = new MainWindowViewModel();
             //mv.DataContext = vm;
-
-            mv.Show(); 
+            mv.Show();
         }
 
     }
