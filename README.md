@@ -236,6 +236,20 @@ internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
 
 ```
 
+## Связь команд с событиями 
+
+Подключить ```Microsoft.Xaml.Behavior.Wpf```
+
+```Csharp
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction
+                        Command="{Binding EditUserCommand}"
+                        CommandParameter="{Binding ElementName=userList, Path=SelectedItem}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+```
+
 
 
 ## DataGrid определение
