@@ -61,7 +61,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         }
 ```
 
-# Загрузка ```View``` вручную в ```App.cs```
+## Загрузка ```View``` вручную в ```App.cs```
 
 ```Csharp
 
