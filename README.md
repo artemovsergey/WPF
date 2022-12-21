@@ -61,6 +61,183 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         }
 ```
 
+# Загрузка ```View``` вручную в ```App.cs```
+
+```Csharp
+
+public partial class App : Application
+    {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            MainWindow mv = new MainWindow();
+            //MainWindowViewModel vm = new MainWindowViewModel();
+            //mv.DataContext = vm;
+            mv.Show();
+        }
+
+    }
+
+```
+
+## Команда как свойство во ```ViewModel``` и определение команды в конструкторе
+
+```Csharp
+
+#region Команда CloseApplicationCommand
+        public ICommand CloseApplicationCommand { get; set; }
+
+        private void OnCloseApplicationCommandExecuteed(object p)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private bool CanCloseApplicationCommandExecute(object p)
+        {
+            return true;
+        }
+        #endregion
+
+        #region Команда MessageCommand
+        private TestCommand messageCommand;
+        public TestCommand MessageCommand
+        {
+            get
+            {
+                if (messageCommand == null)
+                    messageCommand = new TestCommand();
+                return messageCommand;
+            }
+            set
+            {
+                messageCommand = value;
+            }
+        } 
+        #endregion
+
+
+        public MainWindowViewModel()
+        {
+            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuteed, CanCloseApplicationCommandExecute);
+        }
+
+```
+
+# Команда ```LambdaCommand```
+
+```Csharp
+
+internal class LambdaCommand : Command
+    {
+
+        // если поля помечены readonly, то они будут работать быстрее
+        private readonly Action<object> _execute;
+        private readonly Func<object, bool> _canExecute;
+
+        // в конструкторе надо получить два делегата Action и Func
+        public LambdaCommand(Action<object> Execute, Func<object, bool>  CanExecute = null) 
+        {
+            _execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
+            _canExecute = CanExecute;
+        }
+
+        public override bool CanExecute(object? parameter) => _canExecute?.Invoke(parameter) ?? true;
+                
+        public override void Execute(object? parameter)
+        {
+            _execute(parameter);
+        }
+    }
+    
+```
+
+# Базовая ```ViewModel```
+
+```Csharp
+
+internal abstract class ViewModel : INotifyPropertyChanged, IDisposable 
+    {
+
+        #region NotifyPropertyChanged
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+
+        // разрешить кольцевые обновления свойств без зацикливания
+        protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
+        {
+            if (Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(PropertyName);
+            return true;
+        }
+        #endregion
+
+        #region Disposable
+        // деструктор
+        ~ViewModel()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        private bool _Disposed;
+
+        protected virtual void Dispose(bool Disposing)
+        {
+            if (!Disposing || _Disposed) return;
+            _Disposed = true;
+            // Освобождение управляемых ресурсов 
+        } 
+        #endregion
+
+    }
+
+```
+
+# Базовый класс ```Command```
+
+```Csharp
+
+// команды тоже как свойства ViewModel
+
+    internal abstract class Command : ICommand
+    {
+
+        /*
+         CanExecuteChanged уведомляет любые источники команд
+         (такие как Button или CheckBox), привязанные к этому ICommand,
+         об изменении значения, возвращаемого CanExecute.
+         Источники команд заботятся об этом, потому что обычно им необходимо
+         соответствующим образом обновлять свой статус (например, кнопка отключится, если CanExecute() вернет false).
+         */
+
+        public event EventHandler? CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested+= value;
+            remove => CommandManager.RequerySuggested-=value;
+        }
+
+        // возможно ли выполнить команду?
+        public abstract bool CanExecute(object? parameter);
+        
+
+        // логика команды
+        public abstract void Execute(object? parameter);    
+        
+    }
+
+```
+
+
+
 ## DataGrid определение
 
 ```csharp
@@ -1768,118 +1945,7 @@ CREATE TABLE [dbo].[RelatedProducts] (
 
 ```
 
-# Базовая ```ViewModel```
 
-```Csharp
-
-internal abstract class ViewModel : INotifyPropertyChanged, IDisposable 
-    {
-
-        #region NotifyPropertyChanged
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
-        }
-
-        // разрешить кольцевые обновления свойств без зацикливания
-        protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
-        {
-            if (Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(PropertyName);
-            return true;
-        }
-        #endregion
-
-        #region Disposable
-        // деструктор
-        ~ViewModel()
-        {
-            Dispose(false);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        private bool _Disposed;
-
-        protected virtual void Dispose(bool Disposing)
-        {
-            if (!Disposing || _Disposed) return;
-            _Disposed = true;
-            // Освобождение управляемых ресурсов 
-        } 
-        #endregion
-
-    }
-
-```
-
-# Базовый класс ```Command```
-
-```Csharp
-
-// команды тоже как свойства ViewModel
-
-    internal abstract class Command : ICommand
-    {
-
-        /*
-         CanExecuteChanged уведомляет любые источники команд
-         (такие как Button или CheckBox), привязанные к этому ICommand,
-         об изменении значения, возвращаемого CanExecute.
-         Источники команд заботятся об этом, потому что обычно им необходимо
-         соответствующим образом обновлять свой статус (например, кнопка отключится, если CanExecute() вернет false).
-         */
-
-        public event EventHandler? CanExecuteChanged
-        {
-            add => CommandManager.RequerySuggested+= value;
-            remove => CommandManager.RequerySuggested-=value;
-        }
-
-        // возможно ли выполнить команду?
-        public abstract bool CanExecute(object? parameter);
-        
-
-        // логика команды
-        public abstract void Execute(object? parameter);    
-        
-    }
-
-```
-
-# Команда ```LambdaCommand```
-
-```Csharp
-
-internal class LambdaCommand : Command
-    {
-
-        // если поля помечены readonly, то они будут работать быстрее
-        private readonly Action<object> _execute;
-        private readonly Func<object, bool> _canExecute;
-
-        // в конструкторе надо получить два делегата Action и Func
-        public LambdaCommand(Action<object> Execute, Func<object, bool>  CanExecute = null) 
-        {
-            _execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
-            _canExecute = CanExecute;
-        }
-
-        public override bool CanExecute(object? parameter) => _canExecute?.Invoke(parameter) ?? true;
-                
-        public override void Execute(object? parameter)
-        {
-            _execute(parameter);
-        }
-    }
-    
-```
 
 ## Команда ```TestCommand``` как отдельный класс
 
@@ -1918,48 +1984,7 @@ internal class TestCommand : Command
 
 ```
 
-## Применение команды во ```ViewModel``` в конструкторе
 
-```Csharp
-
-#region Команда CloseApplicationCommand
-        public ICommand CloseApplicationCommand { get; set; }
-
-        private void OnCloseApplicationCommandExecuteed(object p)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private bool CanCloseApplicationCommandExecute(object p)
-        {
-            return true;
-        }
-        #endregion
-
-        #region Команда MessageCommand
-        private TestCommand messageCommand;
-        public TestCommand MessageCommand
-        {
-            get
-            {
-                if (messageCommand == null)
-                    messageCommand = new TestCommand();
-                return messageCommand;
-            }
-            set
-            {
-                messageCommand = value;
-            }
-        } 
-        #endregion
-
-
-        public MainWindowViewModel()
-        {
-            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuteed, CanCloseApplicationCommandExecute);
-        }
-
-```
 
 **Замечание**: дизайнер WPF работает с бинарниками, поэтому каждый раз как что-то поменяли в коде надо пересобрать проект
 
@@ -2029,24 +2054,7 @@ internal class TestCommand : Command
 
 ```
 
-# Загрузка ```View``` вручную в ```App.cs```
 
-```Csharp
-
-public partial class App : Application
-    {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-            MainWindow mv = new MainWindow();
-            //MainWindowViewModel vm = new MainWindowViewModel();
-            //mv.DataContext = vm;
-            mv.Show();
-        }
-
-    }
-
-```
 
 
 
