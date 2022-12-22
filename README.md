@@ -1033,8 +1033,10 @@ https://github.com/dbeaver/dbeaver/issues/2959
 
 # Миграции для WPF
 
-## Установка Nuget-пакетов:
+## Установка Nuget-пакетов
+
 Microsoft.EntityFrameworkCore.Design
+
 Microsoft.EntityFrameworkCore.Tools
 
 ## Обновление пакета инструментов в консоле:
