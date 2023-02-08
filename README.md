@@ -5,7 +5,7 @@
 
 
 
-## App.config
+# App.config
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -34,7 +34,7 @@
 </configuration>
 ```
 
-## UserContext
+# UserContext
 
 ```Csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -61,7 +61,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         }
 ```
 
-## Загрузка ```View``` вручную в ```App.cs```
+# Загрузка ```View``` вручную в ```App.cs```
 
 - Переместить MainWindow.xaml в папку ```Views```
 
@@ -84,7 +84,7 @@ public partial class App : Application
 
 ```
 
-## Команда как свойство во ```ViewModel``` и определение команды в конструкторе
+# Команда как свойство во ```ViewModel``` и определение команды в конструкторе
 
 ```Csharp
 
@@ -240,7 +240,7 @@ internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
 
 ```
 
-## Связь команд с событиями 
+# Связь команд с событиями 
 
 Подключить ```Microsoft.Xaml.Behavior.Wpf```
 
@@ -256,7 +256,7 @@ internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
 
 
 
-## DataGrid определение
+# DataGrid определение
 
 ```csharp
     <DataGrid 
@@ -300,7 +300,7 @@ internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
 ```
 
 
-## Интерфейс INotifyPropertyChanged
+# Интерфейс INotifyPropertyChanged
 
 ```Csharp
   public class User : INotifyPropertyChanged
@@ -356,9 +356,9 @@ internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
     }
 ```
 
-## Entity Framework Core 6. Cвязь моделей 1 : M
+# Entity Framework Core 6. Cвязь моделей 1 : M
 
-### Model User
+# Model User
 
 ```csharp
 
@@ -382,7 +382,7 @@ namespace FabricShop.Models
 }
 ```
 
-### Модель Role
+# Модель Role
 
 ```csharp
 using System;
@@ -405,7 +405,7 @@ namespace FabricShop.Models
 }
 ```
 																  
-## MaterialDesign
+# MaterialDesign
 
 App.xaml
 								  
@@ -422,7 +422,7 @@ App.xaml
     </Application.Resources>								  
 ```							
 
-## Подключение MaterialDesign
+# Подключение MaterialDesign
  
 ```xml
 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -436,7 +436,7 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         FontFamily="{DynamicResource MaterialDesignFont}"
 ```
 
-## Пример MaterialDesign
+# Пример MaterialDesign
 
 ```xml
 <Grid>
@@ -482,8 +482,7 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
 ```
 
-
-## Scaffold
+# Scaffold
 
 **Замечание**: надо установить ```Microsoft.EntityFrameworkCore.Tools```.
 
@@ -504,7 +503,7 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=UserDatabase;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models2
 ```
 
-## Обновление объектов базы данных в DataGrid на странице
+# Обновление объектов базы данных в DataGrid на странице
 
 Событие IsVisibleChanged="Page1_InVisibleChanged"
 
@@ -520,7 +519,7 @@ private void Page1_InVisibleChanged(object sender, DependencyPropertyChangedEven
         }
 ```
 
-## Вызов контекста на кнопке
+# Вызов контекста на кнопке
 
 ```Csharp
     private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -529,7 +528,7 @@ private void Page1_InVisibleChanged(object sender, DependencyPropertyChangedEven
     }
 ```
 
-## Кнопка удаления с диалогом
+# Кнопка удаления с диалогом
 
 ```Csharp
 
@@ -556,7 +555,7 @@ private void DeleteButton_Click(object sender, RoutedEventArgs e)
         }
 ```
 
-## Задание начальных значений для списка
+# Задание начальных значений для списка
 
 ```csharp
 var allTypes = db.Users.ToList();
@@ -567,7 +566,7 @@ ComboBox.ItemsSource = allTypes;//.Select(p => p.Login);
 ComboBox.SelectedIndex = 0;
 ```
 
-## Список ```Combobox``` в xaml
+# Список ```Combobox``` в xaml
 
 ```xml
  <ComboBox Width="100"
@@ -576,7 +575,7 @@ ComboBox.SelectedIndex = 0;
 	   SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
 ```
 
-## ```ListView```
+# ```ListView```
 
 ```xml
 <ListView Grid.Row ="0"
@@ -636,26 +635,26 @@ ComboBox.SelectedIndex = 0;
         </ListView>
 ```
 
-## Внешний ключ SQL Server
+# Внешний ключ SQL Server
 
 ```SQL
 CONSTRAINT [FK_Abiturients_Specialty] FOREIGN KEY ([specialty_id]) REFERENCES [dbo].[Specialty] ([Id])
 ```
 
-## Применение глобального шрифта к страницам Page или Window
+# Применение глобального шрифта к страницам Page или Window
 							    
 ```Csharp
 Style = (Style)FindResource(typeof(Page));
 ```
 
-## Include
+# Include
 
 ```Csharp
 productGrid.ItemsSource = db.Abiturients.Include(p => p.Specialty).ToList();
 //Без использования метода Include мы бы не могли бы получить связанную команду и ее свойства: p.Specialty.Name
 ```
 
-## Переход на страницу Вперед
+# Переход на страницу Вперед
 
 ```Csharp
 private void ForwardButton_Click(object sender, RoutedEventArgs e)
@@ -668,7 +667,7 @@ private void ForwardButton_Click(object sender, RoutedEventArgs e)
     }	
 ```
 						   
-## Переход на страницу Назад
+# Переход на страницу Назад
 
 ```Csharp
 private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -681,7 +680,7 @@ private void BackButton_Click(object sender, RoutedEventArgs e)
     }
 ```
 
-## Атрибуты для DataGrid
+# Атрибуты для DataGrid
 
 ```xml
     Grid.Row="1"
@@ -706,7 +705,7 @@ private void BackButton_Click(object sender, RoutedEventArgs e)
             CanUserResizeColumns="True" IsSynchronizedWithCurrentItem="False"
 ```
 
-## Триггеры в DataGrid на Row
+# Триггеры в DataGrid на Row
 
 ```xml
     <DataGrid.RowStyle>
@@ -720,13 +719,13 @@ private void BackButton_Click(object sender, RoutedEventArgs e)
     </DataGrid.RowStyle>
 ```
 
-## Вinding даты через Stringformat
+# Вinding даты через Stringformat
 	
 ```xml
     Binding="{Binding BirthDay, StringFormat={}{0:dd.MM.yyyy}}"
 ```
 	
-## Авторизация логика
+# Авторизация логика
 
 ```Csharp
 using(ColledgeStoreContext db = new ColledgeStoreContext())
@@ -747,7 +746,7 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
 ```
 
 	
-## Валидация
+# Валидация
 
 ```Csharp
     
@@ -772,7 +771,7 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
 ```
 
 
-## Binding по полному пути картинки
+# Binding по полному пути картинки
 
 ```xml
     <Image>
@@ -783,13 +782,13 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
     </Image>
 ```
 
-## DataPicker
+# DataPicker
 
 ```xml
     <DatePicker SelectedDate="{Binding BirthDay}"  Name="birth_day"/>
 ```
 	
-## ComboBox
+# ComboBox
 
 ```xml
 <ComboBox SelectedValue="{Binding Specialty}"
@@ -806,20 +805,20 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
     specialty_id.DisplayMemberPath = "Name"; // отображение в списке объектов конкретные свойства, а не весь объект
 ```
 
-## Изображение по абсолютному пути
+# Изображение по абсолютному пути
 
 ```Csharp
     BitmapImage image = new BitmapImage(new Uri(System.IO.Path.Combine(Environment.CurrentDirectory, $"{_currentAbiturient.Image}"), UriKind.Absolute));
     ImagePicture.Source = image;
 ```
 		
-## Замена . на , для SQL Server
+# Замена . на , для SQL Server
 
 ```csharp
     Ball = Convert.ToDouble(ball.Text.Replace(".", ",")) // SQL Server принимает дробные значения с запятой
 ```
 	
-## Полные сообщения об ошибках
+# Полные сообщения об ошибках
 
 ```csharp
     catch (Exception ex)
@@ -828,7 +827,7 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
     }
 ```
 
-## Captcha
+# Captcha
 
 ```Csharp
     public static class CaptchaBuild
@@ -850,7 +849,7 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
         }								  
 ```
 
-## Асинхронная задача для выключения кнопки
+# Асинхронная задача для выключения кнопки
 
 ```csharp
 	async void disableButton()
@@ -861,7 +860,7 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
 		}
 ```
 
-## App.xaml. Стили и ресурсы для приложения
+# App.xaml. Стили и ресурсы для приложения
 
 ```xml
     <Application.Resources>
@@ -922,7 +921,7 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
     </Application.Resources>
 ```
 
-## Триггер для ListView
+# Триггер для ListView
 
 ```xml
     <ListView.ItemContainerStyle>
@@ -937,7 +936,7 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
     </ListView.ItemContainerStyle>
 ```
 
-## Border
+# Border
 
 ```xml
     <Border
@@ -958,13 +957,13 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
 **Замечание**: в Border может быть только один элемент.
 
 
-## Выборка по столбцу Select в EF
+# Выборка по столбцу Select в EF
 
 ```csharp
     var Suppliers = db.Products.Select(p => p.Supplier).Distinct().ToList();
 ```
 
-## Начальные значения для сортировки и фильтрации
+# Начальные значения для сортировки и фильтрации
 
 ```csharp
     SortComboBox.ItemsSource = new List<String>() { "Цена", "По убыванию", "По возрастанию" };   //.Select(p => p.Login);
@@ -978,7 +977,7 @@ using(ColledgeStoreContext db = new ColledgeStoreContext())
 
 
 
-## Добавление изображения
+# Добавление изображения
 
 ```Csharp
 private void AddImageToProduct(object sender, RoutedEventArgs e)
@@ -1017,25 +1016,23 @@ private void AddImageToProduct(object sender, RoutedEventArgs e)
     }
 ```
 
-
-## Перезапуск localDb в Visual Studio
+# Перезапуск localDb в Visual Studio
 
 1. Open Nuget Console in Tools -> Nuget Package Manager -> Package Manager Console
 
-2. Stop LocalDB Instance typing: sqllocaldb stop MSSQLLocalDB
+3. Stop LocalDB Instance typing: sqllocaldb stop MSSQLLocalDB
 
 3. Try to update the table
 
 4. Start LocalDB Instance typing: sqllocaldb start MSSQLLocalDB
 
 
-
-## Подключение LocalDb в Dbeaver
+# Подключение LocalDb в Dbeaver
 
 https://github.com/dbeaver/dbeaver/issues/2959
 
 
-# Миграции для WPF
+# Миграции
 
 ## Установка Nuget-пакетов
 
@@ -1060,11 +1057,11 @@ dotnet ef migration add Initial
 комментирование методов Up и Down
 dotnet ef database update 
 
-### Application.Current.MainWindow
+# Application.Current.MainWindow
 
 Application.MainWindow автоматически устанавливается в первое окно, открытое в приложении. Когда окно закрывается, оно устанавливается либо на следующее открытое окно, либо на ноль, если открытых окон нет.
 
-## TextBlock
+# TextBlock
 
 ```xml
 
@@ -1074,7 +1071,7 @@ Application.MainWindow автоматически устанавливается
 
 ```
 
-## Стили в ```App.xaml```
+# Стили в ```App.xaml```
 
 ```
 
@@ -1107,7 +1104,7 @@ Application.MainWindow автоматически устанавливается
 
 ```
 
-## Image в ListView
+# Image в ListView
 
 ```xml
 
@@ -1132,7 +1129,7 @@ Application.MainWindow автоматически устанавливается
 
 ```
 
-## UpdateProducts
+# UpdateProducts
 
 ```Csharp
 
@@ -1189,7 +1186,7 @@ Application.MainWindow автоматически устанавливается
 
 ```
 
-## MainWindow
+# MainWindow
 
 ```Csharp
 
@@ -1197,7 +1194,7 @@ MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOr
 
 ```
 
-## Добавление изображения
+# Добавление изображения
 
 ```Csharp
 
@@ -1264,7 +1261,7 @@ MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOr
 
 ```
 
-## Разметка xaml для добавления или редактирования
+# Разметка xaml для добавления или редактирования
 
 ```xml
 
@@ -1486,7 +1483,7 @@ MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOr
 
 ```
 
-## Разметка xaml для авторизации
+# Разметка xaml для авторизации
 
 ```xml
 
@@ -1542,7 +1539,7 @@ MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOr
 
 ```
 
-## Разметка xaml MainWindow
+# Разметка xaml MainWindow
 
 ```xml
 
@@ -1776,7 +1773,7 @@ MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOr
 
 ```
 
-## Свойство ImagePath
+# Свойство ImagePath
 
 ```Csharp
 
@@ -1798,7 +1795,7 @@ MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOr
 
 ```
 
-## Библиотека классов
+# Библиотека классов
 
 ``Csharp
 
@@ -1950,7 +1947,7 @@ namespace SF2022UserLib
 
 ```
 
-## Каскадное удаление или обновление SQLServer
+# Каскадное удаление или обновление SQLServer
 
 ```sql
 
@@ -1967,7 +1964,7 @@ CREATE TABLE [dbo].[RelatedProducts] (
 
 
 
-## Команда ```TestCommand``` как отдельный класс
+# Команда ```TestCommand``` как отдельный класс
 
 ```Csharp
 
@@ -2004,12 +2001,10 @@ internal class TestCommand : Command
 
 ```
 
-
-
 **Замечание**: дизайнер WPF работает с бинарниками, поэтому каждый раз как что-то поменяли в коде надо пересобрать проект
 
 
-## Вынесение команды в ресурсы как синглтон
+# Вынесение команды в ресурсы как синглтон
 
 ```xml
 
@@ -2018,7 +2013,7 @@ internal class TestCommand : Command
     </Window.Resources>
 ```
 
-## Команда на клавиши
+# Команда на клавиши
 
 ```xml
 
@@ -2028,7 +2023,7 @@ internal class TestCommand : Command
 
 ```
 
-## Подключение команды в XAML
+# Подключение команды в XAML
 
 ```xml
 <!-- Подключение команды как свойства ViewModel  -->
@@ -2036,7 +2031,7 @@ internal class TestCommand : Command
 
 ```
 
-## Подключение команды в разметке XAML как контент
+# Подключение команды в разметке XAML как контент
 ```xml
 
 <!-- Отдельная команда в отдельном классе            
@@ -2048,7 +2043,7 @@ internal class TestCommand : Command
 
 ```
 
-## Применение команд через ```InputBinding```
+# Применение команд через ```InputBinding```
 ```xml
             <Rectangle Width="45"
                                Height="45"
@@ -2071,7 +2066,6 @@ internal class TestCommand : Command
                     <MouseBinding Command="{StaticResource TestCommand}" MouseAction="LeftDoubleClick" />
                 </Rectangle.InputBindings>
             </Rectangle>
-
 ```
 
 
