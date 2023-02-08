@@ -302,6 +302,10 @@ internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
 
 Подключить ```Microsoft.Xaml.Behavior.Wpf```
 
+```xml
+xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+```
+
 ```Csharp
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
