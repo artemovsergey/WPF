@@ -63,9 +63,9 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ## Загрузка ```View``` вручную в ```App.cs```
 
-Переместит MainWindow.xaml в папку ```Views```
+- Переместить MainWindow.xaml в папку ```Views```
 
-Удалить в файле App.xaml опацию ```Startup```
+- Удалить в файле App.xaml опацию ```Startup```
 
 ```Csharp
 
