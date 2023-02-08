@@ -167,6 +167,52 @@ internal class LambdaCommand : Command
     
 ```
 
+# Отдельная команда TestCommand
+```Csharp
+public class TestCommand : ICommand
+    {
+
+        public event EventHandler? CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
+        public bool CanExecute(object? parameter)
+        {
+            return 2 > 1;
+        }
+        public void Execute(object? parameter)
+        {
+            MessageBox.Show(parameter.ToString());
+        }
+    }
+```
+
+# Команда LambdaCommand через obj
+```Csharp
+#region LambdaCommand через obj
+        private LambdaCommand addCommand;
+        public LambdaCommand AddCommand
+        {
+            get
+            {
+                return addCommand ??
+                  (addCommand = new LambdaCommand(obj =>
+                  {
+                      // obj - это CommandParametr
+                      MessageBox.Show(obj.ToString());
+                  }, 
+
+                  // условие при котором команда будет активна
+                  (obj) => (bool)(App.Current.MainWindow.FindName("language") as RadioButton).IsChecked)
+                  );   
+            }
+        }
+        #endregion
+```
+
+
 # Базовая ```ViewModel```
 
 ```Csharp
