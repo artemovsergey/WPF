@@ -67,6 +67,8 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 - Удалить в файле App.xaml опацию ```Startup```
 
+- Подключение в представление объекта модели представления  
+
 ```Csharp
 
 public partial class App : Application
