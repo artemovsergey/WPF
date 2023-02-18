@@ -12,3 +12,17 @@ C:\Users\user\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\ItemTemplate.pdb
 C:\Users\user\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\TemplatFromResource.baml
 C:\Users\user\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\TemplatFromResource.g.cs
 C:\Users\user\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\App.baml
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\bin\Debug\ItemTemplate.exe
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\bin\Debug\ItemTemplate.pdb
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\MainWindow.baml
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\TemplatFromResource.baml
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\App.baml
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\MainWindow.g.cs
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\TemplatFromResource.g.cs
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\App.g.cs
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\ItemTemplate_MarkupCompile.cache
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\ItemTemplate.g.resources
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\ItemTemplate.Properties.Resources.resources
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\ItemTemplate.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\ItemTemplate.exe
+C:\Users\admin\Desktop\WPFExample2010\ItemTemplate\obj\x86\Debug\ItemTemplate.pdb

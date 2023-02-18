@@ -6,13 +6,14 @@
     <!-- Анимация свойств вложенных объектов -->
 
     <Grid>
-        <Ellipse Name="ball" Stroke="Black"  Width="20" Height="20" Canvas.Left="130" Canvas.Bottom="0">
+        <Ellipse Name="ball" Stroke="Black"  Width="50" Height="50" Canvas.Left="130" Canvas.Bottom="0">
             <Ellipse.Fill>
                 <RadialGradientBrush RadiusX="1" RadiusY="1" GradientOrigin="0.3, 0.3">
                     <GradientStop Color="White" Offset="0" />
                     <GradientStop Color="Blue" Offset="1" />
                 </RadialGradientBrush>
             </Ellipse.Fill>
+
             <Ellipse.Triggers>
                 <EventTrigger RoutedEvent="Window.Loaded">
                     <BeginStoryboard>

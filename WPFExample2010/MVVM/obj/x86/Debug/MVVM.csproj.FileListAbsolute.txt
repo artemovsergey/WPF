@@ -10,3 +10,15 @@ C:\Users\user\Desktop\WPFExample2010\MVVM\obj\x86\Debug\MVVM.Properties.Resource
 C:\Users\user\Desktop\WPFExample2010\MVVM\obj\x86\Debug\MVVM.csproj.GenerateResource.Cache
 C:\Users\user\Desktop\WPFExample2010\MVVM\obj\x86\Debug\MVVM.exe
 C:\Users\user\Desktop\WPFExample2010\MVVM\obj\x86\Debug\MVVM.pdb
+C:\Users\admin\Desktop\WPFExample2010\MVVM\bin\Debug\MVVM.exe
+C:\Users\admin\Desktop\WPFExample2010\MVVM\bin\Debug\MVVM.pdb
+C:\Users\admin\Desktop\WPFExample2010\MVVM\obj\x86\Debug\View\MainWindow.g.cs
+C:\Users\admin\Desktop\WPFExample2010\MVVM\obj\x86\Debug\View\App.g.cs
+C:\Users\admin\Desktop\WPFExample2010\MVVM\obj\x86\Debug\MVVM_MarkupCompile.cache
+C:\Users\admin\Desktop\WPFExample2010\MVVM\obj\x86\Debug\MVVM_MarkupCompile.lref
+C:\Users\admin\Desktop\WPFExample2010\MVVM\obj\x86\Debug\View\MainWindow.baml
+C:\Users\admin\Desktop\WPFExample2010\MVVM\obj\x86\Debug\MVVM.g.resources
+C:\Users\admin\Desktop\WPFExample2010\MVVM\obj\x86\Debug\MVVM.Properties.Resources.resources
+C:\Users\admin\Desktop\WPFExample2010\MVVM\obj\x86\Debug\MVVM.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\WPFExample2010\MVVM\obj\x86\Debug\MVVM.exe
+C:\Users\admin\Desktop\WPFExample2010\MVVM\obj\x86\Debug\MVVM.pdb

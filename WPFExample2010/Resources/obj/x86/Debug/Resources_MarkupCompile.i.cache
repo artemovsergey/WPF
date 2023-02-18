@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-C:\Users\user\Desktop\WPFExample2010\Resources\obj\x86\Debug\
+C:\Users\admin\Desktop\WPFExample2010\Resources\obj\x86\Debug\
 Resources
 none
 false
 DEBUG;TRACE
-C:\Users\user\Desktop\WPFExample2010\Resources\App.xaml
+C:\Users\admin\Desktop\WPFExample2010\Resources\App.xaml
 10-1603195210
 
-14-594349504
+141256131635
 12-1381780322
 Dictionary.xaml;DinamicResource.xaml;DynamicResourceFromCodebehind.xaml;ElementResource.xaml;Example1.xaml;Example2.xaml;Example3.xaml;ResourceFromCodebehind.xaml;ResourceFromDictionary.xaml;StaticResource.xaml;
 

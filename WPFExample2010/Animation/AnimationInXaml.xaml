@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="AnimationInXaml" Height="300" Width="300">
 
+<!-- Определение анимации в XAML -->
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="Loaded">
@@ -11,11 +12,13 @@
                     <Storyboard TargetProperty="Width" TargetName="helloButton">
                         <DoubleAnimation From="70" To="150"
                                          AutoReverse="True"
-                                         RepeatBehavior="0:0:10"
-                                         Duration="0:0:3">
-                                         <!-- Completed="ButtonAnimation_Completed" -->
+                                         RepeatBehavior="3x" 
+                                         Duration="0:0:3"
+                            
+                                         Completed="ButtonAnimation_Completed">
                                          
-                                         
+                                         <!-- 2x  число повторов -->
+
                             </DoubleAnimation>
                     </Storyboard>
                 </BeginStoryboard>

@@ -16,7 +16,7 @@
                         <BeginStoryboard>
                             <Storyboard>
 
-                                <!--
+                                <!--   -->
                                 <DoubleAnimationUsingKeyFrames
                                 Storyboard.TargetProperty="(Canvas.Bottom)"
                                 Duration="0:0:3" AutoReverse="True"
@@ -26,9 +26,9 @@
                                     <LinearDoubleKeyFrame KeyTime="66%" Value="120" />
                                     <LinearDoubleKeyFrame KeyTime="99%" Value="180" />
                                 </DoubleAnimationUsingKeyFrames>
-                                -->
+                              
 
-                                <!-- Сплайновая анимация -->
+                                <!-- Сплайновая анимация 
 
                                 <DoubleAnimationUsingKeyFrames
                                     Storyboard.TargetProperty="(Canvas.Bottom)"
@@ -39,7 +39,12 @@
                                     <SplineDoubleKeyFrame KeySpline="0,1 1,0" KeyTime="66%" Value="120" />
                                     <SplineDoubleKeyFrame KeySpline="0,1 1,0" KeyTime="100%" Value="180" />
                                 </DoubleAnimationUsingKeyFrames>
+                                -->
 
+                                <!--
+                                Дискретные кадры DiscreteColorKeyFrame
+                                обеспечивают резкую смену кадров.
+                                -->
 
 
                                 <ColorAnimationUsingKeyFrames
@@ -51,6 +56,7 @@
                                         <LinearColorKeyFrame KeyTime="0:0:2" Value="Red" />
                                     </ColorAnimationUsingKeyFrames.KeyFrames>
                                 </ColorAnimationUsingKeyFrames>
+
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>

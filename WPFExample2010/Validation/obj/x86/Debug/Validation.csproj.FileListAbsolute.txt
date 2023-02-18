@@ -9,3 +9,14 @@ C:\Users\user\Desktop\WPFExample2010\Validation\obj\x86\Debug\Validation.Propert
 C:\Users\user\Desktop\WPFExample2010\Validation\obj\x86\Debug\Validation.csproj.GenerateResource.Cache
 C:\Users\user\Desktop\WPFExample2010\Validation\obj\x86\Debug\Validation.exe
 C:\Users\user\Desktop\WPFExample2010\Validation\obj\x86\Debug\Validation.pdb
+C:\Users\admin\Desktop\WPFExample2010\Validation\bin\Debug\Validation.exe
+C:\Users\admin\Desktop\WPFExample2010\Validation\bin\Debug\Validation.pdb
+C:\Users\admin\Desktop\WPFExample2010\Validation\obj\x86\Debug\MainWindow.baml
+C:\Users\admin\Desktop\WPFExample2010\Validation\obj\x86\Debug\MainWindow.g.cs
+C:\Users\admin\Desktop\WPFExample2010\Validation\obj\x86\Debug\App.g.cs
+C:\Users\admin\Desktop\WPFExample2010\Validation\obj\x86\Debug\Validation_MarkupCompile.cache
+C:\Users\admin\Desktop\WPFExample2010\Validation\obj\x86\Debug\Validation.g.resources
+C:\Users\admin\Desktop\WPFExample2010\Validation\obj\x86\Debug\Validation.Properties.Resources.resources
+C:\Users\admin\Desktop\WPFExample2010\Validation\obj\x86\Debug\Validation.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\WPFExample2010\Validation\obj\x86\Debug\Validation.exe
+C:\Users\admin\Desktop\WPFExample2010\Validation\obj\x86\Debug\Validation.pdb

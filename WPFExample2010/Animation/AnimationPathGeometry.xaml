@@ -14,12 +14,14 @@
     <Canvas Background="Black">
         <Path Stroke="Red" Data="{StaticResource geometryPath}" Canvas.Top="10" Canvas.Left="10" />
         <Ellipse Width="15" Height="15" Canvas.Top="177" Canvas.Left="120">
+            
             <Ellipse.Fill>
                 <RadialGradientBrush RadiusX="1" RadiusY="1" GradientOrigin="0.3, 0.3">
                     <GradientStop Color="White" Offset="0" />
                     <GradientStop Color="Black" Offset="1" />
                 </RadialGradientBrush>
             </Ellipse.Fill>
+
             <Ellipse.Triggers>
                 <EventTrigger RoutedEvent="Window.Loaded">
                     <BeginStoryboard>
@@ -38,4 +40,5 @@
             </Ellipse.Triggers>
         </Ellipse>
     </Canvas>
+
 </Window>

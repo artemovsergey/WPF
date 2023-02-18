@@ -22,5 +22,11 @@ namespace Animation
         {
             InitializeComponent();
         }
+
+
+        private void ButtonAnimation_Completed(object sender, EventArgs e)
+        {
+            MessageBox.Show("Анимация завершена");
+        }
     }
 }

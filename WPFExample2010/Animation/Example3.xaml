@@ -7,21 +7,23 @@
 
     <Grid>
         <Button x:Name="helloButton" Foreground="White" Width="70" Height="25" Content="Кнопка">
+            
             <Button.Background>
                 <SolidColorBrush x:Name="buttonColor" Color="Black" />
             </Button.Background>
+
             <Button.Triggers>
                 <EventTrigger RoutedEvent="Loaded">
                     <EventTrigger.Actions>
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimation Storyboard.TargetProperty="Width" Storyboard.TargetName="helloButton"
-                                                 From="80" To="150"  AutoReverse="True" RepeatBehavior="0:0:10" Duration="0:0:2"  />
+                                                 From="80" To="150"  AutoReverse="True" RepeatBehavior="Forever" Duration="0:0:2"  />
                                 <DoubleAnimation Storyboard.TargetProperty="Height" Storyboard.TargetName="helloButton"
-                                                 From="30" To="100" AutoReverse="True" RepeatBehavior="0:0:10" Duration="0:0:2" />
+                                                 From="30" To="100" AutoReverse="True" RepeatBehavior="Forever" Duration="0:0:2" />
                                 <ColorAnimation Storyboard.TargetName="buttonColor" Storyboard.TargetProperty="Color"
                                                 From="{Binding ElementName=buttonColor, Path=Color}" To="Red"
-                                                AutoReverse="True" RepeatBehavior="0:0:10" Duration="0:0:2" />
+                                                AutoReverse="True" RepeatBehavior="Forever" Duration="0:0:2" />
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger.Actions>

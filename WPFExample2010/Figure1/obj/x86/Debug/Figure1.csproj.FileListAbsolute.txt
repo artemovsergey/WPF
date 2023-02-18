@@ -1,0 +1,11 @@
+C:\Users\admin\Desktop\WPFExample2010\Figure1\bin\Debug\Figure1.exe
+C:\Users\admin\Desktop\WPFExample2010\Figure1\bin\Debug\Figure1.pdb
+C:\Users\admin\Desktop\WPFExample2010\Figure1\obj\x86\Debug\MainWindow.baml
+C:\Users\admin\Desktop\WPFExample2010\Figure1\obj\x86\Debug\MainWindow.g.cs
+C:\Users\admin\Desktop\WPFExample2010\Figure1\obj\x86\Debug\App.g.cs
+C:\Users\admin\Desktop\WPFExample2010\Figure1\obj\x86\Debug\Figure1_MarkupCompile.cache
+C:\Users\admin\Desktop\WPFExample2010\Figure1\obj\x86\Debug\Figure1.g.resources
+C:\Users\admin\Desktop\WPFExample2010\Figure1\obj\x86\Debug\Figure1.Properties.Resources.resources
+C:\Users\admin\Desktop\WPFExample2010\Figure1\obj\x86\Debug\Figure1.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\WPFExample2010\Figure1\obj\x86\Debug\Figure1.exe
+C:\Users\admin\Desktop\WPFExample2010\Figure1\obj\x86\Debug\Figure1.pdb

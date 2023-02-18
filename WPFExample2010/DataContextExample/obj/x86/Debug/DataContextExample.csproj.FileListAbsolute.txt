@@ -26,3 +26,5 @@ C:\Users\user\Desktop\WPFExample2010\DataContextExample\obj\x86\Debug\MainWindow
 C:\Users\user\Desktop\WPFExample2010\DataContextExample\obj\x86\Debug\DataContextExample.g.resources
 C:\Users\user\Desktop\WPFExample2010\DataContextExample\obj\x86\Debug\DataContextExample.Properties.Resources.resources
 C:\Users\user\Desktop\WPFExample2010\DataContextExample\obj\x86\Debug\DataContextExample.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\WPFExample2010\DataContextExample\obj\x86\Debug\ObservableCollection.baml
+C:\Users\admin\Desktop\WPFExample2010\DataContextExample\obj\x86\Debug\ObservableCollection.g.cs

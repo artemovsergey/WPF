@@ -11,3 +11,16 @@ C:\Users\user\Desktop\WPFExample2010\Theme\obj\x86\Debug\Theme.Properties.Resour
 C:\Users\user\Desktop\WPFExample2010\Theme\obj\x86\Debug\Theme.csproj.GenerateResource.Cache
 C:\Users\user\Desktop\WPFExample2010\Theme\obj\x86\Debug\Theme.exe
 C:\Users\user\Desktop\WPFExample2010\Theme\obj\x86\Debug\Theme.pdb
+C:\Users\admin\Desktop\WPFExample2010\Theme\bin\Debug\Theme.exe
+C:\Users\admin\Desktop\WPFExample2010\Theme\bin\Debug\Theme.pdb
+C:\Users\admin\Desktop\WPFExample2010\Theme\obj\x86\Debug\dark.baml
+C:\Users\admin\Desktop\WPFExample2010\Theme\obj\x86\Debug\light.baml
+C:\Users\admin\Desktop\WPFExample2010\Theme\obj\x86\Debug\MainWindow.baml
+C:\Users\admin\Desktop\WPFExample2010\Theme\obj\x86\Debug\MainWindow.g.cs
+C:\Users\admin\Desktop\WPFExample2010\Theme\obj\x86\Debug\App.g.cs
+C:\Users\admin\Desktop\WPFExample2010\Theme\obj\x86\Debug\Theme_MarkupCompile.cache
+C:\Users\admin\Desktop\WPFExample2010\Theme\obj\x86\Debug\Theme.g.resources
+C:\Users\admin\Desktop\WPFExample2010\Theme\obj\x86\Debug\Theme.Properties.Resources.resources
+C:\Users\admin\Desktop\WPFExample2010\Theme\obj\x86\Debug\Theme.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\WPFExample2010\Theme\obj\x86\Debug\Theme.exe
+C:\Users\admin\Desktop\WPFExample2010\Theme\obj\x86\Debug\Theme.pdb
