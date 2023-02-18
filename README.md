@@ -1299,8 +1299,125 @@ CREATE TABLE [dbo].[RelatedProducts] (
 
 ```
 
+# Конвертеры привязки
+```Csharp
+public class TitleConverter : IValueConverter
+    {
+
+        // source to binding
+        // от источника к чему привязываемся (свойствоа VM) к приемнику (xaml)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return $"Компания:{(string)value}";
+        }
+
+        // binding to source
+        // от интерфейса(xaml) к свойству VM
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (string)value;
+        }
+
+    }
+ ```   
+ 
+ ```xml
+ Title="{Binding Title,Converter={StaticResource ResourceKey=titleconverter}}"
+```
+
+```xml
+<Application.Resources>
+	<cnv:TitleConverter x:Key="titleconverter" />
+</Application.Resources>
+```
+
+# Генератор кода
+
+```Csharp
+public static class CodeGeneration
+    {
+        public static string Refresh()
+        {
+            string code = "";
+            Random rnd = new Random();
+            int n;
+            string st = "@#+-#$%^&*!ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+           
+                for (int j = 0; j < 8; j++)
+                {
+                    n = rnd.Next(0, st.Length - 1);
+                    code += st.Substring(n, 1);
+                }
+
+            return code;
+        }
+    }
+```    
+    
+    
+# Применение фокуса при MVVM
+ 
+ ```Csharp
+ public static class FocusExtension
+    {
+        public static bool GetIsFocused(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsFocusedProperty);
+        }
+
+        public static void SetIsFocused(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsFocusedProperty, value);
+        }
+
+        public static readonly DependencyProperty IsFocusedProperty =
+            DependencyProperty.RegisterAttached(
+                "IsFocused", typeof(bool), typeof(FocusExtension),
+                new UIPropertyMetadata(false, OnIsFocusedPropertyChanged));
+
+        private static void OnIsFocusedPropertyChanged(
+            DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
+        {
+            var uie = (UIElement)d;
+            if ((bool)e.NewValue)
+            {
+                uie.Focus(); // Don't care about false values.
+            }
+        }
+    }
+ ```  
+
+```xml
+focus:FocusExtension.IsFocused="{Binding PasswordFocus}"
+```
+
+```Csharp
+   public virtual bool PasswordFocus
+        {
+            get { return _passwordFocus; }
+
+            set
+            {
+                Set(ref _passwordFocus, value);
+            }
+
+        }
+```
 
 
+# PasswordBox Binding MVVM
+ 
+ ```xml
+ <KeyBinding Key="Return" Command="{Binding LoginCommand}"
+                                 CommandParameter="{Binding ElementName=passwordName}"/>
+```
+
+# Image
+
+```xml
+ <Image Source="pack://application:,,,/Resources/Media/volume.png"/>
+```
 
 
 
