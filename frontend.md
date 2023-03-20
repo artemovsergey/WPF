@@ -1,63 +1,3 @@
-# App.xaml. Стили и ресурсы для приложения
-
-```xml
-    <Application.Resources>
-
-        <SolidColorBrush x:Key="ColorPrimery" Color="White"></SolidColorBrush>
-        <SolidColorBrush x:Key="ColorSecondary" Color="#FFFFFFE1"></SolidColorBrush>
-        <SolidColorBrush x:Key="ColorAccent" Color="#FF76E383"></SolidColorBrush>
-
-
-        <Style TargetType="{x:Type Window}">
-            <Setter Property="FontSize" Value="15"></Setter>
-            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
-            <Setter Property="Background" Value="White">
-            </Setter>
-        </Style>
-
-        <Style TargetType="{x:Type Page}">
-            <Setter Property="FontSize" Value="20"></Setter>
-            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
-        </Style>
-
-        <Style TargetType="{x:Type DataGrid}">
-            
-            <Setter Property="Background" Value="#FF76E383">
-            </Setter>
-        </Style>
-
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="4"></Setter>
-            <Setter Property="Width" Value="120"></Setter>
-            <Setter Property="Height" Value="30"></Setter>
-            <Setter Property="Background" Value="#FF498C51"></Setter>
-        </Style>
-
-        <Style TargetType="StackPanel">
-            <Setter Property="Margin" Value="15"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-        </Style>
-
-        <Style TargetType="WrapPanel">
-            <Setter Property="Margin" Value="10"></Setter>
-        </Style>
-
-
-        <Style TargetType="TextBox">
-            <Setter Property="Width" Value="150"></Setter>
-            <Setter Property="Height" Value="30"></Setter>
-            <Setter Property="Margin" Value="1"></Setter>
-        </Style>
-
-        <Style TargetType="DatePicker">
-            <Setter Property="Width" Value="150"></Setter>
-            <Setter Property="Height" Value="30"></Setter>
-            <Setter Property="Margin" Value="1"></Setter>
-        </Style>
-        
-    </Application.Resources>
-```
 
 # Пример MaterialDesign
 
@@ -107,38 +47,42 @@
 
 # Стили в ```App.xaml```
 
+```Csharp
+
+	 <Style TargetType="Button">
+	    <Setter Property="Background" Value="#FF76E383" />
+	    <Setter Property="FontFamily" Value="Comic Sans MS"/>
+	    <Setter Property="FontSize" Value="10"/>
+	</Style>
+
+	<Style TargetType="ListBox">
+	    <Setter Property="Background" Value="#FF498C51" />
+	    <Setter Property="FontFamily" Value="Comic Sans MS"/>
+	    <Setter Property="FontSize" Value="10"/>
+	</Style>
+
+	<Style TargetType="TextBox">
+	    <Setter Property="FontFamily" Value="Comic Sans MS"/>
+	    <Setter Property="FontSize" Value="10"/>
+	</Style>
+
+	<Style TargetType="TextBlock">
+	    <Setter Property="FontFamily" Value="Comic Sans MS"/>
+	    <Setter Property="FontSize" Value="10"/>
+	</Style>
+
+	<Style TargetType="Window">
+	    <Setter Property="FontFamily" Value="Comic Sans MS"/>
+	    <Setter Property="FontSize" Value="10"/>
+	</Style>
+
+	<SolidColorBrush x:Key="ColorPrimery" Color="White"></SolidColorBrush>
+	<SolidColorBrush x:Key="ColorSecondary" Color="#FFFFFFE1"></SolidColorBrush>
+	<SolidColorBrush x:Key="ColorAccent" Color="#FF76E383"></SolidColorBrush>
+
 ```
 
- <Style TargetType="Button">
-            <Setter Property="Background" Value="#FF76E383" />
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="FontSize" Value="10"/>
-        </Style>
-
-        <Style TargetType="ListBox">
-            <Setter Property="Background" Value="#FF498C51" />
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="FontSize" Value="10"/>
-        </Style>
-
-        <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="FontSize" Value="10"/>
-        </Style>
-
-        <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="FontSize" Value="10"/>
-        </Style>
-
-        <Style TargetType="Window">
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="FontSize" Value="10"/>
-        </Style>
-
-```
-
-# Разметка xaml для добавления или редактирования
+# Добавление или редактирование
 
 ```xml
 
@@ -360,7 +304,7 @@
 
 ```
 
-# Разметка xaml для авторизации
+# Авторизация
 
 ```xml
 
@@ -415,7 +359,7 @@
 
 
 ```
-# Разметка xaml MainWindow
+# MainWindow
 
 ```xml
 
@@ -651,7 +595,7 @@
 
 # Библиотека классов
 
-``Csharp
+```Csharp
 
 namespace SF2022UserLib
 {
