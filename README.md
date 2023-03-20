@@ -75,8 +75,8 @@ xmlns:local="clr-namespace:TNC.WPF"
 
 ```xml
 <Window.DataContext>
-            <vm:UserViewModel/>
-    </Window.DataContext>
+   <vm:UserViewModel/>
+</Window.DataContext>
 ```
 
 ```Csharp
