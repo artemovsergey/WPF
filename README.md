@@ -11,25 +11,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
 
-
 	<connectionStrings>
-		<add 
+		
+		<add
 			 name="DefaultConnection"
 			 connectionString="Server=localhost,63027;Database=UserDatabase;Trusted_Connection=True"
 			 providerName="System.Data.SqlClient"/>
-
 		<add
 			 name="ConnectionLocalDb"
 			 connectionString="Server=(localdb)\mssqllocaldb;Database=UserDatabase;Trusted_Connection=True;"
 			 providerName="System.Data.SqlClient"/>
 
-
 		<add name="ConnectionSQLite"
 			 connectionString="Data Source=FabricShop.db"
 			 providerName="System.Data.SQLite" />
 
-	</connectionStrings>
+		<add name="PostgreSQL"
+			 connectionString="Host=localhost;Port=5432;Database=Keeper;Username=postgres;Password=root"
+			 providerName="System.Data.Npgsql" />
 
+	</connectionStrings>
 
 </configuration>
 ```
